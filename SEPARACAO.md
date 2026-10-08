@@ -1,13 +1,13 @@
 # Separação do portal e do Growth OS
 
-Status em 08/10/2026: o portal está publicado na Hostinger. O login pelo GitHub e o acesso ao painel Supabase foram concluídos. O repositório privado `legendadigitalmkt-dot/legenda-digital-portal` é exclusivo do portal. A inclusão dele no ChatGPT Codex Connector foi autorizada pelo titular, salva e validada. O novo Supabase ainda não foi criado. A produção ainda usa as tabelas do portal no projeto `cknlzuinwcdupdxilzcf`.
+Status em 08/10/2026: o portal está publicado na Hostinger usando o Supabase exclusivo `yltnjgngkomelfltdyky`, chamado `Legenda Digital Portal`. A foundation e a importação foram aplicadas e conferidas. O repositório privado `legendadigitalmkt-dot/legenda-digital-portal` contém os 53 arquivos de fonte, com integridade conferida e CI aprovado. A inclusão dele no ChatGPT Codex Connector foi autorizada pelo titular, salva e validada. O software mantém `legendadigitalmkt-dot/ld` e `cknlzuinwcdupdxilzcf`. A criação da conta própria do CMS e a vinculação de seu novo UUID a `site_staff` continuam pendentes.
 
 | Recurso | Portal | Software |
 | --- | --- | --- |
 | Domínio | `legendadigital.com.br` | `app.legendadigital.com.br` |
 | Código | Fonte do portal, lockfile, assets, testes e migrations neste repositório exclusivo | `legendadigitalmkt-dot/ld` |
 | Novo repositório | `legendadigitalmkt-dot/legenda-digital-portal` — privado, integração autorizada | Manter o repositório atual |
-| Supabase | `Legenda Digital Portal` — a criar | `LD Growth OS Dev`, ref `cknlzuinwcdupdxilzcf` |
+| Supabase | `Legenda Digital Portal`, ref `yltnjgngkomelfltdyky` — saudável, região São Paulo | `LD Growth OS Dev`, ref `cknlzuinwcdupdxilzcf` |
 | Organização do novo banco | `legendadigitalmkt-dot's Org`, id `ypjngyqoqptxkkwqehvt` — escolha confirmada | Manter a organização atual |
 | Publicação | `public_html` do domínio principal | Manter a publicação do subdomínio |
 
@@ -22,13 +22,15 @@ Status em 08/10/2026: o portal está publicado na Hostinger. O login pelo GitHub
 
 O snapshot operacional fica em `.migration-data/`, ignorado pelo Git. Nunca enviar esse diretório, `.env`, senhas, tokens, JWTs de sessão ou arquivos de runtime para o repositório. O pacote de código desta etapa não contém o snapshot.
 
-## Criar os recursos exclusivos
+## Recursos exclusivos criados
 
 1. O repositório privado `legenda-digital-portal` foi criado na conta `legendadigitalmkt-dot` e conectado como `origin` do projeto local. A inclusão dele na instalação ChatGPT Codex Connector foi salva após autorização do titular, mantendo a lista limitada a `ld` e `legenda-digital-portal`. O acesso de leitura e escrita ao repositório novo foi confirmado. A branch de produção do portal é `main`.
-2. Criar `Legenda Digital Portal` na organização confirmada. Conferir custo/plano antes da criação e selecionar São Paulo se disponível. Usar credenciais e chaves próprias do projeto. A senha nova de banco deve ser definida pelo titular em uma interface segura.
-3. Confirmar que o novo banco está saudável e registrar seu ref real. Não reutilizar o ref nem as chaves do Growth OS.
+2. O titular criou `Legenda Digital Portal` na organização confirmada, plano Free, região São Paulo (`sa-east-1`). Sua senha de banco foi definida pelo titular. Nenhuma credencial do software foi reutilizada.
+3. O projeto `yltnjgngkomelfltdyky` foi confirmado como `ACTIVE_HEALTHY`. O portal usa a URL e a chave publishable próprias dele. A configuração PHP publicada e o bundle da home foram conferidos. O teste de navegação no domínio real produziu dois eventos somente no banco novo.
 
-## Migrar o banco
+## Procedimento de migração aplicado
+
+A importação única descrita abaixo já foi executada no destino. Não reaplicar o importador sobre o banco em produção: ele recusa tabelas já ocupadas. Estes comandos ficam registrados para auditoria e para um destino novo de recuperação.
 
 Aplicar a migration `public_site_foundation` no novo projeto. Para importar os dados reais, **não executar `supabase/seed.sql` primeiro**: ele é destinado à demonstração/local. O importador recusa sobrescrever um banco com conteúdo existente.
 
@@ -68,12 +70,12 @@ Confirmar que os bundles e o runtime PHP publicados usam o novo ref. Conferir ta
 
 Se houver falha, restaurar o pacote anterior da Hostinger e a configuração pública anterior. A origem permanece disponível para reversão. Nenhuma exclusão do projeto, do Auth ou de dados do Growth OS faz parte desta mudança.
 
-## Estado de validação desta etapa
+## Estado de validação da separação
 
-Export conferido: 9 conteúdos, 1 autor, 8 categorias, 16 tags e 1 configuração. Inscritos, interesses, mensagens, eventos de comunidade e recursos estavam vazios. Eventos de analytics podem continuar chegando e devem ser exportados novamente na troca.
+Export conferido e importado: 9 conteúdos, 1 autor, 8 categorias, 16 tags, 1 configuração e 20 eventos de analytics. Inscritos, interesses, mensagens, eventos de comunidade e recursos estavam vazios. A igualdade de todas as linhas e colunas foi verificada após a importação, incluindo IDs e datas. SHA256 do export operacional: `a01606292aec74a340f24aced141e0ec65e6f3be99d4552367101a34567b763c`. A origem continuou idêntica na conferência após a troca; nenhuma reconciliação adicional foi necessária nessa janela. Clientes com páginas antigas em cache ainda devem ser considerados em futuras conferências da origem.
 
-A importação e os testes do novo Supabase dependem de sua criação. O repositório remoto foi confirmado como privado e sua integração já permite leitura e escrita. A publicação do código usa blobs verificados por hash, commit na branch `main` e confirmação do novo estado remoto. Não há confirmação de banco novo ou troca da produção nesta etapa.
+O novo banco possui 12 tabelas públicas com RLS e cinco buckets, sendo `private-admin` privado. O advisor de segurança não apresentou lints. O advisor de desempenho apontou duas FKs sem índice, índices ainda não usados e políticas permissivas sobrepostas; são observações registradas, sem alteração das regras de acesso nesta migração. Leituras privadas e escritas editoriais/admin anônimas foram recusadas. Newsletter, comunidade e contato persistiram os testes sintéticos; somente os três registros de teste foram removidos.
 
-Validação local desta preparação: TypeScript e build de 31 rotas concluídos; 9 testes aprovados, incluindo validação do export, recusa do banco do software, referências quebradas, duplicatas e isolamento de conteúdo que contém sintaxe SQL. TOML válido. O verificador de separação inicialmente apontou banco compartilhado e ausência de remoto Git; o remoto agora aponta para o repositório exclusivo. O SQL gerado ainda precisa ser executado e validado no novo Supabase.
+TypeScript e build de 31 rotas concluídos; 9 testes aprovados, incluindo validação do export, recusa do banco do software, referências quebradas, duplicatas e isolamento de conteúdo que contém sintaxe SQL. TOML válido. O verificador de separação passou com o novo ref e o remoto próprio. A Hostinger recebeu somente o pacote de produção em `public_html` do domínio principal; o cache foi limpo. Home, artigo e entrada protegida do CMS foram conferidos. A entrada do software respondeu em `/login`. Os arquivos, o repositório, o Auth e as tabelas do software não foram alterados pelo trabalho de separação.
 
-O formulário de criação do Supabase está preparado na organização correta, no plano Free, com nome `Legenda Digital Portal`, região `South America (São Paulo)` e Data API habilitada. A exposição automática de tabelas está desativada e a ativação automática de RLS está habilitada. Nenhuma senha nova do banco foi definida pelo agente. A definição da nova credencial e a criação precisam ser concluídas pelo titular em uma interface segura.
+O Auth hospedado usa Site URL `https://legendadigital.com.br` e redirect permitido `https://legendadigital.com.br/admin`. Cadastro público, login anônimo e vinculação manual estão desativados; confirmação de e-mail está ativa. O mínimo de senha foi configurado em 12 caracteres, com troca de senha protegida e exigência da senha atual. O novo Auth ainda não contém usuários: o titular precisa criar a conta do CMS em uma interface segura; depois, seu UUID confirmado será autorizado em `site_staff`. Senhas e identidades do software não foram copiadas.
