@@ -11,3 +11,11 @@
 .reveal-ready{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}.reveal-ready.reveal-in{opacity:1;transform:translateY(0)}@media(prefers-reduced-motion:reduce){.reveal-ready{opacity:1;transform:none}}
 
 .optional-name{margin-top:17px;font-size:11px;color:#52647c}.optional-name input{font-size:13px;border-radius:12px}
+
+/* Official horizontal brand artwork, shared by React and PHP article headers. */
+.logo .brand-logo{display:block;width:216px;max-width:100%;height:auto;object-fit:contain}
+.logo-light{background:#fff;border-radius:8px;padding:0 6px;max-width:100%}
+.logo-light .brand-logo{width:204px}
+@media(min-width:1024px) and (max-width:1200px){.site-header .header-inner{gap:18px}.site-header .logo .brand-logo{width:180px}.site-header nav{gap:16px}}
+@media(max-width:767px){.site-header .logo .brand-logo{width:192px}}
+
