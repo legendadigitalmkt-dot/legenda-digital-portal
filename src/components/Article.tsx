@@ -337,7 +337,7 @@ export function ArticlePage({
             className="article-toc"
             open={
               typeof window === "undefined" ||
-              window.matchMedia("(min-width: 1100px)").matches
+              window.matchMedia("(min-width: 1280px)").matches
             }
           >
             <summary>
@@ -373,8 +373,6 @@ export function ArticlePage({
           </a>
 
           {!!extras.links.length&&<nav className="article-manual-links" aria-label="Links selecionados"><h2>Links selecionados</h2>{extras.links.map((l,i)=><a key={i} href={l.url} target={l.newTab?"_blank":undefined} rel={l.newTab?"noopener noreferrer":undefined}>{l.label}{l.newTab&&<span className="sr-only"> (abre em nova aba)</span>}</a>)}</nav>}
-          <div className="article-banners-desktop"><ArticleBanners banners={sidebarBanners}/></div>
-          {showDefaultPromo && <SidebarPromo onClick={() => event("article_growth_cta_clicked")} />}
         </aside>
         <div className="article-main-column">
           <article
@@ -487,6 +485,10 @@ export function ArticlePage({
             </div>
           </section>
         </div>
+        {(sidebarBanners.length>0 || showDefaultPromo) && <aside className="article-promo-rail" aria-label="Banner do artigo">
+          <ArticleBanners banners={sidebarBanners}/>
+          {showDefaultPromo && <SidebarPromo onClick={() => event("article_growth_cta_clicked")} />}
+        </aside>}
       </div>
       <BriefSection config={config} />
     </>

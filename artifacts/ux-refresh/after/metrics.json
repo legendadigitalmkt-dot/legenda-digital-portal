@@ -1,6 +1,168 @@
 {
-  "fixture": "Local identical approved Batch 1 data; no production writes. LCP/CLS lab samples, not field Core Web Vitals.",
+  "fixture": "Composite local QA: 33 unchanged non-article samples from the full layout run; 11 final article samples from metrics-article.json. Approved Batch 1 fixtures, no production writes. Lab LCP/CLS, not field Core Web Vitals.",
   "results": [
+    {
+      "name": "home",
+      "width": 1180,
+      "height": 820,
+      "status": 200,
+      "errors": [],
+      "viewport": 1180,
+      "scrollWidth": 1180,
+      "cls": 0,
+      "lcp": 260,
+      "bodyFont": "18px",
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "contents",
+      "width": 1180,
+      "height": 820,
+      "status": 200,
+      "errors": [],
+      "viewport": 1180,
+      "scrollWidth": 1180,
+      "cls": 0,
+      "lcp": 196,
+      "bodyFont": "18px",
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "article",
+      "width": 1180,
+      "height": 820,
+      "status": 200,
+      "errors": [],
+      "viewport": 1180,
+      "scrollWidth": 1180,
+      "cls": 0,
+      "lcp": 216,
+      "bodyFont": "18px",
+      "articleWidth": 720,
+      "articleFont": "18px",
+      "articleCenterDelta": 0,
+      "bannerSide": "inline",
+      "commentsWidth": 720,
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "growth",
+      "width": 1180,
+      "height": 820,
+      "status": 200,
+      "errors": [],
+      "viewport": 1180,
+      "scrollWidth": 1180,
+      "cls": 0,
+      "lcp": 268,
+      "bodyFont": "18px",
+      "cardFits": [],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "cls": 0,
+      "lcp": 244,
+      "bodyFont": "18px",
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "contents",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "cls": 0,
+      "lcp": 208,
+      "bodyFont": "18px",
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "article",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "cls": 0,
+      "lcp": 192,
+      "bodyFont": "18px",
+      "articleWidth": 720,
+      "articleFont": "18px",
+      "articleCenterDelta": 0,
+      "bannerSide": "right",
+      "commentsWidth": 720,
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "growth",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "cls": 0,
+      "lcp": 260,
+      "bodyFont": "18px",
+      "cardFits": [],
+      "failedImages": []
+    },
     {
       "name": "home",
       "width": 1366,
@@ -10,7 +172,7 @@
       "viewport": 1366,
       "scrollWidth": 1366,
       "cls": 0,
-      "lcp": 276,
+      "lcp": 212,
       "bodyFont": "18px",
       "cardFits": [
         "contain",
@@ -33,7 +195,7 @@
       "viewport": 1366,
       "scrollWidth": 1366,
       "cls": 0,
-      "lcp": 308,
+      "lcp": 172,
       "bodyFont": "18px",
       "cardFits": [
         "contain",
@@ -53,10 +215,13 @@
       "viewport": 1366,
       "scrollWidth": 1366,
       "cls": 0,
-      "lcp": 300,
+      "lcp": 176,
       "bodyFont": "18px",
-      "articleWidth": 760,
-      "commentsWidth": 760,
+      "articleWidth": 720,
+      "articleFont": "18px",
+      "articleCenterDelta": 0,
+      "bannerSide": "right",
+      "commentsWidth": 720,
       "cardFits": [
         "contain",
         "contain",
@@ -74,7 +239,7 @@
       "viewport": 1366,
       "scrollWidth": 1366,
       "cls": 0,
-      "lcp": 228,
+      "lcp": 148,
       "bodyFont": "18px",
       "cardFits": [],
       "failedImages": []
@@ -88,7 +253,7 @@
       "viewport": 1440,
       "scrollWidth": 1440,
       "cls": 0,
-      "lcp": 232,
+      "lcp": 228,
       "bodyFont": "18px",
       "cardFits": [
         "contain",
@@ -131,11 +296,19 @@
       "viewport": 1440,
       "scrollWidth": 1440,
       "cls": 0,
-      "lcp": 160,
+      "lcp": 176,
       "bodyFont": "18px",
-      "articleWidth": 760,
-      "commentsWidth": 760,
-      "cardFits": [],
+      "articleWidth": 720,
+      "articleFont": "18px",
+      "articleCenterDelta": 0,
+      "bannerSide": "right",
+      "commentsWidth": 720,
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
       "failedImages": []
     },
     {
@@ -147,7 +320,7 @@
       "viewport": 1440,
       "scrollWidth": 1440,
       "cls": 0,
-      "lcp": 176,
+      "lcp": 148,
       "bodyFont": "18px",
       "cardFits": [],
       "failedImages": []
@@ -161,7 +334,7 @@
       "viewport": 1920,
       "scrollWidth": 1920,
       "cls": 0,
-      "lcp": 236,
+      "lcp": 224,
       "bodyFont": "18px",
       "cardFits": [
         "contain",
@@ -184,7 +357,7 @@
       "viewport": 1920,
       "scrollWidth": 1920,
       "cls": 0,
-      "lcp": 232,
+      "lcp": 204,
       "bodyFont": "18px",
       "cardFits": [
         "contain",
@@ -204,11 +377,19 @@
       "viewport": 1920,
       "scrollWidth": 1920,
       "cls": 0,
-      "lcp": 248,
+      "lcp": 172,
       "bodyFont": "18px",
-      "articleWidth": 760,
-      "commentsWidth": 760,
-      "cardFits": [],
+      "articleWidth": 720,
+      "articleFont": "18px",
+      "articleCenterDelta": 0,
+      "bannerSide": "right",
+      "commentsWidth": 720,
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
       "failedImages": []
     },
     {
@@ -219,22 +400,22 @@
       "errors": [],
       "viewport": 1920,
       "scrollWidth": 1920,
-      "cls": 0,
-      "lcp": 196,
-      "bodyFont": "18px",
-      "cardFits": [],
-      "failedImages": []
-    },
-    {
-      "name": "home",
-      "width": 360,
-      "height": 800,
-      "status": 200,
-      "errors": [],
-      "viewport": 360,
-      "scrollWidth": 360,
       "cls": 0,
       "lcp": 252,
+      "bodyFont": "18px",
+      "cardFits": [],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "errors": [],
+      "viewport": 360,
+      "scrollWidth": 360,
+      "cls": 0,
+      "lcp": 172,
       "bodyFont": "17px",
       "cardFits": [
         "contain",
@@ -257,7 +438,7 @@
       "viewport": 360,
       "scrollWidth": 360,
       "cls": 0,
-      "lcp": 132,
+      "lcp": 156,
       "bodyFont": "17px",
       "cardFits": [
         "contain",
@@ -277,11 +458,19 @@
       "viewport": 360,
       "scrollWidth": 360,
       "cls": 0,
-      "lcp": 148,
+      "lcp": 140,
       "bodyFont": "17px",
       "articleWidth": 320,
+      "articleFont": "16px",
+      "articleCenterDelta": 0,
+      "bannerSide": "inline",
       "commentsWidth": 320,
-      "cardFits": [],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
       "failedImages": []
     },
     {
@@ -293,7 +482,7 @@
       "viewport": 360,
       "scrollWidth": 360,
       "cls": 0,
-      "lcp": 224,
+      "lcp": 256,
       "bodyFont": "17px",
       "cardFits": [],
       "failedImages": []
@@ -307,7 +496,7 @@
       "viewport": 375,
       "scrollWidth": 375,
       "cls": 0,
-      "lcp": 208,
+      "lcp": 164,
       "bodyFont": "17px",
       "cardFits": [
         "contain",
@@ -330,7 +519,7 @@
       "viewport": 375,
       "scrollWidth": 375,
       "cls": 0,
-      "lcp": 160,
+      "lcp": 156,
       "bodyFont": "17px",
       "cardFits": [
         "contain",
@@ -350,11 +539,19 @@
       "viewport": 375,
       "scrollWidth": 375,
       "cls": 0,
-      "lcp": 148,
+      "lcp": 144,
       "bodyFont": "17px",
       "articleWidth": 335,
+      "articleFont": "16px",
+      "articleCenterDelta": 0,
+      "bannerSide": "inline",
       "commentsWidth": 335,
-      "cardFits": [],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
       "failedImages": []
     },
     {
@@ -365,23 +562,23 @@
       "errors": [],
       "viewport": 375,
       "scrollWidth": 375,
-      "cls": 0,
-      "lcp": 224,
-      "bodyFont": "17px",
-      "cardFits": [],
-      "failedImages": []
-    },
-    {
-      "name": "home",
-      "width": 390,
-      "height": 844,
-      "status": 200,
-      "errors": [],
-      "viewport": 390,
-      "scrollWidth": 390,
       "cls": 0,
       "lcp": 188,
       "bodyFont": "17px",
+      "cardFits": [],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "viewport": 390,
+      "scrollWidth": 390,
+      "cls": 0,
+      "lcp": 168,
+      "bodyFont": "17px",
       "cardFits": [
         "contain",
         "contain",
@@ -403,7 +600,7 @@
       "viewport": 390,
       "scrollWidth": 390,
       "cls": 0,
-      "lcp": 108,
+      "lcp": 136,
       "bodyFont": "17px",
       "cardFits": [
         "contain",
@@ -423,11 +620,19 @@
       "viewport": 390,
       "scrollWidth": 390,
       "cls": 0,
-      "lcp": 132,
+      "lcp": 164,
       "bodyFont": "17px",
       "articleWidth": 350,
+      "articleFont": "16px",
+      "articleCenterDelta": 0,
+      "bannerSide": "inline",
       "commentsWidth": 350,
-      "cardFits": [],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
       "failedImages": []
     },
     {
@@ -439,7 +644,7 @@
       "viewport": 390,
       "scrollWidth": 390,
       "cls": 0,
-      "lcp": 152,
+      "lcp": 132,
       "bodyFont": "17px",
       "cardFits": [],
       "failedImages": []
@@ -453,7 +658,7 @@
       "viewport": 430,
       "scrollWidth": 430,
       "cls": 0,
-      "lcp": 184,
+      "lcp": 156,
       "bodyFont": "17px",
       "cardFits": [
         "contain",
@@ -499,8 +704,16 @@
       "lcp": 148,
       "bodyFont": "17px",
       "articleWidth": 390,
+      "articleFont": "16px",
+      "articleCenterDelta": 0,
+      "bannerSide": "inline",
       "commentsWidth": 390,
-      "cardFits": [],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
       "failedImages": []
     },
     {
@@ -512,7 +725,7 @@
       "viewport": 430,
       "scrollWidth": 430,
       "cls": 0,
-      "lcp": 204,
+      "lcp": 152,
       "bodyFont": "17px",
       "cardFits": [],
       "failedImages": []
@@ -526,7 +739,7 @@
       "viewport": 768,
       "scrollWidth": 768,
       "cls": 0,
-      "lcp": 200,
+      "lcp": 192,
       "bodyFont": "18px",
       "cardFits": [
         "contain",
@@ -549,7 +762,7 @@
       "viewport": 768,
       "scrollWidth": 768,
       "cls": 0,
-      "lcp": 148,
+      "lcp": 188,
       "bodyFont": "18px",
       "cardFits": [
         "contain",
@@ -569,11 +782,19 @@
       "viewport": 768,
       "scrollWidth": 768,
       "cls": 0,
-      "lcp": 168,
+      "lcp": 148,
       "bodyFont": "18px",
       "articleWidth": 672,
+      "articleFont": "18px",
+      "articleCenterDelta": 0,
+      "bannerSide": "inline",
       "commentsWidth": 672,
-      "cardFits": [],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
       "failedImages": []
     },
     {
@@ -585,7 +806,7 @@
       "viewport": 768,
       "scrollWidth": 768,
       "cls": 0,
-      "lcp": 152,
+      "lcp": 144,
       "bodyFont": "18px",
       "cardFits": [],
       "failedImages": []
@@ -599,7 +820,7 @@
       "viewport": 820,
       "scrollWidth": 820,
       "cls": 0,
-      "lcp": 252,
+      "lcp": 236,
       "bodyFont": "18px",
       "cardFits": [
         "contain",
@@ -622,7 +843,7 @@
       "viewport": 820,
       "scrollWidth": 820,
       "cls": 0,
-      "lcp": 160,
+      "lcp": 200,
       "bodyFont": "18px",
       "cardFits": [
         "contain",
@@ -642,11 +863,19 @@
       "viewport": 820,
       "scrollWidth": 820,
       "cls": 0,
-      "lcp": 144,
+      "lcp": 168,
       "bodyFont": "18px",
-      "articleWidth": 724,
-      "commentsWidth": 724,
-      "cardFits": [],
+      "articleWidth": 720,
+      "articleFont": "18px",
+      "articleCenterDelta": 0,
+      "bannerSide": "inline",
+      "commentsWidth": 720,
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
       "failedImages": []
     },
     {
@@ -658,7 +887,7 @@
       "viewport": 820,
       "scrollWidth": 820,
       "cls": 0,
-      "lcp": 156,
+      "lcp": 168,
       "bodyFont": "18px",
       "cardFits": [],
       "failedImages": []
