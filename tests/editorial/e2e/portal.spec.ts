@@ -252,6 +252,26 @@ async function login(page: Page) {
   await page.getByRole("button", { name: "Entrar no admin" }).click();
   await expect(page.getByRole("button", { name: "Novo artigo" })).toBeVisible();
 }
+test('Homepage editorial cards have compact, aligned grids and preserve readable covers',async({page})=>{
+ await fixtures(page);
+ await page.setViewportSize({width:1440,height:900});await page.goto('/');
+ const lead=page.locator('.home-featured .featured-card');
+ await expect(lead).toHaveCount(1);await expect(page.locator('.home-featured .compact-card')).toHaveCount(4);
+ expect((await lead.boundingBox())!.height).toBeLessThan(320);
+ const thumbnails=await page.locator('.home-featured .compact-card').evaluateAll(cards=>cards.map(c=>c.getBoundingClientRect().height));
+ expect(Math.max(...thumbnails)).toBeLessThan(210);
+ const latest=await page.locator('.home-latest .post-card').evaluateAll(cards=>cards.map(c=>c.getBoundingClientRect().height));
+ expect(latest).toHaveLength(3);expect(Math.max(...latest)).toBeLessThan(500);expect(Math.max(...latest)-Math.min(...latest)).toBeLessThan(1);
+ await expect(page.locator('.home-featured .featured-card .post-image img')).toHaveCSS('object-fit','contain');
+ await expect(page.locator('.home-featured .compact-card').first()).toHaveCSS('display','grid');
+ await page.setViewportSize({width:390,height:844});
+ await expect(page.locator('.home-featured .secondary-posts')).toHaveCSS('grid-template-columns','350px');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await expect(page.locator('.home-featured .compact-card h3 a').first()).toHaveCSS('font-size','18px');
+ await page.locator('.home-featured .featured-card h3 a').click();
+ await expect(page).toHaveURL(new RegExp('/conteudos/'+manifest.articles[0].post.slug));
+ await expect(page.getByRole('heading',{level:1,name:manifest.articles[0].post.title})).toBeVisible();
+});
 
 test("public article: real SSR, TOC, sources, images, share and mobile overflow", async ({
   page,

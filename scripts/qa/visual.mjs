@@ -108,6 +108,9 @@ try {
         scrollWidth: document.documentElement.scrollWidth,
         ...window.__qa,
         bodyFont: getComputedStyle(document.body).fontSize,
+        homeLeadHeight: document.querySelector('.home-featured .featured-card')?.getBoundingClientRect().height,
+        homeCompactHeights: [...document.querySelectorAll('.home-featured .compact-card')].map(c=>c.getBoundingClientRect().height),
+        homeLatestHeights: [...document.querySelectorAll('.home-latest .post-card')].map(c=>c.getBoundingClientRect().height),
         articleWidth: document
           .querySelector(".article-body")
           ?.getBoundingClientRect().width,
@@ -143,6 +146,7 @@ try {
         stage === "after" &&
         (metrics.scrollWidth > width ||
           errors.length ||
+          (name === 'home' && width >= 1180 && (metrics.homeLeadHeight > 320 || Math.max(...metrics.homeCompactHeights) > 210 || Math.max(...metrics.homeLatestHeights) > 500 || Math.max(...metrics.homeLatestHeights)-Math.min(...metrics.homeLatestHeights)>1)) ||
           (name === 'article' && (metrics.articleCenterDelta > 1 || metrics.bannerSide === 'wrong' || metrics.articleFont !== (width < 768 ? '16px' : '18px'))) ||
           metrics.failedImages.length ||
           metrics.cls > 0.1 ||
@@ -151,10 +155,16 @@ try {
         throw Error(JSON.stringify(results.at(-1)));
       if (stage === 'after' && width === 1440 && (name === 'article' || name === 'home')) {
         if(name === 'article')await page.locator('.article-layout').scrollIntoViewIfNeeded();
-        else await page.getByRole('heading',{name:'Conteúdos em destaque'}).scrollIntoViewIfNeeded();
+        else await page.locator('.home-featured').evaluate(el=>window.scrollTo(0,scrollY+el.getBoundingClientRect().top-100));
         await page.screenshot({path:`${output}/${name === 'article'?'article-reading':'home-cards'}-1440.jpg`,type:'jpeg',quality:75});
       }
       console.log(stage, name, width, JSON.stringify(metrics));
+      if(stage === 'after' && name === 'home' && [1440,390].includes(width)) {
+        for(const [className,label] of [['home-featured','featured'],['home-latest','latest']]) {
+          await page.locator('.'+className).evaluate(el=>window.scrollTo(0,scrollY+el.getBoundingClientRect().top-100));
+          await page.screenshot({path:`${output}/home-${label}-${width}.jpg`,type:'jpeg',quality:75});
+        }
+      }
       await context.close();
     }
   await writeFile(
