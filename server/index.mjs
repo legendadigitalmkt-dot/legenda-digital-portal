@@ -1,6 +1,6 @@
 import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
-import {dirname,resolve,join} from 'node:path';
+import {join} from 'node:path';
 import React from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {App} from '../src/App.tsx';
@@ -8,7 +8,8 @@ import {createPortalHandler, cleanBody, safeUrl, BACKEND} from './portal.mjs';
 
 export {createPortalHandler, cleanBody, safeUrl, BACKEND};
 export const renderArticle = post => renderToStaticMarkup(React.createElement(App,{path:'/conteudos/' + post.slug,server:true,initialPosts:[post]}));
-export async function start(root = dirname(resolve(process.argv[1])), port = Number(process.env.PORT || 3000)) {
+export async function start(root, port = Number(process.env.PORT || 3000)) {
+  if (typeof root !== 'string' || !root) throw new Error('Invalid application root');
   if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid application port');
   const config = JSON.parse(await readFile(join(root,'portal-runtime.json'),'utf8'));
   const handler = await createPortalHandler({root,config,renderArticle});
@@ -19,5 +20,3 @@ export async function start(root = dirname(resolve(process.argv[1])), port = Num
   process.once('SIGTERM',shutdown);process.once('SIGINT',shutdown);
   return server;
 }
-// This entry is bundled as CommonJS, with its own package scope in dist.
-if (typeof require !== 'undefined' && require.main === module) start().catch(() => {console.error('Portal startup failed: check build and public backend configuration.');process.exitCode=1;});
