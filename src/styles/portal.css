@@ -2109,3 +2109,66 @@ body:has(dialog[open]) {
 .preview-mobile .article-body h3 {font-size:var(--article-h3)}
 
 .preview-mobile .article-toc nav {max-height:220px;overflow:auto}
+
+/* Compact editorial cards on the homepage; reading and directory layouts are unchanged. */
+.home-card-section {padding:64px 0}
+.home-card-section .section-head {margin-bottom:28px;gap:20px}
+.home-card-section .section-head h2 {font-size:32px;line-height:1.2}
+.home-card-section .section-head p:not(.eyebrow) {font-size:16px;margin-top:10px}
+.home-card-section .featured-grid {grid-template-columns:1fr;gap:18px}
+.home-card-section .post-card {border-radius:16px;box-shadow:0 4px 18px #07152b04;display:flex;flex-direction:column}
+.home-card-section .post-content {padding:18px;display:flex;flex-direction:column;flex:1;min-width:0}
+.home-card-section .post-card h3 {font-size:21px;line-height:1.3;margin:10px 0}
+.home-card-section .post-card h3 a {min-height:44px;-webkit-line-clamp:3}
+.home-card-section .post-card p {font-size:16px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.home-card-section .category {align-self:flex-start;font-size:13px;padding:4px 8px}
+.home-card-section .post-meta {margin-top:auto;padding-top:16px;gap:6px 10px;font-size:13px;line-height:1.5}
+.home-card-section .post-meta .author-avatar {display:none}
+.home-card-section .post-meta>span:nth-child(2) {flex:1;min-width:0;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.home-card-section .post-meta time {flex-basis:auto;margin-left:0;font-size:13px}
+.home-featured .featured-card {display:grid;grid-template-columns:minmax(0,.38fr) minmax(0,.62fr);align-items:stretch}
+.home-featured .featured-card .post-image {height:240px;min-width:0;background:#fff}
+.home-featured .featured-card .article-cover {height:100%;aspect-ratio:auto}
+.home-featured .featured-card .post-image img {aspect-ratio:auto;height:100%}
+.home-featured .featured-card .post-content {padding:24px;justify-content:center}
+.home-featured .featured-card h3 {font-size:27px;line-height:1.25;margin:12px 0}
+.home-featured .featured-card .post-meta {margin-top:0;padding-top:18px}
+.home-featured .secondary-posts {grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
+.home-featured .compact-card {display:grid;grid-template-columns:112px minmax(0,1fr);height:100%}
+.home-featured .compact-card .post-image {height:100%;display:flex;align-items:center;background:#fff;padding:8px}
+.home-featured .compact-card .article-cover {width:100%;height:auto;aspect-ratio:4/3}
+.home-featured .compact-card .post-image img {height:auto;aspect-ratio:4/3}
+.home-featured .compact-card h3 {font-size:18px;line-height:1.35;margin:8px 0}
+.home-featured .compact-card .post-content {padding:16px}
+.home-featured .compact-card .post-meta {padding-top:10px}
+.home-latest .post-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.home-latest .article-cover {aspect-ratio:16/9}
+.home-latest .post-image img {aspect-ratio:auto;height:100%}
+.home-latest .post-content {gap:0}
+@media(max-width:1100px){
+ .home-featured .featured-card {grid-template-columns:minmax(0,.4fr) minmax(0,.6fr)}
+ .home-featured .featured-card .post-image {height:100%;min-height:220px}
+ .home-featured .compact-card {grid-template-columns:96px minmax(0,1fr)}
+ .home-featured .compact-card .post-meta time {flex-basis:100%}
+ .home-latest .post-card h3 {font-size:19px}
+}
+@media(max-width:767px){
+ .home-card-section {padding:44px 0}
+ .home-card-section .section-head {margin-bottom:22px}
+ .home-card-section .section-head h2 {font-size:27px}
+ .home-card-section .section-head p:not(.eyebrow) {font-size:16px}
+ .home-featured .featured-card {display:flex}
+ .home-featured .featured-card .post-image {height:auto;min-height:0}
+ .home-featured .featured-card .article-cover {aspect-ratio:16/10;height:auto}
+ .home-featured .featured-card .post-image img {height:100%;aspect-ratio:auto}
+ .home-featured .featured-card .post-content {padding:18px}
+ .home-featured .featured-card h3 {font-size:23px}
+ .home-featured .secondary-posts {grid-template-columns:1fr;gap:12px}
+ .home-featured .compact-card {display:grid;grid-template-columns:88px minmax(0,1fr)}
+ .home-featured .compact-card .post-content {padding:14px}
+ .home-featured .compact-card h3 {font-size:18px}
+ .home-latest .post-grid {grid-template-columns:1fr;gap:16px}
+ .home-latest .article-cover {aspect-ratio:16/10}
+ .home-latest .post-card h3 {font-size:21px}
+ .home-card-section .post-meta time {flex-basis:100%}
+}

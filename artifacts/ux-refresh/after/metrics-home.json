@@ -1,0 +1,390 @@
+{
+  "fixture": "Local identical approved Batch 1 data; no production writes. LCP/CLS lab samples, not field Core Web Vitals.",
+  "results": [
+    {
+      "name": "home",
+      "width": 1180,
+      "height": 820,
+      "status": 200,
+      "errors": [],
+      "viewport": 1180,
+      "scrollWidth": 1180,
+      "cls": 0,
+      "lcp": 232,
+      "bodyFont": "18px",
+      "homeLeadHeight": 242,
+      "homeCompactHeights": [
+        151.6875,
+        151.6875,
+        151.6875,
+        151.6875
+      ],
+      "homeLatestHeights": [
+        430.359375,
+        430.359375,
+        430.359375
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 1280,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1280,
+      "scrollWidth": 1280,
+      "cls": 0,
+      "lcp": 232,
+      "bodyFont": "18px",
+      "homeLeadHeight": 242,
+      "homeCompactHeights": [
+        151.6875,
+        151.6875,
+        151.6875,
+        151.6875
+      ],
+      "homeLatestHeights": [
+        460.359375,
+        460.359375,
+        460.359375
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 1366,
+      "height": 768,
+      "status": 200,
+      "errors": [],
+      "viewport": 1366,
+      "scrollWidth": 1366,
+      "cls": 0,
+      "lcp": 232,
+      "bodyFont": "18px",
+      "homeLeadHeight": 242,
+      "homeCompactHeights": [
+        151.6875,
+        151.6875,
+        151.6875,
+        151.6875
+      ],
+      "homeLatestHeights": [
+        476.484375,
+        476.484375,
+        476.484375
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "cls": 0,
+      "lcp": 212,
+      "bodyFont": "18px",
+      "homeLeadHeight": 242,
+      "homeCompactHeights": [
+        151.6875,
+        151.6875,
+        151.6875,
+        151.6875
+      ],
+      "homeLatestHeights": [
+        478.359375,
+        478.359375,
+        478.359375
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "errors": [],
+      "viewport": 1920,
+      "scrollWidth": 1920,
+      "cls": 0,
+      "lcp": 248,
+      "bodyFont": "18px",
+      "homeLeadHeight": 242,
+      "homeCompactHeights": [
+        151.6875,
+        151.6875,
+        151.6875,
+        151.6875
+      ],
+      "homeLatestHeights": [
+        478.359375,
+        478.359375,
+        478.359375
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 360,
+      "height": 800,
+      "status": 200,
+      "errors": [],
+      "viewport": 360,
+      "scrollWidth": 360,
+      "cls": 0,
+      "lcp": 200,
+      "bodyFont": "17px",
+      "homeLeadHeight": 452.84375,
+      "homeCompactHeights": [
+        197.484375,
+        197.484375,
+        197.484375,
+        197.484375
+      ],
+      "homeLatestHeights": [
+        443.9375,
+        471.234375,
+        471.234375
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 375,
+      "height": 812,
+      "status": 200,
+      "errors": [],
+      "viewport": 375,
+      "scrollWidth": 375,
+      "cls": 0,
+      "lcp": 168,
+      "bodyFont": "17px",
+      "homeLeadHeight": 462.21875,
+      "homeCompactHeights": [
+        197.484375,
+        197.484375,
+        197.484375,
+        197.484375
+      ],
+      "homeLatestHeights": [
+        453.3125,
+        480.609375,
+        480.609375
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "viewport": 390,
+      "scrollWidth": 390,
+      "cls": 0,
+      "lcp": 188,
+      "bodyFont": "17px",
+      "homeLeadHeight": 471.59375,
+      "homeCompactHeights": [
+        197.484375,
+        197.484375,
+        197.484375,
+        197.484375
+      ],
+      "homeLatestHeights": [
+        462.6875,
+        489.984375,
+        489.984375
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 430,
+      "height": 932,
+      "status": 200,
+      "errors": [],
+      "viewport": 430,
+      "scrollWidth": 430,
+      "cls": 0,
+      "lcp": 200,
+      "bodyFont": "17px",
+      "homeLeadHeight": 496.59375,
+      "homeCompactHeights": [
+        197.484375,
+        197.484375,
+        197.484375,
+        197.484375
+      ],
+      "homeLatestHeights": [
+        477.09375,
+        487.6875,
+        514.984375
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 768,
+      "height": 1024,
+      "status": 200,
+      "errors": [],
+      "viewport": 768,
+      "scrollWidth": 768,
+      "cls": 0,
+      "lcp": 180,
+      "bodyFont": "18px",
+      "homeLeadHeight": 250.59375,
+      "homeCompactHeights": [
+        201.484375,
+        201.484375,
+        201.484375,
+        201.484375
+      ],
+      "homeLatestHeights": [
+        382.03125,
+        382.03125,
+        382.03125
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 820,
+      "height": 1180,
+      "status": 200,
+      "errors": [],
+      "viewport": 820,
+      "scrollWidth": 820,
+      "cls": 0,
+      "lcp": 176,
+      "bodyFont": "18px",
+      "homeLeadHeight": 250.59375,
+      "homeCompactHeights": [
+        201.484375,
+        201.484375,
+        201.484375,
+        201.484375
+      ],
+      "homeLatestHeights": [
+        391.78125,
+        391.78125,
+        391.78125
+      ],
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    }
+  ]
+}
