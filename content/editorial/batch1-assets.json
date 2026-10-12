@@ -1,0 +1,122 @@
+{
+  "public/images/editorial/batch1/o-novo-funil-de-vendas-na-era-da-ia-hero.webp": {
+    "sha256": "8298798c238b9fe45321ca4085ae44465542b736572e93ba6288fc85fbc00778",
+    "bytes": 17604,
+    "width": 1200,
+    "height": 630
+  },
+  "public/images/editorial/batch1/o-novo-funil-de-vendas-na-era-da-ia-hero-mobile.webp": {
+    "sha256": "1885de1723593549df8ae5114a748f827031975b1b7b4f82ca59c77dbd17953a",
+    "bytes": 9774,
+    "width": 720,
+    "height": 378
+  },
+  "public/images/editorial/batch1/o-novo-funil-de-vendas-na-era-da-ia-diagram-1.webp": {
+    "sha256": "c5b85e05382b45eba2815b0d51d1d06ed7054a3b42db3f9f5fbd0f75dfbfea10",
+    "bytes": 33172,
+    "width": 1200,
+    "height": 652
+  },
+  "public/images/editorial/batch1/o-novo-funil-de-vendas-na-era-da-ia-diagram-1-mobile.webp": {
+    "sha256": "e3f52fa9692bc894077c0dec2d79388c9caffb6defe1e0a5df33eb4cfdae8ad4",
+    "bytes": 17162,
+    "width": 720,
+    "height": 391
+  },
+  "public/images/editorial/batch1/marketing-de-campanha-para-sistema-hero.webp": {
+    "sha256": "25b50c8e81d7dbe71842039a13adf57116a499bd2841dcac8b390b2978990fff",
+    "bytes": 19976,
+    "width": 1200,
+    "height": 630
+  },
+  "public/images/editorial/batch1/marketing-de-campanha-para-sistema-hero-mobile.webp": {
+    "sha256": "f2634a5161376ea84a3f3f21db910e5e292dc77a8ff56aceb9d72e703d052eab",
+    "bytes": 10946,
+    "width": 720,
+    "height": 378
+  },
+  "public/images/editorial/batch1/marketing-de-campanha-para-sistema-diagram-1.webp": {
+    "sha256": "ef87f1ce612fc0c04bbbbb37549dcc46dc54a439273d520ebcde9779bb52f511",
+    "bytes": 31690,
+    "width": 1200,
+    "height": 652
+  },
+  "public/images/editorial/batch1/marketing-de-campanha-para-sistema-diagram-1-mobile.webp": {
+    "sha256": "28b79b28407c3fba444e2f501350c8b5b58f03a5909e63a36db7448e54101000",
+    "bytes": 16338,
+    "width": 720,
+    "height": 391
+  },
+  "public/images/editorial/batch1/ai-search-como-chatgpt-google-assistentes-mudam-descoberta-hero.webp": {
+    "sha256": "e091e462b8aecca18fe7364cd2e388a4842016d240e9bbf7729731127be5f366",
+    "bytes": 20206,
+    "width": 1200,
+    "height": 630
+  },
+  "public/images/editorial/batch1/ai-search-como-chatgpt-google-assistentes-mudam-descoberta-hero-mobile.webp": {
+    "sha256": "ec339a800df8d642f8e271f427e6a84a7071e7d2fc28b44352f31013e7e62915",
+    "bytes": 11434,
+    "width": 720,
+    "height": 378
+  },
+  "public/images/editorial/batch1/ai-search-como-chatgpt-google-assistentes-mudam-descoberta-diagram-1.webp": {
+    "sha256": "00e9c47d0d7b5ef805cb240718154cf9834babeb8ea72874f1ff41e129429b66",
+    "bytes": 40398,
+    "width": 1200,
+    "height": 652
+  },
+  "public/images/editorial/batch1/ai-search-como-chatgpt-google-assistentes-mudam-descoberta-diagram-1-mobile.webp": {
+    "sha256": "15bcebdfa12539835a9a8e7556c7c1316a6a9f8b36567b50fa446cc1b3a83ce5",
+    "bytes": 20572,
+    "width": 720,
+    "height": 391
+  },
+  "public/images/editorial/batch1/seo-aeo-geo-busca-por-ia-hero.webp": {
+    "sha256": "b0e3e5c1ece1be2f7f22b1b603ca52ae1b67373abe95a85bb784fe9d53a4f101",
+    "bytes": 19408,
+    "width": 1200,
+    "height": 630
+  },
+  "public/images/editorial/batch1/seo-aeo-geo-busca-por-ia-hero-mobile.webp": {
+    "sha256": "0d1792b9b71497b7297c61ca5c0046cd4eb0f711adf69c59709a37d314b23d9c",
+    "bytes": 11290,
+    "width": 720,
+    "height": 378
+  },
+  "public/images/editorial/batch1/seo-aeo-geo-busca-por-ia-diagram-1.webp": {
+    "sha256": "11a2f73f3d20aa2d3d09dd3a09b0e0e0bd0059ffb171265e64af4482229faf41",
+    "bytes": 39132,
+    "width": 1200,
+    "height": 652
+  },
+  "public/images/editorial/batch1/seo-aeo-geo-busca-por-ia-diagram-1-mobile.webp": {
+    "sha256": "04cc63d497ce26365ba7dae9f0808d1a4bb0ea6c539d738538b5c59ea421f011",
+    "bytes": 19620,
+    "width": 720,
+    "height": 391
+  },
+  "public/images/editorial/batch1/agentes-de-ia-chatbots-sistemas-de-trabalho-hero.webp": {
+    "sha256": "954dcaacd9d4e14687e3ab9b97cc42bd4de757385ec663c65e5b0128fbf847e7",
+    "bytes": 21638,
+    "width": 1200,
+    "height": 630
+  },
+  "public/images/editorial/batch1/agentes-de-ia-chatbots-sistemas-de-trabalho-hero-mobile.webp": {
+    "sha256": "cd8fc0c7db6b366b5a304b8828495c2effc2b5ea9e19d0a017634b46abedd836",
+    "bytes": 12236,
+    "width": 720,
+    "height": 378
+  },
+  "public/images/editorial/batch1/agentes-de-ia-chatbots-sistemas-de-trabalho-diagram-1.webp": {
+    "sha256": "faa04d7fea7a94fedcd317db1a9eda143b23d76e23045c7309bd8d8da6aa2e3c",
+    "bytes": 50494,
+    "width": 1200,
+    "height": 652
+  },
+  "public/images/editorial/batch1/agentes-de-ia-chatbots-sistemas-de-trabalho-diagram-1-mobile.webp": {
+    "sha256": "f24105174ac0af536d976a2b53c38286a45cb2e1226fb6e08b15aa71f88b9b6c",
+    "bytes": 26212,
+    "width": 720,
+    "height": 391
+  }
+}
