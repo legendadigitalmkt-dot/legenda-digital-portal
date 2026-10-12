@@ -20,7 +20,7 @@ async function serve(t, fetchImpl = async () => Response.json([post])) {
 }
 
 test('Node build has standalone entry, routes and no PHP artifacts',async () => {
-  assert.equal(routes.length,31);
+  assert.equal(routes.length,36);assert.ok(routes.includes('/categorias/growth-negocios'));
   for (const name of ['index.php','sitemap.php','site-runtime.php','.htaccess']) await assert.rejects(readFile('dist/' + name));
   assert.match(await readFile('dist/portal-runtime.cjs','utf8'),/createPortalHandler/);
 });
@@ -119,7 +119,7 @@ test('Sitemap uses only currently published posts and excludes admin, search and
 test('Sitemap paginates public API results',async t => {
   const offsets=[];
   const origin = await serve(t,async url => {
-    const offset = new URL(url).searchParams.get('offset');offsets.push(offset);
+    if(new URL(url).pathname.endsWith('/content_categories'))return Response.json([]);const offset = new URL(url).searchParams.get('offset');offsets.push(offset);
     return Response.json(offset === '0' ? Array.from({length:1000},(_,i) => ({...post,slug:'artigo-' + i})) : [{...post,slug:'pagina-dois'}]);
   });
   const result = await fetch(origin + '/sitemap.xml');
@@ -159,5 +159,5 @@ test('POST is rejected without backend mutation and HEAD preserves metadata with
 
 test('Health identifies Node release without credentials or user data',async t => {
   const origin = await serve(t,async () => {throw new Error('Health must not access backend');});
-  assert.deepEqual(await (await fetch(origin + '/api/health')).json(),{status:'ok',release:'portal-node-v2',runtime:'node'});
+  assert.deepEqual(await (await fetch(origin + '/api/health')).json(),{status:'ok',release:'portal-editorial-v1',runtime:'node'});
 });
