@@ -2172,3 +2172,326 @@ body:has(dialog[open]) {
  .home-latest .post-card h3 {font-size:21px}
  .home-card-section .post-meta time {flex-basis:100%}
 }
+/* Tools platform foundation: shared rhythm and mobile-first controls. */
+.tools-directory,
+.tool-page {
+  padding-block: 64px;
+}
+.tools-directory .tool-card h2 {
+  font-size: 24px;
+}
+.tools-directory .tool-card img {
+  height: 160px;
+  object-fit: cover;
+}
+.tools-directory-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.tool-filters,
+.tool-actions,
+.tool-account-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tool-filters button {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  padding: 9px 15px;
+  min-height: 44px;
+  color: var(--navy);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.tool-filters button[aria-pressed="true"] {
+  background: var(--navy);
+  color: white;
+}
+.engine-workspace {
+  align-items: start;
+  gap: 32px;
+}
+.tool-input,
+.engine-result {
+  min-width: 0;
+}
+.tool-input h2,
+.engine-result h2 {
+  font-size: 26px;
+}
+.tool-input h3,
+.engine-result h3 {
+  font-size: 20px;
+  margin-top: 24px;
+}
+.tools-engine label,
+.portal-auth label,
+.account-tools label,
+.tool-history-grid form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.tools-engine input,
+.tools-engine textarea,
+.portal-auth input,
+.account-tools input,
+.tool-history-grid form input,
+.tool-history-grid form textarea,
+.tool-history-grid form select {
+  width: 100%;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 12px;
+  border: 1px solid #a2b3c9;
+  border-radius: 10px;
+  background: white;
+  color: var(--navy);
+  font: inherit;
+  font-size: 16px;
+}
+.tools-engine textarea {
+  resize: vertical;
+}
+.tools-engine .tool-check,
+.portal-auth .tool-check,
+.account-tools .tool-check {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+.tools-engine .tool-check input,
+.portal-auth .tool-check input,
+.account-tools .tool-check input {
+  width: 22px;
+  height: 22px;
+  min-height: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--navy);
+}
+.tool-local-consent {
+  padding-block: 16px;
+  border-top: 1px solid var(--border);
+  margin-top: 24px;
+}
+.engine-result {
+  position: sticky;
+  top: 100px;
+  scroll-margin-top: 110px;
+}
+.tool-result-value {
+  display: block;
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 16px 0;
+}
+.tool-result-lines {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.tool-result-lines p {
+  font-size: 16px;
+  line-height: 1.65;
+}
+.engine-result .tool-actions {
+  margin: 24px 0;
+}
+.tool-actions .btn {
+  min-height: 44px;
+  white-space: normal;
+}
+.tool-save {
+  margin-block: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.portal-auth {
+  max-width: 520px;
+}
+.portal-auth h2 {
+  font-size: 26px;
+}
+.portal-auth .microcopy {
+  margin-top: 16px;
+}
+.tool-methodology {
+  max-width: 800px;
+  margin: 48px auto;
+}
+.tool-methodology h2 {
+  font-size: 26px;
+  margin: 26px 0 12px;
+}
+.tool-methodology details {
+  border-top: 1px solid var(--border);
+  padding: 16px 0;
+}
+.tool-methodology summary,
+.tool-history-card summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding-block: 8px;
+}
+.tool-related {
+  margin-top: 48px;
+}
+.tool-related .info-card h3 {
+  font-size: 20px;
+}
+.tool-planner fieldset {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 16px 0;
+}
+.tool-planner legend {
+  padding: 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.account-tools {
+  max-width: 1100px;
+}
+.tool-account-nav {
+  margin-bottom: 32px;
+}
+.tool-account-nav a {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 16px;
+}
+.tool-history-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-block: 24px;
+}
+.tool-history-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  min-width: 0;
+  background: white;
+}
+.tool-history-card h3 {
+  font-size: 22px;
+  overflow-wrap: anywhere;
+  margin: 12px 0;
+}
+.tool-history-card .tool-actions {
+  margin-block: 16px;
+}
+.tool-history-card time {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+}
+.tool-compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.tool-comparison,
+.tool-privacy {
+  margin-block: 40px;
+}
+.tool-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.tool-metrics div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 14px;
+}
+.tool-metrics dd {
+  margin: 0;
+  font-weight: 700;
+}
+.tool-input form > .btn {
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .tools-directory,
+  .tool-page {
+    padding-block: 40px;
+  }
+  .engine-workspace,
+  .tool-history-grid,
+  .tool-compare-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .engine-result {
+    position: static;
+    padding: 24px;
+  }
+  .tool-input h2,
+  .engine-result h2,
+  .tool-methodology h2 {
+    font-size: 24px;
+  }
+  .tool-history-card {
+    padding: 20px;
+  }
+  .tool-related .three-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tool-filters {
+    gap: 8px;
+  }
+  .tool-filters button {
+    padding: 8px 12px;
+  }
+  .tool-actions .btn {
+    font-size: 14px;
+  }
+  .tool-planner fieldset {
+    padding: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tools-engine * {
+    scroll-behavior: auto !important;
+  }
+}
+
+.tool-workspace-placeholder,
+.engine-workspace {
+  min-height: 640px;
+}
+.engine-result:focus {
+  outline: 2px solid #5276c6;
+  outline-offset: 6px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .engine-result .tool-result-lines {
+    animation: tool-result-enter 0.2s ease-out;
+  }
+  @keyframes tool-result-enter {
+    from {
+      opacity: 0.6;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
