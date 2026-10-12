@@ -25,13 +25,17 @@ A integração precisa ter acesso apenas ao repositório do portal. Não tornar 
 
 ## Adaptação do runtime
 
-`npm run build` gera o frontend e as 31 rotas com SEO, empacota servidor + renderizador React + sanitizador em um `dist/server.js` independente de node_modules no runtime, escreve a configuração pública e remove todos os controladores/configurações PHP da saída Node. `npm start` atende em `0.0.0.0`, usando `PORT` fornecida pela plataforma ou 3000. Não fixar outra porta arbitrária.
+`npm run build` gera o frontend e as 31 rotas com SEO, empacota servidor + renderizador React + sanitizador em `dist/portal-runtime.cjs`, escreve a entrada `dist/server.js` e a configuração pública, e remove todos os controladores/configurações PHP da saída Node. O runtime é independente de node_modules. A entrada inicia o servidor também quando carregada pelo loader da Hostinger; não condiciona `listen()` a `require.main === module`. Os arquivos de build são resolvidos pelo diretório da entrada (`__dirname`), não pelo argv ou diretório de trabalho do loader. `npm start` atende em `0.0.0.0`, usando `PORT` fornecida pela plataforma ou 3000. Não fixar outra porta arbitrária.
 
 Artigos são consultados em tempo real na Data API pública, com filtros de publicação/status/slug e chave publishable, sem encaminhar cookies ou Authorization do visitante. SSR produz a página React inteira e metadados atualizados. O HTML do CMS passa por allowlist de sanitização antes de renderizar. Rascunhos, arquivados e datas futuras retornam 404 mesmo se o upstream trouxer dados inadequados. Falha do upstream retorna 503 sem revelar snapshots estáticos de artigos removidos.
 
 `/sitemap.xml` consulta posts publicados e pagina em lotes de 1000, limitado a 20 páginas e prazo total de 6 segundos. Não usa artigos seed desatualizados no sitemap; exclui admin, busca e 404. Falhas retornam 503. HTML tem no-cache; admin tem private/no-store + noindex; assets com hash têm cache imutável. Cookies e Auth do CMS continuam exclusivamente no cliente Supabase/RLS existente. O servidor não aceita operações de escrita.
 
-Arquivos de configuração, código do servidor, fontes, PHP e caminhos fora do diretório público são bloqueados. URLs de artigo com `/index.html` não escapam da checagem de publicação. `/api/health` identifica a release `portal-node-v1`; é prova de liveness do runtime, não de leitura do banco.
+Arquivos de configuração, código do servidor, fontes, PHP e caminhos fora do diretório público são bloqueados. URLs de artigo com `/index.html` não escapam da checagem de publicação. `/api/health` identifica a release `portal-node-v2`; é prova de liveness do runtime, não de leitura do banco.
+
+## Correção de inicialização de 12/10/2026
+
+Os logs da implantação inicial informaram que o aplicativo não chamava `listen()` em três segundos, destacando a incompatibilidade com `if (require.main === module)`. O carregamento do bundle anterior por `require()` foi reproduzido localmente: o processo terminava sem ouvir porta. A entrada dedicada agora inicia sem essa condição e passa o diretório correto ao runtime. Testes de processo validam início direto e por loader, com argv/cwd diferentes, health em até três segundos e bloqueio dos arquivos internos. A publicação só está aceita quando o domínio responder com health `portal-node-v2` e artigos, sitemap e marca forem conferidos.
 
 ## CI e verificação
 

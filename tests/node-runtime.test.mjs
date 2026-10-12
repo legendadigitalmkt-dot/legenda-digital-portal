@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
 import {readFile,symlink,unlink} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import runtime from '../dist/server.js';
+import runtime from '../dist/portal-runtime.cjs';
 const {createPortalHandler,renderArticle,cleanBody,BACKEND} = runtime;
 const root = resolve('dist');
 const routes = JSON.parse(await readFile('dist/portal-runtime.json','utf8')).routes;
@@ -22,7 +22,7 @@ async function serve(t, fetchImpl = async () => Response.json([post])) {
 test('Node build has standalone entry, routes and no PHP artifacts',async () => {
   assert.equal(routes.length,31);
   for (const name of ['index.php','sitemap.php','site-runtime.php','.htaccess']) await assert.rejects(readFile('dist/' + name));
-  assert.match(await readFile('dist/server.js','utf8'),/createPortalHandler/);
+  assert.match(await readFile('dist/portal-runtime.cjs','utf8'),/createPortalHandler/);
 });
 
 test('Backend selection and privileged keys fail before serving anything',async () => {
@@ -130,7 +130,7 @@ test('Sitemap paginates public API results',async t => {
 
 test('Private output, PHP, source files and traversal are never served',async t => {
   const origin = await serve(t,async () => {throw new Error('Unexpected API call');});
-  for (const path of ['/portal-runtime.json','/server.js','/package.json','/.env','/.git/config','/src/App.tsx','/site-runtime.php','/index.php','/assets/..%2fportal-runtime.json','/images/%5csecret','/missing']) {
+  for (const path of ['/portal-runtime.json','/portal-runtime.cjs','/server.js','/package.json','/.env','/.git/config','/src/App.tsx','/site-runtime.php','/index.php','/assets/..%2fportal-runtime.json','/images/%5csecret','/missing']) {
     const result = await fetch(origin + path);
     assert.ok([400,404].includes(result.status),path + ': ' + result.status);
     assert.ok(!(await result.text()).includes('sb_publishable_fixture'));
@@ -159,5 +159,5 @@ test('POST is rejected without backend mutation and HEAD preserves metadata with
 
 test('Health identifies Node release without credentials or user data',async t => {
   const origin = await serve(t,async () => {throw new Error('Health must not access backend');});
-  assert.deepEqual(await (await fetch(origin + '/api/health')).json(),{status:'ok',release:'portal-node-v1',runtime:'node'});
+  assert.deepEqual(await (await fetch(origin + '/api/health')).json(),{status:'ok',release:'portal-node-v2',runtime:'node'});
 });
