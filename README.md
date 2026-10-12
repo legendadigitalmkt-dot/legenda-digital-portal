@@ -6,7 +6,7 @@ Portal editorial da LD Serviços e Soluções Digitais Ltda. Domínio de produç
 
 O site apresenta a marca, conteúdos, guias, notícias, comunidade, newsletter, ferramentas gratuitas, Building e a página comercial do Growth OS. O aplicativo Growth OS é um projeto separado. Não há CRM, checkout, cobrança ou envio de newsletter dentro deste projeto.
 
-React + TypeScript + Vite, Tailwind CSS, componentes UI no padrão shadcn, Lucide, React Hook Form e Zod. O CMS e os formulários usam Supabase PostgreSQL, Auth e Storage. A Hostinger serve os arquivos estáticos e um pequeno controlador PHP que mantém artigos e sitemap atualizados a partir do CMS. A interface administrativa tem um bundle separado.
+React + TypeScript + Vite, Tailwind CSS, componentes UI no padrão shadcn, Lucide, React Hook Form e Zod. O CMS e os formulários usam Supabase PostgreSQL, Auth e Storage. A publicação PHP atual permanece preservada. Para a integração Web app Node.js escolhida pelo titular, o build padrão gera um servidor Node que mantém artigos e sitemap atualizados a partir do CMS. A interface administrativa tem um bundle separado. Configuração e aceite: [HOSTINGER_NODE.md](HOSTINGER_NODE.md).
 
 ## Desenvolvimento
 
@@ -28,7 +28,7 @@ node scripts/verify-backend.mjs
 npm audit --audit-level=high
 ```
 
-O build produz `dist/` e pré-renderiza 31 rotas para entregar conteúdo e SEO sem depender da execução de JavaScript. Artigos publicados pelo CMS recebem HTML, metadados e schema atualizados pelo controlador PHP. `/sitemap.xml` consulta o CMS em produção. Páginas sem conteúdo têm estados vazios úteis. O admin é `noindex` e usa cache privado.
+O build produz `dist/` e pré-renderiza 31 rotas para entregar conteúdo e SEO sem depender da execução de JavaScript. Artigos publicados pelo CMS recebem HTML, metadados e schema atualizados pelo servidor Node. `/sitemap.xml` consulta o CMS em produção. Páginas sem conteúdo têm estados vazios úteis. O admin é `noindex` e usa cache privado. `npm start` inicia o servidor empacotado; `npm run build:php` preserva a geração anterior para rollback/compatibilidade.
 
 ## Supabase
 
@@ -54,7 +54,7 @@ Não há cadastro público de equipe ou envio automático de e-mails. O código 
 
 ## Deploy Hostinger
 
-O fluxo de publicação por SSH com GitHub Actions está em [DEPLOYMENT.md](DEPLOYMENT.md). Ele fica desativado até a configuração explícita dos Secrets e da variável de ativação. O procedimento abaixo documenta a publicação manual original.
+O caminho escolhido agora é [Web app Node.js por GitHub](HOSTINGER_NODE.md). O fluxo SSH anterior está em [DEPLOYMENT.md](DEPLOYMENT.md) e permanece desativado. O procedimento abaixo documenta somente a publicação PHP original; usar `npm run build:php` nesse caminho.
 
 1. Faça backup dos arquivos atuais de `public_html` e preserve a possibilidade de restauração.
 2. Execute o build com as variáveis públicas corretas.
