@@ -113,8 +113,9 @@ export async function createPortalHandler({root, config, renderArticle, renderCo
       if (/[\\\x00-\x1f]/.test(path) || path.split('/').some(part => part === '.' || part === '..')) { send(400,'Invalid path','text/plain'); return; }
       path = path.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
       const admin = path === '/admin' || path.startsWith('/admin/');
-      if (admin) { res.setHeader('Cache-Control','private, no-store'); res.setHeader('X-Robots-Tag','noindex, nofollow'); }
-      if (path === '/api/health') { send(200,JSON.stringify({status:'ok',release:'home-cards-v5',runtime:'node'}),'application/json'); return; }
+      const privatePage=admin||path==='/conta'||path.startsWith('/conta/')||path.startsWith('/ferramentas/')&&new URL(req.url,DOMAIN).searchParams.has('run');
+      if (privatePage) { res.setHeader('Cache-Control','private, no-store'); res.setHeader('X-Robots-Tag','noindex, nofollow'); }
+      if (path === '/api/health') { send(200,JSON.stringify({status:'ok',release:'tools-foundation-v1',runtime:'node'}),'application/json'); return; }
       const signal = AbortSignal.timeout(6000), instant = now();
       const filter = {status:'eq.published',published_at:'lte.' + new Date(instant).toISOString()};
       if (path === '/sitemap.xml') {
@@ -128,7 +129,7 @@ export async function createPortalHandler({root, config, renderArticle, renderCo
         if (!complete) throw new Error('Sitemap size limit reached');
         const categories = await api({select:'name,slug,active',active:'eq.true',limit:'100'},signal,'content_categories');
         const categoryRoutes=categories.filter(c=>typeof c.name==='string'&&SLUG.test(c.slug)&&c.active!==false).map(c=>'/categorias/'+c.slug);
-        const fixed = [...routeSet].filter(route => !['/admin','/busca','/404'].includes(route) && !route.startsWith('/conteudos/') && !route.startsWith('/categorias/')).concat(categoryRoutes);
+        const fixed = [...routeSet].filter(route => !['/admin','/conta','/conta/ferramentas','/busca','/404'].includes(route) && !route.startsWith('/conteudos/') && !route.startsWith('/categorias/')).concat(categoryRoutes);
         const seen = new Set();
         const xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + fixed.map(route => '<url><loc>' + escape(DOMAIN + route) + '</loc></url>').join('') + posts.filter(post => !seen.has(post.slug) && seen.add(post.slug)).map(post => '<url><loc>' + DOMAIN + '/conteudos/' + escape(post.slug) + '</loc>' + (/^\d{4}-\d{2}-\d{2}/.test(post.updated_at ?? '') ? '<lastmod>' + post.updated_at.slice(0,10) + '</lastmod>' : '') + '</url>').join('') + '</urlset>';
         res.setHeader('Cache-Control','public, max-age=300'); send(200,xml,'application/xml; charset=utf-8'); return;

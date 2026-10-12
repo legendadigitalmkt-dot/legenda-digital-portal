@@ -1,11 +1,249 @@
-import React from 'react';
-import {useState,useEffect} from 'react';import {ArrowRight,Copy,Download,Sparkles,CheckCircle2,Plus,Trash2,Calculator,CalendarDays,FileCheck2} from 'lucide-react';import {PageIntro} from './PublicPages';import {toolsData} from '../lib/data';import {Button} from '../components/ui/button';import {csvEscape} from '../lib/validation';
-export function downloadText(text:string,name:string,type='text/plain'){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=u;a.download=name;a.click();URL.revokeObjectURL(u)}
-export function ToolsPage(){return <><PageIntro label="LD TOOLS / LABS" title="Ferramentas para aplicar." text="Recursos simples e gratuitos para transformar uma ideia em ação. Use no navegador, sem criar uma conta."/><section className="section"><div className="container tools-grid">{toolsData.map((t,i)=><a href={'/ferramentas/'+t.slug} className="tool-card visual-tool" key={t.slug}><img src={t.image} alt="" loading="lazy" width="500" height="320"/><div><span className={'accent-icon tone-'+i}><Sparkles size={25}/></span><small>{t.type}</small><h2>{t.title}</h2><p>{t.description}</p><span className="text-link">Abrir ferramenta<ArrowRight size={17}/></span></div></a>)}</div></section><section className="section section-soft"><div className="container narrow center"><h2>Pequenas ferramentas.<br/>Aplicações concretas.</h2><p>Os próximos experimentos do LD Labs serão adicionados quando estiverem prontos. Você pode sugerir uma necessidade ou acompanhar a construção.</p><a href="/contato?assunto=Ferramentas" className="btn btn-secondary">Sugerir uma ferramenta<ArrowRight size={18}/></a></div></section></>}
-export function ClaroTool(){const [values,setValues]=useState<Record<string,string>>({Contexto:'',Limite:'',Ação:'',Resultado:'',Observação:''});const [copied,setCopied]=useState(false);const output=Object.entries(values).filter(([,v])=>v.trim()).map(([k,v])=>`${k.toUpperCase()}\n${v.trim()}`).join('\n\n');return <div className="tool-workspace claro-workspace"><div><h2>Uma instrução com contexto.</h2><p>Preencha os campos relevantes. A ferramenta organiza seu pedido; não faz chamadas a um modelo de IA.</p>{Object.entries(values).map(([k,v])=><label key={k}>{k}<textarea rows={3} value={v} onChange={e=>setValues({...values,[k]:e.target.value})} placeholder={{Contexto:'Quem é a marca? Qual é a situação?',Limite:'Restrições, prazo e o que evitar.',Ação:'Qual tarefa precisa ser feita?',Resultado:'Formato e critérios de qualidade.',Observação:'Informações adicionais e pontos de atenção.'}[k]}/></label>)}</div><aside className="output-panel"><p className="eyebrow">SUA INSTRUÇÃO ESTRUTURADA</p><pre>{output||'Preencha os campos ao lado para montar sua instrução.'}</pre><Button disabled={!output} onClick={()=>navigator.clipboard.writeText(output).then(()=>setCopied(true))}>{copied?<CheckCircle2 size={17}/>:<Copy size={17}/>} {copied?'Copiado':'Copiar instrução'}</Button><Button variant="secondary" disabled={!output} onClick={()=>downloadText(output,'instrucao-claro.txt')}><Download size={17}/>Baixar TXT</Button><p className="microcopy">Evite dados pessoais ou confidenciais. Revise a resposta da IA antes de usar.</p></aside></div>}
-const checklist=['O público e a pergunta principal estão claros.','O título descreve o que o leitor vai encontrar.','As afirmações têm fonte ou estão identificadas como opinião.','Datas, nomes e números foram revisados.','A peça tem uma aplicação ou próximo passo útil.','As imagens têm permissão de uso e texto alternativo.','Links e chamadas para ação foram testados.','O texto está legível no celular.','O conteúdo respeita a voz da marca.','O canal e a data de distribuição foram definidos.'];
-export function Checklist(){const [checked,setChecked]=useState<boolean[]>(Array(10).fill(false));useEffect(()=>{try{const value=JSON.parse(localStorage.getItem('ld-checklist')||'null');if(Array.isArray(value)&&value.length===10)setChecked(value)}catch{}},[]);const count=checked.filter(Boolean).length;return <div className="tool-workspace checklist-workspace"><div><h2>Antes de publicar, revise.</h2><p>O checklist fica salvo somente neste navegador.</p><div className="progress-bar"><span style={{width:count*10+'%'}}/></div><p className="progress-label">{count} de 10 critérios revisados</p>{checklist.map((x,i)=><label className={'checklist-row '+(checked[i]?'done':'')} key={x}><input type="checkbox" checked={checked[i]} onChange={()=>{const next=checked.map((v,j)=>j===i?!v:v);setChecked(next);localStorage.setItem('ld-checklist',JSON.stringify(next))}}/>{x}</label>)}</div><aside className="output-panel"><FileCheck2 size={40}/><h3>Clareza é parte da qualidade.</h3><p>Marcar todos os itens ajuda a organizar a revisão. O checklist não substitui avaliação editorial e checagem de fatos.</p><Button onClick={()=>downloadText(checklist.map((x,i)=>`${checked[i]?'[x]':'[ ]'} ${x}`).join('\n'),'checklist-conteudo.txt')}><Download size={17}/>Exportar checklist</Button><Button variant="secondary" onClick={()=>{setChecked(Array(10).fill(false));localStorage.removeItem('ld-checklist')}}>Reiniciar revisão</Button></aside></div>}
-export function Conversion(){const [visits,setVisits]=useState('');const [actions,setActions]=useState('');const v=Number(visits),a=Number(actions);const valid=visits!==''&&actions!==''&&v>0&&a>=0&&a<=v&&Number.isInteger(v)&&Number.isInteger(a);return <div className="tool-workspace"><div><h2>Da visita à ação.</h2><p>Use valores do mesmo período e do mesmo funil. A fórmula é ações ÷ visitas × 100.</p><label>Visitas ou oportunidades<input type="number" min="1" step="1" value={visits} onChange={e=>setVisits(e.target.value)}/></label><label>Ações concluídas<input type="number" min="0" step="1" value={actions} onChange={e=>setActions(e.target.value)}/></label>{visits&&actions&&!valid&&<p role="alert" className="form-error">Use números inteiros. As ações devem ficar entre zero e o total de visitas.</p>}</div><aside className="output-panel conversion-result"><Calculator size={33}/><p className="eyebrow">TAXA DE CONVERSÃO</p><strong>{valid?(a/v*100).toLocaleString('pt-BR',{maximumFractionDigits:2})+'%':'—'}</strong><p>{valid?`${a} ações em ${v} visitas.`:'Preencha os dois valores para calcular.'}</p><p className="microcopy">Não há uma taxa ideal universal. Compare períodos equivalentes e considere o contexto.</p></aside></div>}
-type Plan={theme:string;format:string;channel:string;date:string};
-export function Planner(){const [rows,setRows]=useState<Plan[]>([{theme:'',format:'Artigo',channel:'Site',date:''}]);useEffect(()=>{try{const v=JSON.parse(localStorage.getItem('ld-editorial-plan')||'null');if(Array.isArray(v)&&v.length)setRows(v)}catch{}},[]);const update=(next:Plan[])=>{setRows(next);localStorage.setItem('ld-editorial-plan',JSON.stringify(next))};return <div className="planner"><div className="section-head"><div><h2>Uma semana com intenção.</h2><p>Organize a pauta, escolha o canal e defina uma data. Salvo neste navegador.</p></div><Button variant="secondary" onClick={()=>downloadText('\uFEFF'+[['Tema','Formato','Canal','Data'],...rows.map(r=>[r.theme,r.format,r.channel,r.date])].map(r=>r.map(csvEscape).join(',')).join('\r\n'),'planner-editorial.csv','text/csv;charset=utf-8')}><Download size={17}/>Exportar CSV</Button></div><div className="planner-rows">{rows.map((r,i)=><div className="planner-row" key={i}><label>Tema<input value={r.theme} onChange={e=>update(rows.map((x,j)=>j===i?{...x,theme:e.target.value}:x))}/></label><label>Formato<select value={r.format} onChange={e=>update(rows.map((x,j)=>j===i?{...x,format:e.target.value}:x))}>{['Artigo','Guia','Post','Vídeo','Newsletter'].map(x=><option key={x}>{x}</option>)}</select></label><label>Canal<input value={r.channel} onChange={e=>update(rows.map((x,j)=>j===i?{...x,channel:e.target.value}:x))}/></label><label>Data<input type="date" value={r.date} onChange={e=>update(rows.map((x,j)=>j===i?{...x,date:e.target.value}:x))}/></label><Button variant="ghost" onClick={()=>update(rows.filter((_,j)=>j!==i))} aria-label={'Remover pauta '+(i+1)}><Trash2 size={18}/></Button></div>)}</div><Button onClick={()=>update([...rows,{theme:'',format:'Artigo',channel:'Site',date:''}])}><Plus size={17}/>Adicionar pauta</Button></div>}
-export function ToolPage({slug}:{slug:string}){const tool=toolsData.find(t=>t.slug===slug);if(!tool)return null;return <><PageIntro label={'LD TOOLS / '+tool.type.toUpperCase()} title={tool.title} text={tool.description}/><section className="section"><div className="container"><a href="/ferramentas" className="back-link">← Todas as ferramentas</a>{slug==='claro'?<ClaroTool/>:slug==='checklist-conteudo'?<Checklist/>:slug==='calculadora-conversao'?<Conversion/>:<Planner/>}</div></section></>}
+import React, { lazy, Suspense, useState, useEffect } from "react";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { PageIntro } from "./PublicPages";
+import { toolRegistry, type ToolDefinition } from "../lib/tools-engine.mjs";
+import { db } from "../services/supabase";
+export function downloadText(text: string, name: string, type = "text/plain") {
+  const u = URL.createObjectURL(new Blob([text], { type }));
+  const a = document.createElement("a");
+  a.href = u;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(u), 1000);
+}
+const Workspace = lazy(() => import("../features/tools/ToolWorkspace"));
+export function ToolHeader({ tool }: { tool: ToolDefinition }) {
+  return (
+    <PageIntro
+      label={
+        "LD TOOLS / " + tool.category.toUpperCase() + " · V" + tool.version
+      }
+      title={tool.name}
+      text={tool.description}
+    />
+  );
+}
+export function ToolsPage() {
+  const [category, setCategory] = useState("Todas");
+  const [catalog, setCatalog] = useState(toolRegistry);
+  useEffect(() => {
+    let active = true;
+    db?.from("tools")
+      .select("id,name,description,status")
+      .then(({ data }) => {
+        if (active && data)
+          setCatalog(
+            toolRegistry.map((t) => ({
+              ...t,
+              ...data.find((x) => x.id === t.id),
+            })),
+          );
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+  const visible = catalog
+    .filter((t) => category === "Todas" || t.category === category)
+    .filter((t) => t.status === "published");
+  return (
+    <>
+      <PageIntro
+        label="LD TOOLS / LABS"
+        title="Ferramentas para aplicar."
+        text="Calcule, organize e revise com contexto. Use sem conta; salve seus resultados quando quiser voltar a eles."
+      />
+      <section className="section tools-directory">
+        <div className="container">
+          <div className="tools-directory-head">
+            <div
+              role="group"
+              aria-label="Filtrar ferramentas por categoria"
+              className="tool-filters"
+            >
+              {[
+                "Todas",
+                "Growth",
+                "Marketing",
+                "Vendas",
+                "Conteúdo",
+                "IA",
+                "Dados",
+                "Negócios",
+              ].map((c) => (
+                <button
+                  type="button"
+                  aria-pressed={category === c}
+                  key={c}
+                  onClick={() => setCategory(c)}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+            <a className="text-link" href="/conta/ferramentas">
+              Meu histórico →
+            </a>
+          </div>
+          <div className="tools-grid">
+            {visible.map((t) => (
+              <a
+                href={"/ferramentas/" + t.slug}
+                className="tool-card visual-tool"
+                key={t.id}
+              >
+                <img
+                  src={t.image}
+                  alt=""
+                  loading="lazy"
+                  width="500"
+                  height="320"
+                />
+                <div>
+                  <span className="accent-icon">
+                    <Sparkles size={25} />
+                  </span>
+                  <small>
+                    {t.category} · {t.type}
+                  </small>
+                  <h2>{t.name}</h2>
+                  <p>{t.description}</p>
+                  <span className="text-link">
+                    Abrir ferramenta
+                    <ArrowRight size={17} />
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+          {!visible.length && (
+            <div className="info-card">
+              <h2>Novas ferramentas em preparação</h2>
+              <p>
+                Esta categoria será ampliada após validação. Explore os recursos
+                disponíveis nas outras categorias.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+      <section className="section section-soft">
+        <div className="container narrow center">
+          <h2>Volte ao que você construiu.</h2>
+          <p>
+            Uma conta do portal permite nomear, favoritar, comparar e duplicar
+            resultados. O uso básico continua aberto.
+          </p>
+          <a href="/conta" className="btn btn-secondary">
+            Minha conta
+            <ArrowRight size={18} />
+          </a>
+        </div>
+      </section>
+    </>
+  );
+}
+export function ToolPage({
+  slug,
+  server = false,
+}: {
+  slug: string;
+  server?: boolean;
+}) {
+  const original = toolRegistry.find((t) => t.slug === slug);
+  const [override, setOverride] = useState<Record<string, string> | null>(null);
+  useEffect(() => {
+    let active = true;
+    if (original)
+      db?.from("tools")
+        .select("name,description")
+        .eq("id", original.id)
+        .maybeSingle()
+        .then(({ data }) => {
+          if (active) setOverride(data);
+        });
+    return () => {
+      active = false;
+    };
+  }, [slug]);
+  if (!original) return null;
+  const tool = { ...original, ...override };
+  return (
+    <>
+      <ToolHeader tool={tool} />
+      <section className="section tool-page">
+        <div className="container">
+          <a href="/ferramentas" className="back-link">
+            ← Todas as ferramentas
+          </a>
+          {server ? (
+            <div className="tool-workspace-placeholder">
+              <p>
+                A ferramenta abre no navegador. Não é necessário criar uma
+                conta.
+              </p>
+            </div>
+          ) : (
+            <Suspense
+              fallback={
+                <div className="tool-workspace-placeholder" role="status">
+                  Carregando a ferramenta…
+                </div>
+              }
+            >
+              <Workspace tool={tool} />
+            </Suspense>
+          )}
+          <div className="tool-methodology">
+            <h2>Quando usar</h2>
+            <p>{tool.description}</p>
+            <h2>Metodologia e limites</h2>
+            <p>{tool.methodology}</p>
+            <p>{tool.limits}</p>
+            <details>
+              <summary>Preciso de uma conta?</summary>
+              <p>
+                Não para usar, copiar ou exportar. Uma conta é necessária
+                somente para guardar o resultado no histórico privado.
+              </p>
+            </details>
+            <details>
+              <summary>Minhas respostas ficam públicas?</summary>
+              <p>
+                Não. As respostas anônimas ficam nesta página. O histórico da
+                conta só pode ser lido por você. Não há compartilhamento público
+                automático.
+              </p>
+            </details>
+          </div>
+          <RelatedTools tool={tool} />
+        </div>
+      </section>
+    </>
+  );
+}
+export function RelatedTools({ tool }: { tool: ToolDefinition }) {
+  return (
+    <section className="tool-related">
+      <h2>Continue aplicando</h2>
+      <div className="three-grid">
+        {tool.related_tools
+          .map((id) => toolRegistry.find((t) => t.id === id))
+          .filter(Boolean)
+          .map((t) => (
+            <a
+              className="info-card"
+              key={t!.id}
+              href={"/ferramentas/" + t!.slug}
+            >
+              <h3>{t!.name}</h3>
+              <p>{t!.description}</p>
+            </a>
+          ))}
+      </div>
+      <a href="/conteudos" className="text-link">
+        Explore conteúdos para aprofundar →
+      </a>
+    </section>
+  );
+}
