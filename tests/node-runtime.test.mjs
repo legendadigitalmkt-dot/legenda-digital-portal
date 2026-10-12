@@ -159,5 +159,5 @@ test('POST is rejected without backend mutation and HEAD preserves metadata with
 
 test('Health identifies Node release without credentials or user data',async t => {
   const origin = await serve(t,async () => {throw new Error('Health must not access backend');});
-  assert.deepEqual(await (await fetch(origin + '/api/health')).json(),{status:'ok',release:'portal-editorial-v1',runtime:'node'});
+  assert.deepEqual(await (await fetch(origin + '/api/health')).json(),{status:'ok',release:'portal-ux-v2',runtime:'node'});
 });

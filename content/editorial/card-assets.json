@@ -1,0 +1,92 @@
+{
+  "public/images/editorial/batch1/o-novo-funil-de-vendas-na-era-da-ia-hero-large.webp": {
+    "sha256": "9a5550d981c5eb7e0fee27b4e5213474468521765d375e9b2c3f9410383e126b",
+    "width": 1200,
+    "height": 750,
+    "bytes": 17730
+  },
+  "public/images/editorial/batch1/o-novo-funil-de-vendas-na-era-da-ia-hero-card.webp": {
+    "sha256": "8b7c69ffb59c605efd77a94ef206353d106aa4709ee882d0350e759468ebad7d",
+    "width": 720,
+    "height": 540,
+    "bytes": 9640
+  },
+  "public/images/editorial/batch1/o-novo-funil-de-vendas-na-era-da-ia-hero-card-mobile.webp": {
+    "sha256": "965c0d3edfed5a901d5b13412d27a8ca89cadee562678db2126d9b9c08f40177",
+    "width": 480,
+    "height": 360,
+    "bytes": 5768
+  },
+  "public/images/editorial/batch1/marketing-de-campanha-para-sistema-hero-large.webp": {
+    "sha256": "a362d4e5422c038163b4a22f8fa03fff85fb3bdca7909088f0ebf7c0c829bf7b",
+    "width": 1200,
+    "height": 750,
+    "bytes": 19838
+  },
+  "public/images/editorial/batch1/marketing-de-campanha-para-sistema-hero-card.webp": {
+    "sha256": "9d3f191669e995a19cd21a26bf8731326c9d7ae45229c033eac8a314da3a06ef",
+    "width": 720,
+    "height": 540,
+    "bytes": 10744
+  },
+  "public/images/editorial/batch1/marketing-de-campanha-para-sistema-hero-card-mobile.webp": {
+    "sha256": "a586e6abb221bb50e3f3d029331c033deada481e76a817fcf41dee6b5d326f82",
+    "width": 480,
+    "height": 360,
+    "bytes": 6578
+  },
+  "public/images/editorial/batch1/ai-search-como-chatgpt-google-assistentes-mudam-descoberta-hero-large.webp": {
+    "sha256": "0affe0186e56101cf2827d741f4e408248f60434c99a735c7012b498375fa763",
+    "width": 1200,
+    "height": 750,
+    "bytes": 20424
+  },
+  "public/images/editorial/batch1/ai-search-como-chatgpt-google-assistentes-mudam-descoberta-hero-card.webp": {
+    "sha256": "8ea4dabb53be6f48f8060f5362d7c216701fbc24f823c71ed58067d237f3ba00",
+    "width": 720,
+    "height": 540,
+    "bytes": 11094
+  },
+  "public/images/editorial/batch1/ai-search-como-chatgpt-google-assistentes-mudam-descoberta-hero-card-mobile.webp": {
+    "sha256": "2483fd30deae003c7ffed7700ef65dc27ee81784c49124ee7eef3eed1159c237",
+    "width": 480,
+    "height": 360,
+    "bytes": 6516
+  },
+  "public/images/editorial/batch1/seo-aeo-geo-busca-por-ia-hero-large.webp": {
+    "sha256": "dbc887a5da521931f7ba54a13d38a267522e91e4bbadb54870848ec4a6bc549c",
+    "width": 1200,
+    "height": 750,
+    "bytes": 19494
+  },
+  "public/images/editorial/batch1/seo-aeo-geo-busca-por-ia-hero-card.webp": {
+    "sha256": "68c1444eca46e0727b461a9df3e8da2e0b467225cd364d4174ac1193bffca6a2",
+    "width": 720,
+    "height": 540,
+    "bytes": 11174
+  },
+  "public/images/editorial/batch1/seo-aeo-geo-busca-por-ia-hero-card-mobile.webp": {
+    "sha256": "96f9fe00b9c85bd10da36c4c296aba467e98cacc77258aaa6a97b463de85e0a3",
+    "width": 480,
+    "height": 360,
+    "bytes": 6878
+  },
+  "public/images/editorial/batch1/agentes-de-ia-chatbots-sistemas-de-trabalho-hero-large.webp": {
+    "sha256": "bdd85700b324f46b467933b8ebfae0e0b2d910fe6b5dd766cd886e1756dad656",
+    "width": 1200,
+    "height": 750,
+    "bytes": 21498
+  },
+  "public/images/editorial/batch1/agentes-de-ia-chatbots-sistemas-de-trabalho-hero-card.webp": {
+    "sha256": "30247bf16476951c5bc05ed8d96b4f257f1eb41c48c85ad373714cd8b586cae6",
+    "width": 720,
+    "height": 540,
+    "bytes": 11938
+  },
+  "public/images/editorial/batch1/agentes-de-ia-chatbots-sistemas-de-trabalho-hero-card-mobile.webp": {
+    "sha256": "d7a12f3cf59e7413d00d699262019e483c7d59a6fac1655c467e880ba406b9f8",
+    "width": 480,
+    "height": 360,
+    "bytes": 6880
+  }
+}

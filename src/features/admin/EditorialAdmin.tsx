@@ -1,3 +1,4 @@
+import {imagePosition} from '../../components/ArticleCover';
 import * as Dialog from "@radix-ui/react-dialog";
 import React, { useEffect, useRef, useState } from "react";
 import DOMPurify from "dompurify";
@@ -15,6 +16,11 @@ const blank = (): Post => ({
   subtitle: "",
   excerpt: "",
   body: "<p></p>",
+  image_variant: "editorial",
+  hero_position: "center",
+  card_image: "",
+  card_image_mobile: "",
+  card_image_large: "",
   featured_image: "",
   hero_image_alt: "",
   hero_image_caption: "",
@@ -47,6 +53,11 @@ const editableKeys = [
   "subtitle",
   "excerpt",
   "body",
+  "image_variant",
+  "hero_position",
+  "card_image",
+  "card_image_mobile",
+  "card_image_large",
   "featured_image",
   "hero_image_alt",
   "hero_image_caption",
@@ -228,6 +239,9 @@ export default function EditorialAdmin({
     ) {
       setMessage("O canonical precisa ser uma URL de artigo do portal.");
       return false;
+    }
+    if (candidate.hero_position && imagePosition(candidate.hero_position) !== candidate.hero_position) {
+      setMessage("Use center, top, bottom ou percentuais de 0 a 100, por exemplo 50% 30%."); return false;
     }
     const start = revision.current;
     saving.current = true;
@@ -835,9 +849,14 @@ export default function EditorialAdmin({
             </section>
             <section>
               <h2>Capa e imagens</h2>
+              <label>Tipo de imagem<select value={editing.image_variant || "editorial"} onChange={set("image_variant")}><option value="editorial">Capa editorial com texto — sem corte</option><option value="illustration">Ilustração — imagem inteira</option><option value="photography">Fotografia — corte permitido</option></select></label>
+              {editing.image_variant === "photography" && <label>Posição da fotografia<input value={editing.hero_position || "center"} onChange={set("hero_position")} placeholder="center, top ou 50% 30%"/><small>Aplica-se apenas a fotos. Artes com texto permanecem inteiras.</small></label>}
               {[
                 ["featured_image", "URL da capa"],
                 ["hero_image_mobile", "Capa para celular"],
+                ["card_image", "Card padrão 4:3"],
+                ["card_image_large", "Card grande 16:10"],
+                ["card_image_mobile", "Card para celular 4:3"],
                 ["hero_image_alt", "Texto alternativo (alt)"],
                 ["hero_image_caption", "Legenda"],
                 ["hero_image_credit", "Crédito"],

@@ -1,0 +1,161 @@
+{
+  "fixture": "Local identical approved Batch 1 data; no production writes. LCP/CLS lab samples, not field Core Web Vitals.",
+  "results": [
+    {
+      "name": "home",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "cls": 0,
+      "lcp": 376,
+      "bodyFont": "16px",
+      "cardFits": [
+        "cover",
+        "cover",
+        "cover",
+        "cover",
+        "cover",
+        "cover",
+        "cover",
+        "cover"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "contents",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "cls": 0,
+      "lcp": 268,
+      "bodyFont": "16px",
+      "cardFits": [
+        "cover",
+        "cover",
+        "cover",
+        "cover",
+        "cover"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "article",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "cls": 0.0012128312224713863,
+      "lcp": 252,
+      "bodyFont": "16px",
+      "articleWidth": 780,
+      "commentsWidth": 1050,
+      "cardFits": [
+        "cover",
+        "cover",
+        "cover",
+        "cover"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "growth",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "cls": 0.007661407680014361,
+      "lcp": 200,
+      "bodyFont": "16px",
+      "cardFits": [],
+      "failedImages": []
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "viewport": 390,
+      "scrollWidth": 390,
+      "cls": 0.03793302274812405,
+      "lcp": 240,
+      "bodyFont": "16px",
+      "cardFits": [
+        "cover",
+        "cover",
+        "cover",
+        "cover",
+        "cover",
+        "cover",
+        "cover",
+        "cover"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "contents",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "viewport": 390,
+      "scrollWidth": 390,
+      "cls": 0.03539464945309589,
+      "lcp": 152,
+      "bodyFont": "16px",
+      "cardFits": [
+        "cover",
+        "cover",
+        "cover",
+        "cover",
+        "cover"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "article",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "viewport": 390,
+      "scrollWidth": 390,
+      "cls": 0.014355674319134332,
+      "lcp": 232,
+      "bodyFont": "16px",
+      "articleWidth": 350,
+      "commentsWidth": 350,
+      "cardFits": [
+        "cover",
+        "cover",
+        "cover",
+        "cover"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "growth",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "viewport": 390,
+      "scrollWidth": 390,
+      "cls": 0.00005375731288432598,
+      "lcp": 172,
+      "bodyFont": "16px",
+      "cardFits": [],
+      "failedImages": []
+    }
+  ]
+}
