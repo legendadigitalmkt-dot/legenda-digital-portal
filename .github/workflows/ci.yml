@@ -13,3 +13,7 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: npm audit --audit-level=high
+      - run: python3 -m unittest discover -s tests -p 'test_deploy*.py'
+      - run: for file in scripts/deploy/*.sh; do bash -n "$file"; done
+      - run: php -l scripts/hostinger/index.php && php -l scripts/hostinger/sitemap.php
+
