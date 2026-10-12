@@ -1,3 +1,4 @@
+import AxeBuilder from '@axe-core/playwright';
 import { test, expect, type Page } from "@playwright/test";
 import { readFileSync } from "node:fs";
 const manifest = JSON.parse(
@@ -33,6 +34,7 @@ async function fixtures(page: Page) {
   }));
   const writes: any[] = [];
   const analytics: string[] = [];
+  const contacts: any[] = [];
   const comments: any[] = [
     {
       id: "00000000-0000-4000-8000-000000000301",
@@ -212,6 +214,7 @@ async function fixtures(page: Page) {
         ]);
       if (table === "content_tags")
         return respond([{ id: "tag-ia", name: "IA", slug: "ia" }]);
+      if (table === "contact_messages" && req.method() === "POST") { contacts.push(req.postDataJSON()); return respond(null,201); }
       if (table === "site_settings") return respond({ config: {} });
       if (table === "editorial_notes")
         return respond(req.method() === "GET" ? null : {});
@@ -223,7 +226,7 @@ async function fixtures(page: Page) {
       return respond([]);
     },
   );
-  return { posts, writes, comments, reports, analytics };
+  return { posts, writes, comments, reports, analytics, contacts };
 }
 async function login(page: Page) {
   await page.goto("/admin/articles");
@@ -489,4 +492,20 @@ test("editorial analytics respects consent and starts collecting after explicit 
     .scrollIntoViewIfNeeded();
   await expect.poll(() => f.analytics.includes("article_scroll_75")).toBe(true);
   expect(f.analytics.filter((e) => e === "article_viewed")).toHaveLength(1);
+});
+
+for (const width of [1440,390]) for (const [name,path] of Object.entries({home:'/',contents:'/conteudos',article:'/conteudos/'+manifest.articles[0].post.slug,growth:'/produtos/growth-os'})) {
+ test(`UX v2 accessibility: ${name} ${width}`,async({page})=>{
+  await fixtures(page);await page.setViewportSize({width,height:900});await page.goto(path);await page.evaluate(()=>document.fonts.ready);await page.waitForTimeout(200);
+  const result=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+  expect(result.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.slice(0,12).map(n=>({target:n.target,summary:n.failureSummary?.slice(0,280)}))}))).toEqual([]);
+ });
+}
+test('UX v2 mobile drawers, separate filters, tabs and demo form remain human-controlled',async({page})=>{
+ const f=await fixtures(page);await page.setViewportSize({width:390,height:844});await page.goto('/conteudos');
+ const menu=page.getByRole('button',{name:'Abrir menu'});await menu.click();await expect(page.getByRole('dialog',{name:'Menu de navegação'})).toBeVisible();await page.keyboard.press('Escape');await expect(menu).toBeFocused();
+ await page.getByRole('button',{name:'Filtros',exact:true}).click();const filters=page.locator('.filter-dialog');await filters.getByRole('button',{name:'IA',exact:true}).click();await filters.getByLabel('Formatos').selectOption('guide');await filters.getByRole('button',{name:/Ver .* conteúdo/}).click();await expect(page.locator('.post-card')).toHaveCount(1);
+ await page.goto('/produtos/growth-os');await expect(page.locator('.preview-caption')).toHaveCount(3);const tabs=page.getByRole('tablist');await tabs.getByRole('tab',{name:'Hoje',exact:true}).focus();await page.keyboard.press('End');await expect(tabs.getByRole('tab',{name:'Resultados',exact:true})).toBeFocused();await expect(page.getByRole('tabpanel')).toContainText('Sem forecast');
+ await tabs.getByRole('tab',{name:'Próxima ação',exact:true}).click();await page.getByRole('button',{name:'Revisar próxima ação'}).click();await expect(page.getByRole('tabpanel')).toContainText('nenhuma mensagem foi enviada');expect(f.contacts).toHaveLength(0);
+ const form=page.locator('#demonstracao form');await expect(form.getByLabel('Assunto',{exact:true})).toHaveValue('Demonstração Growth OS');await form.getByLabel('Nome',{exact:true}).fill('Pessoa de teste');await form.getByLabel('E-mail',{exact:true}).fill('demo@example.test');await form.getByLabel('Mensagem',{exact:true}).fill('Quero conhecer o acompanhamento de oportunidades.');await form.getByRole('checkbox').check();await form.getByRole('button',{name:'Enviar mensagem'}).click();await expect.poll(()=>f.contacts.length).toBe(1);expect(f.contacts[0].subject).toBe('Demonstração Growth OS');expect(f.contacts[0].consent).toBe(true);await expect(form.getByRole('status')).toContainText('Mensagem recebida');
 });

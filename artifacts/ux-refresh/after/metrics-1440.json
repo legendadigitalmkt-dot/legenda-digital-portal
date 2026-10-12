@@ -1,0 +1,83 @@
+{
+  "fixture": "Local identical approved Batch 1 data; no production writes. LCP/CLS lab samples, not field Core Web Vitals.",
+  "results": [
+    {
+      "name": "home",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "cls": 0,
+      "lcp": 224,
+      "bodyFont": "18px",
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "contents",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "cls": 0,
+      "lcp": 256,
+      "bodyFont": "18px",
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "article",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "cls": 0,
+      "lcp": 188,
+      "bodyFont": "18px",
+      "articleWidth": 760,
+      "commentsWidth": 760,
+      "cardFits": [
+        "contain",
+        "contain",
+        "contain",
+        "contain"
+      ],
+      "failedImages": []
+    },
+    {
+      "name": "growth",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "cls": 0,
+      "lcp": 188,
+      "bodyFont": "18px",
+      "cardFits": [],
+      "failedImages": []
+    }
+  ]
+}

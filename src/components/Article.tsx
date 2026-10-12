@@ -1,3 +1,5 @@
+import { SidebarPromo } from "./ProductPreview";
+import { imageKind, imagePosition } from "./ArticleCover";
 import React, {
   lazy,
   Suspense,
@@ -55,7 +57,14 @@ export function prepareArticle(body: string) {
       return `<h${level} id="${id}">${content}</h${level}>`;
     },
   );
-  return { html, headings };
+  return {
+    html: html.replace(
+      /<table\b([^>]*)>/gi,
+      (_, attrs) =>
+        `<table${attrs} tabindex="0" aria-label="Tabela do artigo; role para ver todas as colunas">`,
+    ),
+    headings,
+  };
 }
 export function relevantPosts(post: Post, posts: Post[]) {
   const manual = post.related_articles || [];
@@ -240,6 +249,49 @@ export function ArticlePage({
             )}
           </div>
         </div>
+        {post.show_share !== false && (
+          <div className="article-share" aria-label="Compartilhar artigo">
+            <a
+              href={
+                "https://wa.me/?text=" +
+                encodeURIComponent(post.title + " " + canonical)
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => event("article_shared")}
+            >
+              WhatsApp
+              <ArrowUpRight size={14} />
+            </a>
+            <a
+              href={
+                "https://www.linkedin.com/sharing/share-offsite/?url=" +
+                encodeURIComponent(canonical)
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => event("article_shared")}
+            >
+              LinkedIn
+              <ArrowUpRight size={14} />
+            </a>
+            <button type="button" onClick={copy}>
+              {shareStatus === "Link copiado" ? (
+                <Check size={16} />
+              ) : (
+                <Copy size={16} />
+              )}
+              Copiar link
+            </button>
+            <button type="button" onClick={share}>
+              <Share2 size={16} />
+              Compartilhar
+            </button>
+            <p className="microcopy" role="status">
+              {shareStatus}
+            </p>
+          </div>
+        )}
       </section>
       {post.featured_image && (
         <figure className="container article-hero">
@@ -259,6 +311,8 @@ export function ArticlePage({
                 post.hero_image_alt ||
                 `Imagem editorial de apoio: ${post.title}`
               }
+              className={`hero-cover cover-${imageKind(post)}`}
+              style={{ objectPosition: imagePosition(post.hero_position) }}
               width="1200"
               height="630"
               fetchPriority="high"
@@ -273,7 +327,13 @@ export function ArticlePage({
       )}
       <div className="article-layout container">
         <aside className="article-aside">
-          <details className="article-toc" open>
+          <details
+            className="article-toc"
+            open={
+              typeof window === "undefined" ||
+              window.matchMedia("(min-width: 1100px)").matches
+            }
+          >
             <summary>
               <List size={18} /> Nesta leitura
             </summary>
@@ -305,182 +365,122 @@ export function ArticlePage({
             <Mail size={20} />
             Receba o LD Brief
           </a>
-          {post.show_share !== false && (
-            <div className="article-share" aria-label="Compartilhar artigo">
-              <a
-                href={
-                  "https://wa.me/?text=" +
-                  encodeURIComponent(post.title + " " + canonical)
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => event("article_shared")}
-              >
-                WhatsApp
-                <ArrowUpRight size={14} />
-              </a>
-              <a
-                href={
-                  "https://www.linkedin.com/sharing/share-offsite/?url=" +
-                  encodeURIComponent(canonical)
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => event("article_shared")}
-              >
-                LinkedIn
-                <ArrowUpRight size={14} />
-              </a>
-              <button type="button" onClick={copy}>
-                {shareStatus === "Link copiado" ? (
-                  <Check size={16} />
-                ) : (
-                  <Copy size={16} />
-                )}
-                Copiar link
-              </button>
-              <button type="button" onClick={share}>
-                <Share2 size={16} />
-                Compartilhar
-              </button>
-              <p className="microcopy" role="status">
-                {shareStatus}
-              </p>
-            </div>
-          )}
+
+          <SidebarPromo onClick={() => event("article_growth_cta_clicked")} />
         </aside>
-        <article
-          ref={bodyRef}
-          className="article-body"
-          onClick={(e) => {
-            const a = (e.target as HTMLElement).closest("a");
-            if (!a) return;
-            const href = (a.getAttribute("href") || "").replace(
-              "https://legendadigital.com.br",
-              "",
-            );
-            event(
-              href === "/newsletter"
-                ? "article_newsletter_clicked"
-                : href === "/produtos/growth-os"
-                  ? "article_growth_cta_clicked"
-                  : href.startsWith("/")
-                    ? "article_internal_link_clicked"
-                    : "article_source_clicked",
-            );
-          }}
-          dangerouslySetInnerHTML={{ __html: prepared.html }}
-        />
-      </div>
-      {post.references?.length &&
-      !/fontes|refer[eê]ncias|registro de checagem/i.test(
-        prepared.headings.map((h) => h.title).join(" "),
-      ) ? (
-        <section className="container article-extra">
-          <h2>Fontes e referências</h2>
-          <ol>
-            {post.references.map((s, i) => (
-              <li key={i}>
-                <a
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => event("article_source_clicked")}
-                >
-                  {s.title}
-                  <LinkIcon size={14} />
-                </a>
-                {s.note && <p>{s.note}</p>}
-              </li>
-            ))}
-          </ol>
-        </section>
-      ) : null}
-      <section className="container article-extra">
-        <div className="article-author">
-          {post.author_profile?.avatar_url &&
-          safeUrl(post.author_profile.avatar_url) ? (
-            <img
-              className="author-avatar"
-              src={post.author_profile.avatar_url}
-              alt={post.author}
-              width="48"
-              height="48"
-              loading="lazy"
-            />
-          ) : (
-            <span className="author-avatar">LD</span>
+        <div className="article-main-column">
+          <article
+            ref={bodyRef}
+            className="article-body"
+            onClick={(e) => {
+              const a = (e.target as HTMLElement).closest("a");
+              if (!a) return;
+              const href = (a.getAttribute("href") || "").replace(
+                "https://legendadigital.com.br",
+                "",
+              );
+              event(
+                href === "/newsletter"
+                  ? "article_newsletter_clicked"
+                  : href === "/produtos/growth-os"
+                    ? "article_growth_cta_clicked"
+                    : href.startsWith("/")
+                      ? "article_internal_link_clicked"
+                      : "article_source_clicked",
+              );
+            }}
+            dangerouslySetInnerHTML={{ __html: prepared.html }}
+          />
+          <SidebarPromo
+            mobile
+            onClick={() => event("article_growth_cta_clicked")}
+          />
+          {post.references?.length &&
+          !/fontes|refer[eê]ncias|registro de checagem/i.test(
+            prepared.headings.map((h) => h.title).join(" "),
+          ) ? (
+            <section className="article-extra article-references">
+              <h2>Fontes e referências</h2>
+              <ol>
+                {post.references.map((s, i) => (
+                  <li key={i}>
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => event("article_source_clicked")}
+                    >
+                      {s.title}
+                      <LinkIcon size={14} />
+                    </a>
+                    {s.note && <p>{s.note}</p>}
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ) : null}
+          {relevantPosts(post, posts).length > 0 && (
+            <section className="article-extra article-related">
+              <div className="article-related-inner">
+                <SectionHead
+                  title="Continue explorando"
+                  description="Leituras conectadas a este tema."
+                />
+                <div className="post-grid">
+                  {relevantPosts(post, posts).map((p) => (
+                    <PostCard post={p} key={p.slug} />
+                  ))}
+                </div>
+              </div>
+            </section>
           )}
-          <div>
-            <h2>{post.author}</h2>
-            <p>
-              {post.author_profile?.bio ||
-                "Conteúdo editorial da Legenda Digital. Fontes, exemplos e limites estão apresentados nesta leitura."}
-            </p>
-            {post.author_profile?.links
-              ?.filter((l) => safeUrl(l.url))
-              .map((l) => (
-                <a
-                  className="text-link"
-                  href={l.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  key={l.url}
-                >
-                  {l.label}
-                  <ArrowUpRight size={14} />
-                </a>
-              ))}
-          </div>
-        </div>
-        <div className="article-cta">
-          <div>
-            <p className="eyebrow">DA LEITURA À PRÁTICA</p>
-            <h2>Qual será seu próximo passo?</h2>
-            <p>Acompanhe o LD Brief ou conheça a construção do Growth OS.</p>
-          </div>
-          <div>
-            <a
-              href="/newsletter"
-              className="btn btn-primary"
-              onClick={() => event("article_newsletter_clicked")}
-            >
-              Receber o LD Brief
-              <Mail size={18} />
-            </a>
-            <a
-              href="/produtos/growth-os"
-              className="text-link"
-              onClick={() => event("article_growth_cta_clicked")}
-            >
-              Conhecer o Growth OS
-              <ArrowUpRight size={18} />
-            </a>
-          </div>
-        </div>
-      </section>
-      {!preview && post.show_comments !== false && post.id && (
-        <section className="container article-extra">
-          <Suspense fallback={<p>Carregando conversa…</p>}>
-            <Comments post={post} />
-          </Suspense>
-        </section>
-      )}
-      {relevantPosts(post, posts).length > 0 && (
-        <section className="section section-soft">
-          <div className="container">
-            <SectionHead
-              title="Continue explorando"
-              description="Leituras conectadas a este tema."
-            />
-            <div className="post-grid">
-              {relevantPosts(post, posts).map((p) => (
-                <PostCard post={p} key={p.slug} />
-              ))}
+          {!preview && post.show_comments !== false && post.id && (
+            <section className="article-extra article-comments-section">
+              <Suspense fallback={<p>Carregando conversa…</p>}>
+                <Comments post={post} />
+              </Suspense>
+            </section>
+          )}
+          <section className="article-extra article-author-section">
+            <div className="article-author">
+              {post.author_profile?.avatar_url &&
+              safeUrl(post.author_profile.avatar_url) ? (
+                <img
+                  className="author-avatar"
+                  src={post.author_profile.avatar_url}
+                  alt={post.author}
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+              ) : (
+                <span className="author-avatar">LD</span>
+              )}
+              <div>
+                <h2>{post.author}</h2>
+                <p>
+                  {post.author_profile?.bio ||
+                    "Conteúdo editorial da Legenda Digital. Fontes, exemplos e limites estão apresentados nesta leitura."}
+                </p>
+                {post.author_profile?.links
+                  ?.filter((l) => safeUrl(l.url))
+                  .map((l) => (
+                    <a
+                      className="text-link"
+                      href={l.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={l.url}
+                    >
+                      {l.label}
+                      <ArrowUpRight size={14} />
+                    </a>
+                  ))}
+              </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        </div>
+      </div>
       <BriefSection config={config} />
     </>
   );

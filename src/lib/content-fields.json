@@ -1,4 +1,4 @@
 {
-  "cards": "id,title,slug,excerpt,featured_image,hero_image_alt,author,category,tags,kind,status,published_at,updated_at,reading_time,featured,allow_index",
-  "article": "id,title,slug,subtitle,excerpt,body,featured_image,hero_image_alt,hero_image_caption,hero_image_credit,hero_image_mobile,hero_image_fallback,author,author_id,reviewer_name,category,tags,topics,kind,status,published_at,updated_at,reading_time,featured,seo_title,seo_description,canonical_url,og_title,og_description,og_image,allow_index,references,related_articles,show_comments,show_share"
+  "cards": "id,title,slug,excerpt,featured_image,hero_image_alt,author,category,tags,kind,status,published_at,updated_at,reading_time,featured,allow_index,image_variant,hero_position,card_image,card_image_mobile,card_image_large",
+  "article": "id,title,slug,subtitle,excerpt,body,featured_image,hero_image_alt,hero_image_caption,hero_image_credit,hero_image_mobile,hero_image_fallback,author,author_id,reviewer_name,category,tags,topics,kind,status,published_at,updated_at,reading_time,featured,seo_title,seo_description,canonical_url,og_title,og_description,og_image,allow_index,references,related_articles,show_comments,show_share,image_variant,hero_position,card_image,card_image_mobile,card_image_large"
 }

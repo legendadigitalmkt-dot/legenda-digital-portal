@@ -16,6 +16,17 @@ const ids = {
   moderator: "00000000-0000-4000-8000-000000000006",
 };
 const q = (s) => "'" + s.replaceAll("'", "''") + "'";
+test('CMS image settings validate photographic positions and preserve version history',async(t)=>{
+ const db=await init();t.after(()=>db.close());
+ const id=await article(db,'image-settings');
+ await db.query("update public.content_posts set image_variant='photography',hero_position='50% 30%',card_image='/images/hero.webp' where id=$1",[id]);
+ await assert.rejects(db.query("update public.content_posts set hero_position='url(https://example.test)' where id=$1",[id]));
+ await assert.rejects(db.query("update public.content_posts set hero_position='101% 30%' where id=$1",[id]));
+ await assert.rejects(db.query("update public.content_posts set image_variant='unsafe' where id=$1",[id]));
+ const version=(await db.query('select snapshot from public.article_versions where post_id=$1 order by version desc limit 1',[id])).rows[0];
+ assert.equal(version.snapshot.image_variant,'photography');assert.equal(version.snapshot.hero_position,'50% 30%');
+ await role(db,'anon');assert.equal((await db.query('select * from public.content_posts where id=$1',[id])).rows.length,0);
+});
 async function init() {
   const db = new PGlite();
   await db.exec(`create role anon;create role authenticated;create schema auth;create schema storage;
@@ -41,6 +52,7 @@ async function init() {
     "commit;",
   );
   await db.exec(scheduler);
+  await db.exec(await readFile('supabase/migrations/20261012140046_portal_ux_image_variants.sql','utf8'));
   for (const [name, id] of Object.entries(ids)) {
     await db.query(
       "insert into auth.users(id,email,email_confirmed_at) values($1,$2,now())",
