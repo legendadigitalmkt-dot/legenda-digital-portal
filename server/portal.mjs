@@ -1,3 +1,4 @@
+import {normalizeExtras} from '../src/lib/article-extras.mjs';
 import contentFields from '../src/lib/content-fields.json' with {type:'json'};
 import {readFile, realpath, stat} from 'node:fs/promises';
 import {join, relative, resolve, extname} from 'node:path';
@@ -17,7 +18,7 @@ export function safeUrl(value) {
 export function cleanBody(body) {
   return sanitizeHtml(String(body ?? ''), {
     allowedTags: ['div','aside','section','pre','code','details','summary','p','h2','h3','h4','ul','ol','li','strong','b','em','i','a','blockquote','img','figure','figcaption','br','hr','table','thead','tbody','tr','th','td'],
-    allowedAttributes: {a:['href','rel','target'],img:['src','alt','width','height','srcset','sizes','loading','decoding'],h2:['id'],h3:['id'],aside:['class','data-block'],section:['class','data-block'],div:['class','data-block','tabindex'],th:['colspan','rowspan'],td:['colspan','rowspan']},
+    allowedAttributes: {a:['href','rel','target','download'],img:['src','alt','width','height','srcset','sizes','loading','decoding'],h2:['id'],h3:['id'],aside:['class','data-block','data-tone'],section:['class','data-block','data-tone'],div:['class','data-block','tabindex'],th:['colspan','rowspan'],td:['colspan','rowspan']},
     allowedSchemes: ['http','https'], allowProtocolRelative: false,
     nonTextTags: ['style','script','textarea','option','xmp','iframe','object','embed'],
     transformTags: {'*': (tagName, attributes) => {
@@ -26,6 +27,7 @@ export function cleanBody(body) {
       if ('class' in attribs && !/^(?:editorial-[a-z-]+|table-scroll|figure-scroll)(?: (?:editorial-[a-z-]+|table-scroll|figure-scroll))*$/.test(attribs.class)) delete attribs.class;
       if ('id' in attribs && !/^[a-zA-Z0-9_-]+$/.test(attribs.id)) delete attribs.id;
       if ('data-block' in attribs && !/^[a-z-]+$/.test(attribs['data-block'])) delete attribs['data-block'];
+      if ('data-tone' in attribs && !['info','insight','warning'].includes(attribs['data-tone'])) delete attribs['data-tone'];
       for (const key of ['href','src']) if (key in attribs && !safeUrl(attribs[key])) delete attribs[key];
       if (tagName === 'a') attribs.rel = 'noopener noreferrer';
       return {tagName, attribs};
@@ -39,7 +41,7 @@ function normalizePost(post) {
   const publicPost = Object.fromEntries(contentFields.article.split(',').filter(key=>key in post).map(key=>[key,post[key]]));
   const author = post.author_profile && typeof post.author_profile.name==='string' ? {name:post.author_profile.name,bio:String(post.author_profile.bio||''),avatar_url:safeUrl(post.author_profile.avatar_url),links:Array.isArray(post.author_profile.links)?post.author_profile.links.filter(l=>typeof l.label==='string'&&safeUrl(l.url)).slice(0,10).map(l=>({label:l.label,url:l.url})):[]} : undefined;
   const category = post.category_profile && typeof post.category_profile.name==='string' ? {name:post.category_profile.name,slug:String(post.category_profile.slug||''),active:post.category_profile.active!==false} : undefined;
-  return {...publicPost, author_profile:author,category_profile:category,category_slug:category?.slug, title:String(post.title ?? ''), excerpt:String(post.excerpt ?? ''), category:String(category?.name || post.category || ''), author:String(author?.name || post.author || ''),
+  return {...publicPost, article_extras:normalizeExtras(post.article_extras), author_profile:author,category_profile:category,category_slug:category?.slug, title:String(post.title ?? ''), excerpt:String(post.excerpt ?? ''), category:String(category?.name || post.category || ''), author:String(author?.name || post.author || ''),
     canonical_url:safeUrl(post.canonical_url)?.startsWith(DOMAIN+'/')?post.canonical_url:undefined,
     hero_image_mobile:safeUrl(post.hero_image_mobile)||undefined,hero_image_fallback:safeUrl(post.hero_image_fallback)||undefined,
     references:Array.isArray(post.references)?post.references.filter(r=>r&&typeof r.title==='string'&&/^https?:\/\//.test(safeUrl(r.url))):[],
@@ -112,7 +114,7 @@ export async function createPortalHandler({root, config, renderArticle, renderCo
       path = path.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
       const admin = path === '/admin' || path.startsWith('/admin/');
       if (admin) { res.setHeader('Cache-Control','private, no-store'); res.setHeader('X-Robots-Tag','noindex, nofollow'); }
-      if (path === '/api/health') { send(200,JSON.stringify({status:'ok',release:'portal-ux-v2',runtime:'node'}),'application/json'); return; }
+      if (path === '/api/health') { send(200,JSON.stringify({status:'ok',release:'editorial-media-v3',runtime:'node'}),'application/json'); return; }
       const signal = AbortSignal.timeout(6000), instant = now();
       const filter = {status:'eq.published',published_at:'lte.' + new Date(instant).toISOString()};
       if (path === '/sitemap.xml') {

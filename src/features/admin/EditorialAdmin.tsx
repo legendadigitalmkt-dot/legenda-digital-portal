@@ -9,6 +9,9 @@ import { db } from "../../services/supabase";
 import { defaultConfig } from "../../lib/data";
 import { ArticlePage } from "../../components/Article";
 import VisualEditor from "./VisualEditor";
+import MediaUpload from "./MediaUpload";
+import ArticleExtrasEditor from "./ArticleExtrasEditor";
+import {editorialUrl,normalizeExtras} from "../../lib/article-extras.mjs";
 type Taxonomy = { id: string; name: string; slug?: string; bio?: string };
 const blank = (): Post => ({
   title: "",
@@ -46,6 +49,7 @@ const blank = (): Post => ({
   featured: false,
   references: [],
   related_articles: [],
+  article_extras: {},
 });
 const editableKeys = [
   "title",
@@ -90,6 +94,7 @@ const editableKeys = [
   "show_share",
   "featured",
   "scheduled_at",
+  "article_extras",
 ] as const;
 const localDate = (s?: string) =>
   s
@@ -180,7 +185,7 @@ export default function EditorialAdmin({
   const open = async (p: Post) => {
     if (dirty && !confirm("Sair da edição sem salvar as alterações pendentes?"))
       return;
-    setEditing({ ...p });
+    setEditing({ ...p,article_extras:normalizeExtras(p.article_extras) });
     setDirty(false);
     setNotes("");
     setReset((n) => n + 1);
@@ -242,6 +247,10 @@ export default function EditorialAdmin({
     }
     if (candidate.hero_position && imagePosition(candidate.hero_position) !== candidate.hero_position) {
       setMessage("Use center, top, bottom ou percentuais de 0 a 100, por exemplo 50% 30%."); return false;
+    }
+    const extras=candidate.article_extras;
+    if(extras && ((extras.banners||[]).some(b=>(!b.title.trim()&&!b.image)||Boolean(b.image&&!b.alt.trim())||Boolean(b.image&&!editorialUrl(b.image))||Boolean(b.url&&(!editorialUrl(b.url)||!b.label.trim()))) || (extras.links||[]).some(l=>!l.label.trim()||!editorialUrl(l.url)))) {
+      setMessage("Confira os banners e links: título ou imagem, alt nas imagens, texto no botão e URLs válidas são obrigatórios.");return;
     }
     const start = revision.current;
     saving.current = true;
@@ -849,6 +858,8 @@ export default function EditorialAdmin({
             </section>
             <section>
               <h2>Capa e imagens</h2>
+              <MediaUpload label="Selecionar capa do computador" onUploaded={files=>update("featured_image",files[0].url)}/>
+              <details><summary>Enviar versões alternativas da capa</summary>{([['hero_image_mobile','Capa para celular'],['card_image','Card padrão'],['card_image_large','Card grande'],['card_image_mobile','Card para celular']] as const).map(([key,label])=><MediaUpload key={key} label={label+' do computador'} onUploaded={files=>update(key,files[0].url)}/>)}</details>
               <label>Tipo de imagem<select value={editing.image_variant || "editorial"} onChange={set("image_variant")}><option value="editorial">Capa editorial com texto — sem corte</option><option value="illustration">Ilustração — imagem inteira</option><option value="photography">Fotografia — corte permitido</option></select></label>
               {editing.image_variant === "photography" && <label>Posição da fotografia<input value={editing.hero_position || "center"} onChange={set("hero_position")} placeholder="center, top ou 50% 30%"/><small>Aplica-se apenas a fotos. Artes com texto permanecem inteiras.</small></label>}
               {[
@@ -869,53 +880,6 @@ export default function EditorialAdmin({
                   />
                 </label>
               ))}
-              <label>
-                Enviar capa
-                <input
-                  type="file"
-                  accept="image/png,image/jpeg,image/webp"
-                  onChange={async (e) => {
-                    const f = e.target.files?.[0];
-                    if (
-                      !f ||
-                      f.size > 8388608 ||
-                      !["image/png", "image/jpeg", "image/webp"].includes(
-                        f.type,
-                      )
-                    ) {
-                      setMessage("Use PNG, JPEG ou WebP até 8 MB.");
-                      return;
-                    }
-                    const {
-                      data: { user },
-                    } = await db!.auth.getUser();
-                    if (!user) return;
-                    const path =
-                      user.id +
-                      "/" +
-                      crypto.randomUUID() +
-                      "." +
-                      (f.type === "image/png"
-                        ? "png"
-                        : f.type === "image/jpeg"
-                          ? "jpg"
-                          : "webp");
-                    const { error } = await db!.storage
-                      .from("content-images")
-                      .upload(path, f, { upsert: false, contentType: f.type });
-                    if (error)
-                      setMessage(
-                        "Falha no upload. Confira sua permissão de mídia.",
-                      );
-                    else
-                      update(
-                        "featured_image",
-                        db!.storage.from("content-images").getPublicUrl(path)
-                          .data.publicUrl,
-                      );
-                  }}
-                />
-              </label>
               {editing.featured_image && (
                 <img
                   src={editing.featured_image}
@@ -923,6 +887,7 @@ export default function EditorialAdmin({
                 />
               )}
             </section>
+            <ArticleExtrasEditor value={editing.article_extras} onChange={value=>update("article_extras",value)}/>
             <section>
               <h2>SEO e redes</h2>
               {[

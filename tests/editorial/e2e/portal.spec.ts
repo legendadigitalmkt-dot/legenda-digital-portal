@@ -32,6 +32,8 @@ async function fixtures(page: Page) {
     published_at: "2026-10-12T00:00:00Z",
     updated_at: "2026-10-12T00:00:00Z",
   }));
+  const uploads:any[]=[];
+  const storageFailure={fail:false};
   const writes: any[] = [];
   const analytics: string[] = [];
   const contacts: any[] = [];
@@ -96,6 +98,17 @@ async function fixtures(page: Page) {
       if (url.pathname.endsWith("/logout")) {
         authenticated = false;
         return respond({});
+      }
+      if(url.pathname.startsWith("/storage/v1/object/list/")){
+        const bucket=url.pathname.split('/').pop(),prefix=req.postDataJSON().prefix;
+        return respond(prefix ? uploads.filter(f=>f.path.includes('/'+bucket+'/'+prefix+'/')).map((f,i)=>({name:f.path.split('/').pop(),id:'uploaded-'+i,metadata:{mimetype:f.path.endsWith('.png')?'image/png':'application/pdf'}})) : [{name:owner,id:null,metadata:null}]);
+      }
+      if(url.pathname.startsWith("/storage/v1/object/")){
+        if(req.method()==="POST"){
+          if(storageFailure.fail)return respond({message:"new row violates row-level security policy",statusCode:"403"},403);
+          uploads.push({path:url.pathname,contentType:req.headers()["content-type"]});return respond({Key:url.pathname.split("/object/")[1]});
+        }
+        return route.fulfill({status:200,contentType:"image/png",body:readFileSync("public/favicon-48x48.png")});
       }
       const table = url.pathname.split("/").pop();
       if (table === "site_staff")
@@ -226,7 +239,7 @@ async function fixtures(page: Page) {
       return respond([]);
     },
   );
-  return { posts, writes, comments, reports, analytics, contacts };
+  return { posts, writes, comments, reports, analytics, contacts, uploads, storageFailure };
 }
 async function login(page: Page) {
   await page.goto("/admin/articles");
@@ -256,6 +269,8 @@ test("public article: real SSR, TOC, sources, images, share and mobile overflow"
     "naturalWidth",
     1200,
   );
+  const tocBox=await page.locator('.article-aside').boundingBox(),bodyBox=await page.locator('.article-main-column').boundingBox();
+  expect(tocBox!.x+tocBox!.width).toBeLessThan(bodyBox!.x);
   await page.locator(".article-toc a").nth(3).click();
   await expect(page).toHaveURL(/#/);
   await expect(
@@ -278,6 +293,82 @@ test("public article: real SSR, TOC, sources, images, share and mobile overflow"
   expect(
     await page.locator('script[type="application/ld+json"]').textContent(),
   ).toContain("BreadcrumbList");
+});
+
+test('CMS: local cover and attachments, upload failures, callouts, banners and manual links survive save/reopen',async({page})=>{
+ test.setTimeout(90000);
+ const f=await fixtures(page);await login(page);
+ await page.getByRole('button',{name:'Novo artigo'}).click();
+ await page.getByLabel('Título',{exact:true}).fill('Artigo com recursos editoriais');
+ await page.getByRole('button',{name:'Gerar a partir do título'}).click();
+ await page.getByLabel('Resumo para os cards').fill('Teste de recursos editoriais.');
+ const editor=page.getByRole('textbox',{name:'Corpo do artigo — editor visual'});
+ await editor.fill('Texto principal do artigo.');
+ await expect.poll(()=>f.posts.some((p:any)=>p.slug==='artigo-com-recursos-editoriais')).toBe(true);
+ const cover=page.getByLabel('Selecionar capa do computador',{exact:true});
+ await cover.setInputFiles({name:'false.png',mimeType:'image/png',buffer:Buffer.from('<html>invalid</html>')});
+ await expect(page.getByText('Conteúdo do arquivo inválido para esse formato.')).toBeVisible();expect(f.uploads.length).toBe(0);
+ f.storageFailure.fail=true;
+ await cover.setInputFiles('public/favicon-48x48.png');
+ await expect(page.getByText('Sua conta não tem permissão de envio de mídia.')).toBeVisible();
+ f.storageFailure.fail=false;
+ await cover.setInputFiles('public/favicon-48x48.png');
+ await expect(page.getByLabel('URL da capa',{exact:true})).toHaveValue(/storage\/v1\/object\/public\/content-images/);
+ await page.getByLabel('Texto alternativo (alt)',{exact:true}).fill('Capa do teste editorial.');
+ await page.getByRole('button',{name:'Adicionar arquivo',exact:true}).click();
+ await page.getByLabel('Selecionar arquivos do computador').setInputFiles([
+   {name:'pesquisa.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.7\nfixture')},
+   {name:'planilha.csv',mimeType:'text/csv',buffer:Buffer.from('nome,valor\nTeste,10')},
+ ]);
+ await expect(page.getByLabel('URLs (uma por linha)')).toHaveValue(/editorial-files/);
+ await expect(page.getByLabel('Texto do link',{exact:true})).toHaveValue('pesquisa.pdf\nplanilha.csv');
+ await page.getByRole('button',{name:'Inserir bloco',exact:true}).click();
+ await expect(editor.locator('[data-block=attachment]')).toHaveCount(2);
+ await page.getByRole('button',{name:'Texto em destaque',exact:true}).click();
+ await page.getByLabel('Estilo do destaque').selectOption('warning');
+ await page.getByLabel('Título do destaque').fill('Antes de aplicar');
+ await page.getByLabel('Texto do destaque',{exact:true}).fill('Confira o contexto.\nRevise os dados primeiro.');
+ await page.getByRole('button',{name:'Inserir bloco',exact:true}).click();
+ await expect(editor.locator('[data-block=callout][data-tone=warning]')).toContainText('Revise os dados primeiro.');
+ await page.getByRole('button',{name:'Link',exact:true}).click();
+ await page.getByLabel('URL',{exact:true}).fill('/contato');
+ await page.getByLabel('Texto do link',{exact:true}).fill('Contato manual');
+ await page.getByRole('button',{name:'Inserir bloco',exact:true}).click();
+ await expect(editor.locator('a[href="/contato"]')).toContainText('Contato manual');
+ await page.getByRole('button',{name:'Adicionar banner',exact:true}).click();
+ await page.getByLabel('Título do banner',{exact:true}).fill('Conheça a pesquisa');
+ await page.getByLabel('Link do banner',{exact:true}).fill('/pesquisa');
+ await page.getByLabel('Adicionar imagem do banner do computador',{exact:true}).setInputFiles('public/favicon-48x48.png');
+ await expect(page.getByLabel('URL da imagem do banner',{exact:true})).toHaveValue(/content-images/);
+ await page.getByLabel('Alt do banner',{exact:true}).fill('Ilustração da pesquisa.');
+ await page.getByRole('button',{name:'Adicionar link manual',exact:true}).click();
+ await page.getByLabel('Nome do link manual',{exact:true}).fill('Método editorial');
+ await page.getByLabel('URL do link manual',{exact:true}).fill('/pesquisa');
+ await page.getByRole('button',{name:'Salvar',exact:true}).click();
+ await expect.poll(()=>f.posts.find((p:any)=>p.slug==='artigo-com-recursos-editoriais')?.article_extras?.links?.[0]?.label).toBe('Método editorial');
+ const saved=f.posts.find((p:any)=>p.slug==='artigo-com-recursos-editoriais');
+ expect(saved.body).toContain('data-tone="warning"');expect(saved.body).toContain('pesquisa.pdf');expect(saved.body).toContain('planilha.csv');expect(f.uploads.length).toBe(4);
+ await page.getByRole('button',{name:'Prévia',exact:true}).click();
+ const dialog=page.getByRole('dialog');
+ await expect(dialog.locator('.article-aside .article-banner')).toContainText('Conheça a pesquisa');
+ await expect(dialog.getByRole('link',{name:'Método editorial',exact:true})).toHaveAttribute('href','/pesquisa');
+ await page.getByRole('button',{name:'Celular 390px'}).click();
+ await expect(dialog.locator('.article-main-column .article-banners-mobile .article-banner')).toBeVisible();
+ await page.getByRole('button',{name:'Fechar prévia'}).click();
+ await page.locator('.editor-topbar').getByRole('button',{name:'Artigos',exact:true}).click();
+ await page.getByRole('row').filter({hasText:'Artigo com recursos editoriais'}).getByRole('button',{name:'Editar / prévia'}).click();
+ await expect(editor.locator('[data-block=attachment]')).toHaveCount(2);
+ await expect(editor.locator('[data-tone=warning]')).toContainText('Confira o contexto.');
+ await expect(page.getByLabel('Nome do link manual',{exact:true})).toHaveValue('Método editorial');
+ await expect(page.getByLabel('Título do banner',{exact:true})).toHaveValue('Conheça a pesquisa');
+ await page.getByRole('button',{name:'Mídia',exact:true}).click();
+ await page.getByLabel('Bucket de mídia').selectOption('editorial-files');
+ await page.getByRole('button',{name:'Abrir pasta',exact:true}).click();
+ await expect(page.locator('.media-grid .info-card')).toHaveCount(2);
+ await expect(page.locator('.media-grid img')).toHaveCount(0);
+ await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async(value:string)=>{(window as any).__copied=value}}}));
+ await page.getByRole('button',{name:'Copiar URL',exact:true}).first().click();
+ await expect.poll(()=>page.evaluate(()=>(window as any).__copied)).toContain('/editorial-files/'+owner+'/');
 });
 
 test("visual editor: autosave, preview and review→approval→publication without HTML editing", async ({

@@ -10,8 +10,9 @@ import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import { TableKit } from "@tiptap/extension-table";
 import DOMPurify from "dompurify";
-import { db } from "../../services/supabase";
-import { safeUrl } from "../../lib/validation";
+import MediaUpload from "./MediaUpload";
+import {editorialUrl} from "../../lib/article-extras.mjs";
+const safeUrl = editorialUrl;
 const IDs = Extension.create({
   name: "editorialIDs",
   addGlobalAttributes() {
@@ -59,6 +60,7 @@ const Group = Node.create({
   content: "block+",
   draggable: true,
   addAttributes: () => ({
+    tone: {default:"info",parseHTML:el=>el.getAttribute("data-tone")||"info",renderHTML:attrs=>({"data-tone":["info","insight","warning"].includes(attrs.tone)?attrs.tone:"info"})},
     kind: {
       default: "callout",
       parseHTML: (el) => el.getAttribute("data-block"),
@@ -111,6 +113,19 @@ const Media = Node.create({
     ],
   ],
 });
+const Attachment = Node.create({
+  name:"editorialAttachment",group:"block",atom:true,draggable:true,
+  addAttributes:()=>({
+    url:{default:"",parseHTML:el=>el.querySelector("a")?.getAttribute("href")},
+    label:{default:"Arquivo",parseHTML:el=>el.querySelector("a")?.textContent},
+    caption:{default:"",parseHTML:el=>el.querySelector("p")?.textContent},
+  }),
+  parseHTML:()=>[{tag:'aside[data-block="attachment"]',priority:100}],
+  renderHTML:({node})=>["aside",{"data-block":"attachment",class:"editorial-block editorial-attachment"},
+    ["a",{href:safeUrl(node.attrs.url)||"#",target:"_blank",rel:"noopener noreferrer",download:""},node.attrs.label],
+    ["p",{},node.attrs.caption||"Arquivo público. Abrir ou baixar em nova aba."],
+  ],
+});
 const ResponsiveImage = Image.extend({
   addAttributes() {
     return {
@@ -149,6 +164,8 @@ export default function VisualEditor({
   const [caption, setCaption] = useState("");
   const [feedback, setFeedback] = useState("");
   const [block, setBlock] = useState("");
+  const [tone,setTone]=useState("info");
+  const linkSelection=useRef<{from:number;to:number}|null>(null);
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -169,6 +186,7 @@ export default function VisualEditor({
       Figure,
       Group,
       Media,
+      Attachment,
     ],
     content: DOMPurify.sanitize(body),
     immediatelyRender: false,
@@ -190,6 +208,8 @@ export default function VisualEditor({
       });
   }, [resetKey, editor]);
   if (!editor) return <p>Carregando editor visual…</p>;
+  // Insert after the selection. Replacing a selected atom would silently remove a file/image.
+  const insert = (content:string|JSONContent|JSONContent[]) => editor.chain().focus().insertContentAt(editor.state.selection.to,content).run();
   const insertBlock = (kind: string) => {
     setBlock("");
     if (
@@ -203,12 +223,16 @@ export default function VisualEditor({
         "source",
         "related",
         "cta",
+        "attachment",
+        "callout",
       ].includes(kind)
     ) {
       setPanel(kind);
       setUrl("");
       setLabel("");
       setCaption("");
+      setFeedback("");
+      setTone("info");
       return;
     }
     if (kind === "paragraph") editor.chain().focus().setParagraph().run();
@@ -248,15 +272,28 @@ export default function VisualEditor({
   };
   const insertMedia = () => {
     const kind = panel;
+    if(kind === "callout") {
+      if(label.trim().length<2 || caption.trim().length<2){setFeedback("Preencha o título e o texto do destaque.");return;}
+      const content='<aside data-block="callout" data-tone="'+tone+'"><p><strong>'+text(label)+'</strong></p>'+caption.split("\n").filter(Boolean).map(p=>'<p>'+text(p)+'</p>').join("")+'</aside>';
+      insert(content);setPanel("");return;
+    }
+    if(kind === "link") {
+      if(!safeUrl(url)){setFeedback("Informe um link https:// ou um caminho interno iniciado por /.");return;}
+      const selection=linkSelection.current;
+      if(selection&&selection.from!==selection.to)editor.chain().focus().setTextSelection(selection).setLink({href:url}).run();
+      else if(label.trim().length>=2)editor.chain().focus().insertContent('<a href="'+text(url)+'">'+text(label)+'</a>').run();
+      else {setFeedback("Selecione um texto no artigo ou preencha o texto do link.");return;}
+      setPanel("");return;
+    }
     const urls =
-      kind === "gallery"
+      ["gallery","attachment"].includes(kind)
         ? url
             .split("\n")
             .map((s) => s.trim())
             .filter(Boolean)
         : [url];
     const alts =
-      kind === "gallery"
+      ["gallery","attachment"].includes(kind)
         ? label
             .split("\n")
             .map((s) => s.trim())
@@ -273,6 +310,9 @@ export default function VisualEditor({
       );
       return;
     }
+    if(kind === "attachment") {
+      insert(urls.map((u,i)=>({type:"editorialAttachment",attrs:{url:u,label:alts[i],caption}})));setPanel("");return;
+    }
     let html = "";
     if (["image", "gallery", "diagram", "chart"].includes(kind)) {
       html = urls
@@ -282,18 +322,14 @@ export default function VisualEditor({
         )
         .join("");
     } else if (["video", "embed"].includes(kind)) {
-      editor
-        .chain()
-        .focus()
-        .insertContent({ type: "externalMedia", attrs: { url, label } })
-        .run();
+      insert({type:"externalMedia",attrs:{url,label}});
       setPanel("");
       return;
     } else
       html = `<aside data-block="${kind}"><p><a href="${text(url)}">${text(label)}</a></p>${caption ? "<p>" + text(caption) + "</p>" : ""}</aside>`;
-    if (kind === "gallery")
+    if (["gallery","attachment"].includes(kind))
       html = '<aside data-block="gallery">' + html + "</aside>";
-    editor.chain().focus().insertContent(html).run();
+    insert(html);
     setPanel("");
     setFeedback("Bloco inserido. Você pode editar o texto diretamente.");
   };
@@ -365,13 +401,19 @@ export default function VisualEditor({
         <button
           type="button"
           onClick={() => {
-            setPanel("source");
-            setLabel("");
-            setUrl("");
+            linkSelection.current={from:editor.state.selection.from,to:editor.state.selection.to};
+            setPanel("link");
+            setLabel(editor.state.doc.textBetween(editor.state.selection.from,editor.state.selection.to));
+            setUrl(editor.getAttributes("link").href||"");
+            setFeedback("");
           }}
         >
           Link
         </button>
+        <button type="button" onClick={()=>insertBlock("image")}>Adicionar imagem</button>
+        <button type="button" onClick={()=>insertBlock("attachment")}>Adicionar arquivo</button>
+        <button type="button" onClick={()=>insertBlock("callout")}>Texto em destaque</button>
+        <button type="button" onClick={()=>editor.chain().focus().unsetLink().run()}>Remover link</button>
         <label className="sr-only" htmlFor="editor-block">
           Adicionar bloco
         </label>
@@ -387,6 +429,7 @@ export default function VisualEditor({
             ["h3", "Título H3"],
             ["image", "Imagem"],
             ["gallery", "Galeria"],
+            ["attachment", "Arquivo / áudio / vídeo"],
             ["quote", "Citação"],
             ["callout", "Destaque"],
             ["table", "Tabela"],
@@ -416,10 +459,11 @@ export default function VisualEditor({
       </div>
       {panel && (
         <div className="editor-insert">
-          <h3>Adicionar {panel}</h3>
-          <label>
-            {panel === "gallery" ? "URLs das imagens (uma por linha)" : "URL"}
-            {panel === "gallery" ? (
+          <h3>Adicionar {({callout:"texto em destaque",image:"imagem",gallery:"galeria",attachment:"arquivo",link:"link manual"} as Record<string,string>)[panel]||panel}</h3>
+          {panel === "callout" && <label>Estilo do destaque<select value={tone} onChange={e=>setTone(e.target.value)}><option value="info">Informação · azul</option><option value="insight">Ideia prática · ciano</option><option value="warning">Atenção · âmbar</option></select></label>}
+          {panel !== "callout" && <label>
+            {["gallery","attachment"].includes(panel) ? "URLs (uma por linha)" : "URL"}
+            {["gallery","attachment"].includes(panel) ? (
               <textarea
                 rows={3}
                 value={url}
@@ -433,86 +477,36 @@ export default function VisualEditor({
                 placeholder="https://… ou /images/…"
               />
             )}
-          </label>
+          </label>}
           <label>
-            {["image", "gallery", "diagram", "chart"].includes(panel)
+            {panel === "callout" ? "Título do destaque" : ["image", "gallery", "diagram", "chart"].includes(panel)
               ? "Texto alternativo (alt)"
               : "Texto do link"}
-            {panel === "gallery" ? (
+            {["gallery","attachment"].includes(panel) ? (
               <textarea
+                aria-label={panel === "attachment" ? "Texto do link" : "Texto alternativo (alt)"}
                 rows={3}
                 value={label}
                 onChange={(e) => setLabel(e.target.value)}
-                placeholder="Um alt por linha, na mesma ordem das imagens"
+                placeholder={panel === "attachment" ? "Um nome por linha, na mesma ordem dos arquivos" : "Um alt por linha, na mesma ordem das imagens"}
               />
             ) : (
               <input value={label} onChange={(e) => setLabel(e.target.value)} />
             )}
           </label>
           <label>
-            Legenda / contexto
-            <input
-              value={caption}
-              onChange={(e) => setCaption(e.target.value)}
-            />
+            {panel === "callout" ? "Texto do destaque" : "Legenda / contexto"}
+            <textarea aria-label={panel === "callout" ? "Texto do destaque" : "Legenda / contexto"} rows={panel === "callout" ? 4 : 2} value={caption} onChange={e=>setCaption(e.target.value)}/>
           </label>
-          {["image", "gallery", "diagram", "chart"].includes(panel) && (
-            <label>
-              Ou enviar imagem
-              <input
-                type="file"
-                accept="image/png,image/jpeg,image/webp"
-                onChange={async (e) => {
-                  const file = e.target.files?.[0];
-                  if (!file || !db) return;
-                  if (
-                    file.size > 8388608 ||
-                    !["image/png", "image/jpeg", "image/webp"].includes(
-                      file.type,
-                    )
-                  ) {
-                    setFeedback("Use PNG, JPEG ou WebP até 8 MB.");
-                    return;
-                  }
-                  const {
-                    data: { user },
-                  } = await db.auth.getUser();
-                  if (!user) return;
-                  const path =
-                    user.id +
-                    "/" +
-                    crypto.randomUUID() +
-                    "." +
-                    (file.type === "image/png"
-                      ? "png"
-                      : file.type === "image/jpeg"
-                        ? "jpg"
-                        : "webp");
-                  const { error } = await db.storage
-                    .from("content-images")
-                    .upload(path, file, {
-                      upsert: false,
-                      contentType: file.type,
-                    });
-                  if (error) {
-                    setFeedback(
-                      "Upload não concluído. Confira sua permissão de mídia.",
-                    );
-                    return;
-                  }
-                  const publicUrl = db.storage
-                    .from("content-images")
-                    .getPublicUrl(path).data.publicUrl;
-                  setUrl((current) =>
-                    panel === "gallery" && current
-                      ? current + "\n" + publicUrl
-                      : publicUrl,
-                  );
-                  setFeedback("Imagem enviada. Preencha o alt para inserir.");
-                }}
-              />
-            </label>
-          )}
+          {["image","gallery","diagram","chart","attachment"].includes(panel) && <MediaUpload
+            label={panel === "attachment" ? "Selecionar arquivos do computador" : "Selecionar imagens do computador"}
+            imagesOnly={panel !== "attachment"} multiple={["gallery","attachment"].includes(panel)}
+            onUploaded={files=>{
+              const many=["gallery","attachment"].includes(panel);
+              setUrl(current=>many?[current,...files.map(f=>f.url)].filter(Boolean).join("\n"):files[0].url);
+              if(panel === "attachment")setLabel(current=>[current,...files.map(f=>f.name)].filter(Boolean).join("\n"));
+              setFeedback(panel === "attachment" ? "Arquivos enviados. Revise os nomes e insira o bloco." : "Imagem enviada. Preencha o texto alternativo para inserir.");
+            }}/> }
           <div>
             <button
               type="button"
@@ -540,6 +534,7 @@ export default function VisualEditor({
         {feedback ||
           "Edite visualmente. Use o menu de blocos e os botões de reordenação."}
       </p>
+      {editor.isActive("editorialGroup",{kind:"callout"}) && <div className="editor-toolbar" role="group" aria-label="Estilo do destaque selecionado">{[["info","Informação"],["insight","Ideia prática"],["warning","Atenção"]].map(([value,label])=><button key={value} type="button" aria-pressed={editor.getAttributes("editorialGroup").tone === value} onClick={()=>editor.chain().focus().updateAttributes("editorialGroup",{tone:value}).run()}>{label}</button>)}</div>}
       <details className="editor-table-controls">
         <summary>Editar tabela selecionada</summary>
         <div className="editor-toolbar">
