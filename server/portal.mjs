@@ -6,6 +6,7 @@ export const DOMAIN = 'https://legendadigital.com.br';
 export const BACKEND = 'https://yltnjgngkomelfltdyky.supabase.co';
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const TYPES = {'.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.ico':'image/x-icon','.woff2':'font/woff2','.txt':'text/plain; charset=utf-8'};
+const PUBLIC_ICONS = new Set(['/favicon.ico','/favicon-16x16.png','/favicon-32x32.png','/favicon-48x48.png','/apple-touch-icon.png']);
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export function safeUrl(value) {
   const text = String(value ?? '');
@@ -122,7 +123,7 @@ export async function createPortalHandler({root, config, renderArticle, fetchImp
         send(200,articleHtml(base, post, renderArticle(post))); return;
       }
       if (admin || routeSet.has(path)) { send(path === '/404' ? 404 : 200,await file(path === '/' ? 'index.html' : (admin ? 'admin' : path.slice(1)) + '/index.html')); return; }
-      const publicAsset = path === '/favicon.ico' || path === '/logo.svg' || path === '/robots.txt' || path === '/fonts/OFL.txt' || /^\/(assets|images|fonts)\/[A-Za-z0-9_./-]+$/.test(path) && TYPES[extname(path)] && !path.split('/').some(part => part.startsWith('.'));
+      const publicAsset = PUBLIC_ICONS.has(path) || path === '/logo.svg' || path === '/robots.txt' || path === '/fonts/OFL.txt' || /^\/(assets|images|fonts)\/[A-Za-z0-9_./-]+$/.test(path) && TYPES[extname(path)] && !path.split('/').some(part => part.startsWith('.'));
       if (publicAsset) {
         try {
           const value = await file(path.slice(1));

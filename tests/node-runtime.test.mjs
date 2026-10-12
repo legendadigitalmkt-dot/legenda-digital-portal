@@ -33,7 +33,7 @@ test('Backend selection and privileged keys fail before serving anything',async 
 
 test('Home, contacts, admin and assets load with guards without backend requests',async t => {
   const origin = await serve(t,async () => {throw new Error('Unexpected API call');});
-  for (const path of ['/','/contato','/admin','/admin/conteudos','/favicon.ico','/images/legenda-digital-logo.png','/fonts/InterVariable.woff2']) {
+  for (const path of ['/','/contato','/admin','/admin/conteudos','/favicon.ico','/favicon-16x16.png','/favicon-32x32.png','/favicon-48x48.png','/apple-touch-icon.png','/images/legenda-digital-logo.png','/images/legenda-digital-logo-footer.svg','/fonts/InterVariable.woff2']) {
     const response = await fetch(origin + path);
     assert.equal(response.status,200,path);
     assert.equal(response.headers.get('x-content-type-options'),'nosniff');
