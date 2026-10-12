@@ -11,6 +11,9 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm run build
+        env:
+          VITE_SUPABASE_URL: https://yltnjgngkomelfltdyky.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_only_not_a_real_key
       - run: npm test
       - run: npm audit --audit-level=high
       - run: python3 -m unittest discover -s tests -p 'test_deploy*.py'

@@ -59,8 +59,8 @@ jobs:
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
         run: |
           npm ci --ignore-scripts
-          npm run build
-          npm test
+          npm run build:php
+          npm run test:php
           npm audit --audit-level=high
           python3 -m unittest discover -s tests -p 'test_deploy*.py'
           php -l scripts/hostinger/index.php

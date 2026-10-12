@@ -1,5 +1,7 @@
 # Portal → Hostinger por GitHub Actions
 
+**Decisão posterior do titular:** usar Web app Node.js por integração GitHub. Consulte [HOSTINGER_NODE.md](HOSTINGER_NODE.md). Este documento descreve somente o caminho PHP/SSH anterior, preservado e desativado para compatibilidade; não ativá-lo para uma app Node gerenciada.
+
 Destino exclusivo: `legendadigital.com.br`. Repositório: `legendadigitalmkt-dot/legenda-digital-portal`. Banco público do build: `yltnjgngkomelfltdyky`. O workflow não publica o software e não altera Auth, DNS, CMS ou banco.
 
 ## Estado
