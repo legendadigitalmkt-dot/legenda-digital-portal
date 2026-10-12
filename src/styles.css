@@ -14,8 +14,8 @@
 
 /* Official horizontal brand artwork, shared by React and PHP article headers. */
 .logo .brand-logo{display:block;width:216px;max-width:100%;height:auto;object-fit:contain}
-.logo-light{background:#fff;border-radius:8px;padding:0 6px;max-width:100%}
-.logo-light .brand-logo{width:204px}
+.logo-light{background:transparent;border-radius:0;padding:0;max-width:100%}
+.logo-light .brand-logo{width:216px}
 @media(min-width:1024px) and (max-width:1200px){.site-header .header-inner{gap:18px}.site-header .logo .brand-logo{width:180px}.site-header nav{gap:16px}}
 @media(max-width:767px){.site-header .logo .brand-logo{width:192px}}
 
