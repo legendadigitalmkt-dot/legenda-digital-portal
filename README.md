@@ -54,6 +54,8 @@ Não há cadastro público de equipe ou envio automático de e-mails. O código 
 
 ## Deploy Hostinger
 
+O fluxo de publicação por SSH com GitHub Actions está em [DEPLOYMENT.md](DEPLOYMENT.md). Ele fica desativado até a configuração explícita dos Secrets e da variável de ativação. O procedimento abaixo documenta a publicação manual original.
+
 1. Faça backup dos arquivos atuais de `public_html` e preserve a possibilidade de restauração.
 2. Execute o build com as variáveis públicas corretas.
 3. Envie **o conteúdo de `dist/`** para o `public_html` do domínio **legendadigital.com.br**. Não envie a pasta do projeto inteiro.

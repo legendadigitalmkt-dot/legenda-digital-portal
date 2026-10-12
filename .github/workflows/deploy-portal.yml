@@ -1,0 +1,78 @@
+name: Deploy portal to Hostinger
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: legenda-digital-portal-production
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'legendadigitalmkt-dot/legenda-digital-portal' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check deployment configuration without exposing values
+        id: configuration
+        env:
+          ENABLED: ${{ vars.PORTAL_DEPLOY_ENABLED }}
+          HOSTINGER_SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+          HOSTINGER_SSH_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
+          HOSTINGER_SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+          HOSTINGER_REMOTE_DIR: ${{ secrets.HOSTINGER_REMOTE_DIR }}
+          HOSTINGER_SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+          HOSTINGER_SSH_KNOWN_HOSTS: ${{ secrets.HOSTINGER_SSH_KNOWN_HOSTS }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          set -euo pipefail
+          echo 'ready=false' >> "$GITHUB_OUTPUT"
+          if [[ "$ENABLED" != true ]]; then
+            echo 'Deployment disabled: set PORTAL_DEPLOY_ENABLED=true only after configuration.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          missing=()
+          for name in HOSTINGER_SSH_HOST HOSTINGER_SSH_PORT HOSTINGER_SSH_USER HOSTINGER_REMOTE_DIR HOSTINGER_SSH_PRIVATE_KEY HOSTINGER_SSH_KNOWN_HOSTS VITE_SUPABASE_PUBLISHABLE_KEY; do
+            [[ -n "${!name}" ]] || missing+=("$name")
+          done
+          if (( ${#missing[@]} )); then
+            printf 'Missing deployment secrets: %s\n' "${missing[*]}" >> "$GITHUB_STEP_SUMMARY"
+            echo '::error::Deployment enabled but required secrets are missing.'
+            exit 1
+          fi
+          [[ "$VITE_SUPABASE_PUBLISHABLE_KEY" == sb_publishable_* ]] || { echo '::error::Only a publishable portal key is accepted.'; exit 1; }
+          echo 'ready=true' >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        if: steps.configuration.outputs.ready == 'true'
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        if: steps.configuration.outputs.ready == 'true'
+        with:
+          node-version: 24
+          cache: npm
+      - name: Build and test trusted main before accessing hosting
+        if: steps.configuration.outputs.ready == 'true'
+        env:
+          VITE_SUPABASE_URL: https://yltnjgngkomelfltdyky.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+          npm test
+          npm audit --audit-level=high
+          python3 -m unittest discover -s tests -p 'test_deploy*.py'
+          php -l scripts/hostinger/index.php
+          php -l scripts/hostinger/sitemap.php
+          python3 scripts/deploy/prepare_release.py dist .portal-release
+      - name: Publish with pinned SSH identity, backup and smoke rollback
+        if: steps.configuration.outputs.ready == 'true'
+        env:
+          HOSTINGER_SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+          HOSTINGER_SSH_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
+          HOSTINGER_SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+          HOSTINGER_REMOTE_DIR: ${{ secrets.HOSTINGER_REMOTE_DIR }}
+          HOSTINGER_SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+          HOSTINGER_SSH_KNOWN_HOSTS: ${{ secrets.HOSTINGER_SSH_KNOWN_HOSTS }}
+        run: bash scripts/deploy/publish.sh
