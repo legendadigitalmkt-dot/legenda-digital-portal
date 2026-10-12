@@ -1,3 +1,5 @@
+import ArticleBanners from './ArticleBanners';
+import {normalizeExtras} from '../lib/article-extras.mjs';
 import { SidebarPromo } from "./ProductPreview";
 import { imageKind, imagePosition } from "./ArticleCover";
 import React, {
@@ -120,6 +122,10 @@ export function ArticlePage({
       ),
     [post.body, server],
   );
+  const extras = normalizeExtras(post.article_extras);
+  const sidebarBanners = extras.banners.filter(b=>b.placement === "sidebar");
+  const afterBanners = extras.banners.filter(b=>b.placement === "after");
+  const showDefaultPromo = !extras.hideGrowthPromo && !sidebarBanners.length;
   const [progress, setProgress] = useState(0);
   const [shareStatus, setShareStatus] = useState("");
   const bodyRef = useRef<HTMLElement>(null);
@@ -366,7 +372,9 @@ export function ArticlePage({
             Receba o LD Brief
           </a>
 
-          <SidebarPromo onClick={() => event("article_growth_cta_clicked")} />
+          {!!extras.links.length&&<nav className="article-manual-links" aria-label="Links selecionados"><h2>Links selecionados</h2>{extras.links.map((l,i)=><a key={i} href={l.url} target={l.newTab?"_blank":undefined} rel={l.newTab?"noopener noreferrer":undefined}>{l.label}{l.newTab&&<span className="sr-only"> (abre em nova aba)</span>}</a>)}</nav>}
+          <div className="article-banners-desktop"><ArticleBanners banners={sidebarBanners}/></div>
+          {showDefaultPromo && <SidebarPromo onClick={() => event("article_growth_cta_clicked")} />}
         </aside>
         <div className="article-main-column">
           <article
@@ -391,10 +399,9 @@ export function ArticlePage({
             }}
             dangerouslySetInnerHTML={{ __html: prepared.html }}
           />
-          <SidebarPromo
-            mobile
-            onClick={() => event("article_growth_cta_clicked")}
-          />
+          <ArticleBanners banners={sidebarBanners} mobile/>
+          <ArticleBanners banners={afterBanners}/>
+          {showDefaultPromo&&<SidebarPromo mobile onClick={() => event("article_growth_cta_clicked")}/> }
           {post.references?.length &&
           !/fontes|refer[eê]ncias|registro de checagem/i.test(
             prepared.headings.map((h) => h.title).join(" "),

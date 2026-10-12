@@ -53,6 +53,8 @@ async function init() {
   );
   await db.exec(scheduler);
   await db.exec(await readFile('supabase/migrations/20261012140046_portal_ux_image_variants.sql','utf8'));
+  await db.exec(await readFile('supabase/migrations/20261012153255_editorial_media_banners.sql','utf8'));
+  await db.exec('grant usage on schema storage to anon,authenticated;grant select,insert,update,delete on storage.objects to anon,authenticated;');
   for (const [name, id] of Object.entries(ids)) {
     await db.query(
       "insert into auth.users(id,email,email_confirmed_at) values($1,$2,now())",
@@ -598,4 +600,29 @@ test("Editorial database: RLS, workflow, ownership, versions, comments and sched
       );
     },
   );
+});
+
+test('Editorial files RLS and banner settings preserve private drafts and immutable resources',async(t)=>{
+ const db=await init();t.after(()=>db.close());
+ const id=await article(db,'media-config');
+ const extras={banners:[{title:'Banner de teste',placement:'sidebar',url:'/contato',label:'Contato'}],links:[{label:'Pesquisa',url:'https://example.test'}]};
+ await db.query('update public.content_posts set article_extras=$1 where id=$2',[JSON.stringify(extras),id]);
+ const snapshot=(await db.query('select snapshot from public.article_versions where post_id=$1 order by version desc limit 1',[id])).rows[0].snapshot;
+ assert.deepEqual(snapshot.article_extras,extras);
+ await assert.rejects(db.query("update public.content_posts set article_extras='[]' where id=$1",[id]));
+ await assert.rejects(db.query("update public.content_posts set article_extras=$1 where id=$2",[JSON.stringify({banners:Array(5).fill({title:'x'})}),id]));
+ await assert.rejects(db.query("update public.content_posts set article_extras=$1 where id=$2",[JSON.stringify({links:{}}),id]));
+ await role(db,'anon');assert.equal((await db.query('select article_extras from public.content_posts where id=$1',[id])).rows.length,0);
+ await assert.rejects(db.query("insert into storage.objects(bucket_id,name) values('editorial-files',$1)",[ids.admin+'/00000000-0000-4000-8000-000000000123.pdf']));
+ for(const name of ['alice','moderator']){await role(db,name);await assert.rejects(db.query("insert into storage.objects(bucket_id,name) values('editorial-files',$1)",[ids[name]+'/00000000-0000-4000-8000-000000000123.pdf']));}
+ for(const name of ['author','editor','admin']){
+   await role(db,name);const path=ids[name]+'/00000000-0000-4000-8000-000000000123.pdf';
+   await db.query("insert into storage.objects(bucket_id,name) values('editorial-files',$1)",[path]);
+   await assert.rejects(db.query("insert into storage.objects(bucket_id,name) values('editorial-files',$1)",[ids.alice+'/00000000-0000-4000-8000-000000000234.pdf']));
+   await assert.rejects(db.query("insert into storage.objects(bucket_id,name) values('editorial-files',$1)",[ids[name]+'/../../malicious.html']));
+   await assert.rejects(db.query("insert into storage.objects(bucket_id,name) values('editorial-files',$1)",[ids[name]+'/00000000-0000-4000-8000-000000000234.exe']));
+   assert.equal((await db.query("update storage.objects set name='overwrite.pdf' where bucket_id='editorial-files' returning id")).rows.length,0);
+   assert.equal((await db.query("delete from storage.objects where bucket_id='editorial-files' returning id")).rows.length,0);
+ }
+ await role(db,'anon');assert.equal((await db.query("select * from storage.objects where bucket_id='editorial-files'")).rows.length,3);
 });

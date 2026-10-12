@@ -20,6 +20,12 @@ const config = {
   key: "sb_publishable_fixture",
   routes: JSON.parse(await readFile("dist/portal-runtime.json")).routes,
 };
+test('SSR safely renders attachments, highlighted text, banners and manually selected links',async(t)=>{
+ const row={...posts[0],body:'<h2>Leitura</h2><aside data-block="callout" data-tone="warning"><p><strong>Importante</strong></p><p>Texto em destaque.</p></aside><aside data-block="attachment"><a href="https://example.test/material.pdf" download target="_blank">Material PDF</a><p>Pesquisa.</p></aside><aside data-tone="url(evil)" onclick="boom">Texto</aside>',article_extras:{hideGrowthPromo:true,banners:[{title:'Banner de exemplo',description:'Contexto',placement:'sidebar',url:'/contato',label:'Conversar'},{title:'Sem script',url:'javascript:alert(1)',label:'Não abrir'}],links:[{label:'Manual',url:'/pesquisa'},{label:'Inseguro',url:'//evil.test'}]}};
+ const url=await server(t,[row]);const html=await(await fetch(url+'/conteudos/'+row.slug)).text();
+ assert.ok(html.includes('data-tone="warning"'));assert.ok(html.includes('Material PDF'));assert.ok(html.includes('Banner de exemplo'));assert.ok(html.includes('Links selecionados'));assert.ok(html.includes('href="/pesquisa"'));
+ assert.ok(!html.includes('javascript:alert'));assert.ok(!html.includes('url(evil)'));assert.ok(!html.includes('onclick="boom"'));assert.ok(!html.includes('href="//evil.test"'));
+});
 async function server(t, rows = posts) {
   const handler = await createPortalHandler({
     root: resolve("dist"),
