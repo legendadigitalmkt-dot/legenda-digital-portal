@@ -65,7 +65,7 @@ Não há cadastro público de equipe ou envio automático de e-mails. O código 
 
 ## Identidade e imagens
 
-Branco como base; navy, royal, ciano, turquesa, violeta e acentos da marca. Tipografia Inter sob OFL, licença em `public/fonts/OFL.txt`. O símbolo vetorial foi recriado a partir da referência enviada; substitua por um arquivo oficial da marca quando disponível.
+Branco como base; navy, royal, ciano, turquesa, violeta e acentos da marca. Tipografia Inter sob OFL, licença em `public/fonts/OFL.txt`. A logo horizontal oficial enviada pelo titular está em `public/images/legenda-digital-logo.png`; o favicon fornecido está em `public/favicon.ico`. Arquivos preservados sem redesenho. Cabeçalho, rodapé, CMS e artigos usam a logo horizontal; o rodapé oferece base branca para manter o contraste da assinatura navy. Metadados e favicon são incluídos nas 31 rotas pré-renderizadas.
 
 Hero e fotografia de colaboração são imagens ilustrativas geradas para este site. A composição foi preservada, com versões WebP otimizadas para entrega. Fotografia de apoio: Vitaly Gariev / Unsplash (`https://unsplash.com/photos/woman-working-on-a-laptop-in-a-modern-office-WrlIRaC9t-A`). Não são fotos de uma equipe real da empresa nem depoimentos.
 
@@ -74,3 +74,12 @@ Nenhuma métrica, cliente, membro ou depoimento foi inventado. Os nove textos in
 ## Limitações de verificação nesta entrega
 
 Publicado na Hostinger em 08/10/2026: https://legendadigital.com.br/. A página inicial, um artigo, a calculadora de conversão e a entrada protegida do CMS foram verificados no domínio público. Build, TypeScript, pré-renderização e RLS passaram pelas verificações registradas em VERIFICACAO.md. A conferência das cinco larguras (360, 390, 768, 1024 e 1440 px) permanece pendente.
+
+## Atualização da marca — 11/10/2026
+
+Logo horizontal e favicon oficiais fornecidos pelo titular, preservados byte a byte. A atualização inclui o layout compartilhado, os artigos servidos por PHP e a logo dos metadados. O favicon contém os tamanhos 16, 32, 48 e 64 px; sua URL versionada evita reutilizar a referência antiga em cache.
+
+Build/TypeScript, pré-renderização de 31 rotas e os 9 testes existentes passaram localmente. Não houve alteração de dependências, formulários, banco ou configuração de acesso. A publicação desta atualização permanece pendente: o login da Hostinger está restrito no navegador na nuvem e a integração encontrada é apenas de e-mail. O resultado de CI e merge é registrado no PR; não considerar a alteração publicada por estar no GitHub.
+
+Rollback: reverter o PR da marca, reconstruir e republicar o pacote anterior. Base anterior: `addef7abffe8798d21f179a315c17df25f5e3b74`. Preservar `site-runtime.php`, `.htaccess`, dados do CMS e arquivos existentes ao publicar. O ícone SVG anterior continua disponível para compatibilidade.
+
