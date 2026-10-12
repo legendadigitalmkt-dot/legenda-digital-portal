@@ -12,12 +12,14 @@ Decisão do titular em 11/10/2026: usar a opção **Web app Node.js** em vez da 
 | Node.js | `24.x` |
 | Comando de build | `npm run build` |
 | Pasta de saída | `dist` |
-| Arquivo de entrada na saída | `server.js` |
+| Arquivo de entrada (relativo à raiz do projeto) | `dist/server.js` |
 | Comando de início, quando solicitado | `npm start` |
 | `VITE_SUPABASE_URL` no build | `https://yltnjgngkomelfltdyky.supabase.co` |
 | `VITE_SUPABASE_PUBLISHABLE_KEY` no build | Chave **publishable** existente do banco do portal, prefixo `sb_publishable_`. |
 
-Esta tabela registra os valores de configuração da aplicação; ela não comprova criação da app ou conexão da Hostinger. A Hostinger detecta React/Vite no projeto, mas o portal agora requer executar o backend Node; um deploy puramente estático não substitui os artigos/sitemap dinâmicos. A entrada `server.js` é relativa à saída `dist`; se uma tela pedir caminho relativo ao projeto inteiro, corresponde a `dist/server.js`. `npm start` funciona tanto na raiz da fonte quanto dentro da saída, com package.json próprio.
+Esta tabela registra os valores de configuração da aplicação; ela não comprova criação da app ou conexão da Hostinger. A Hostinger detecta React/Vite no projeto, mas o portal agora requer executar o backend Node; um deploy puramente estático não substitui os artigos/sitemap dinâmicos. Para **Other**, a Hostinger interpreta o arquivo de entrada a partir da raiz do projeto: informe **`dist/server.js`**. Com entrada definida, a plataforma ignora o diretório de saída e publica a raiz inteira; o servidor continua restringindo a leitura HTTP aos arquivos públicos permitidos em `dist/`. A pasta de saída pode continuar preenchida como `dist`, mas não altera a resolução da entrada. `npm start` funciona tanto na raiz da fonte quanto dentro da saída, com package.json próprio.
+
+Ao mudar a configuração predefinida de Vite para Other, revise os campos: o formulário pode limpar o comando de compilação, a saída e a entrada. Se a tradução automática do navegador mantiver rótulos antigos após selecionar Other ou Node 24.x, exiba a página original antes de validar a configuração.
 
 A integração precisa ter acesso apenas ao repositório do portal. Não tornar o repositório público para contornar autenticação. Não usar o repositório `ld` nem a chave do Supabase do software. Não usar chaves privilegiadas: o build recusa outros backends, chaves ausentes ou formatos não publishable.
 
@@ -43,4 +45,4 @@ Manter a publicação PHP existente recuperável até validar a app Node. Rollba
 
 Dependências novas: `sanitize-html@2.18.0` para HTML do CMS e `esbuild@0.28.2` no build do servidor, fixadas no lockfile. Sem migrations, alterações de roles/RLS/Auth, novos providers ou dados de demonstração em produção.
 
-Referências oficiais: [Web app Node.js na Hostinger](https://www.hostinger.com/support/how-to-deploy-a-nodejs-website-in-hostinger/), [chaves e RLS no Supabase](https://supabase.com/docs/guides/getting-started/api-keys), [sanitização HTML](https://github.com/apostrophecms/apostrophe/tree/main/packages/sanitize-html).
+Referências oficiais: [configurações de build e resolução da entrada por framework](https://docs.hostinger.com/node.js/build-settings#entry-file), [Web app Node.js na Hostinger](https://www.hostinger.com/support/how-to-deploy-a-nodejs-website-in-hostinger/), [chaves e RLS no Supabase](https://supabase.com/docs/guides/getting-started/api-keys), [sanitização HTML](https://github.com/apostrophecms/apostrophe/tree/main/packages/sanitize-html).
