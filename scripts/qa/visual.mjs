@@ -42,6 +42,8 @@ const allViewports =
         [390, 844],
       ]
     : [
+        [1180, 820],
+        [1280, 900],
         [1366, 768],
         [1440, 900],
         [1920, 1080],
@@ -58,7 +60,7 @@ const viewports = process.env.QA_WIDTH
 const results = [];
 try {
   for (const [width, height] of viewports)
-    for (const [name, path] of Object.entries(pages)) {
+    for (const [name, path] of Object.entries(pages).filter(([name])=>!process.env.QA_PAGE||name===process.env.QA_PAGE)) {
       const context = await browser.newContext({ viewport: { width, height } });
       await context.addInitScript(() => {
         localStorage.setItem("ld-analytics-consent", "no");
@@ -109,6 +111,9 @@ try {
         articleWidth: document
           .querySelector(".article-body")
           ?.getBoundingClientRect().width,
+        articleFont: document.querySelector('.article-body') ? getComputedStyle(document.querySelector('.article-body')).fontSize : undefined,
+        articleCenterDelta: document.querySelector('.article-main-column') ? (()=>{const b=document.querySelector('.article-main-column').getBoundingClientRect();return Math.abs(b.x+b.width/2-innerWidth/2)})() : undefined,
+        bannerSide: document.querySelector('.article-promo-rail') ? (()=>{const p=document.querySelector('.article-promo-rail'),b=p.getBoundingClientRect(),a=document.querySelector('.article-main-column').getBoundingClientRect();return getComputedStyle(p).display==='none'?'inline':b.x>=a.right?'right':'wrong'})() : undefined,
         commentsWidth: document
           .querySelector(".article-comments")
           ?.getBoundingClientRect().width,
@@ -138,6 +143,7 @@ try {
         stage === "after" &&
         (metrics.scrollWidth > width ||
           errors.length ||
+          (name === 'article' && (metrics.articleCenterDelta > 1 || metrics.bannerSide === 'wrong' || metrics.articleFont !== (width < 768 ? '16px' : '18px'))) ||
           metrics.failedImages.length ||
           metrics.cls > 0.1 ||
           metrics.lcp > 2500)
@@ -152,7 +158,7 @@ try {
       await context.close();
     }
   await writeFile(
-    `${output}/metrics${process.env.QA_WIDTH?"-"+process.env.QA_WIDTH:""}.json`,
+    `${output}/metrics${process.env.QA_PAGE?"-"+process.env.QA_PAGE:""}${process.env.QA_WIDTH?"-"+process.env.QA_WIDTH:""}.json`,
     JSON.stringify(
       {
         fixture:

@@ -271,6 +271,15 @@ test("public article: real SSR, TOC, sources, images, share and mobile overflow"
   );
   const tocBox=await page.locator('.article-aside').boundingBox(),bodyBox=await page.locator('.article-main-column').boundingBox();
   expect(tocBox!.x+tocBox!.width).toBeLessThan(bodyBox!.x);
+  const promoBox=await page.locator('.article-promo-rail').boundingBox();
+  const heroBox=await page.locator('.article-hero').boundingBox();
+  expect(Math.abs(heroBox!.x-bodyBox!.x)).toBeLessThan(1);
+  expect(Math.abs(heroBox!.width-bodyBox!.width)).toBeLessThan(1);
+  expect(bodyBox!.x+bodyBox!.width).toBeLessThan(promoBox!.x);
+  expect(Math.abs(bodyBox!.x+bodyBox!.width/2-(page.viewportSize()!.width/2))).toBeLessThan(1);
+  await expect(page.locator('.article-aside .sidebar-promo,.article-aside .article-banner')).toHaveCount(0);
+  await expect(page.locator('.article-body')).toHaveCSS('font-size','18px');
+  await expect(page.locator('.article-body h2').first()).toHaveCSS('font-size','30px');
   await page.locator(".article-toc a").nth(3).click();
   await expect(page).toHaveURL(/#/);
   await expect(
@@ -278,6 +287,9 @@ test("public article: real SSR, TOC, sources, images, share and mobile overflow"
   ).toHaveAttribute("href", new RegExp(encodeURIComponent(post.slug)));
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/conteudos/" + post.slug);
+  await expect(page.locator('.article-body')).toHaveCSS('font-size','16px');
+  await expect(page.locator('.article-promo-rail')).toBeHidden();
+  await expect(page.locator('.article-main-column .promo-mobile')).toBeVisible();
   await expect(page.locator(".article-hero img")).toHaveJSProperty(
     "naturalWidth",
     720,
@@ -350,7 +362,7 @@ test('CMS: local cover and attachments, upload failures, callouts, banners and m
  expect(saved.body).toContain('data-tone="warning"');expect(saved.body).toContain('pesquisa.pdf');expect(saved.body).toContain('planilha.csv');expect(f.uploads.length).toBe(4);
  await page.getByRole('button',{name:'Prévia',exact:true}).click();
  const dialog=page.getByRole('dialog');
- await expect(dialog.locator('.article-aside .article-banner')).toContainText('Conheça a pesquisa');
+ await expect(dialog.locator('.article-promo-rail .article-banner')).toContainText('Conheça a pesquisa');
  await expect(dialog.getByRole('link',{name:'Método editorial',exact:true})).toHaveAttribute('href','/pesquisa');
  await page.getByRole('button',{name:'Celular 390px'}).click();
  await expect(dialog.locator('.article-main-column .article-banners-mobile .article-banner')).toBeVisible();

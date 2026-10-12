@@ -35,7 +35,7 @@
   margin: 40px 0;
 }
 .preview-mobile .article-body {
-  font-size: 18px;
+  font-size: 16px;
 }
 .preview-mobile .article-related .post-grid {
   display: grid;
@@ -508,17 +508,19 @@ body:has(dialog[open]) {
   margin-top: 20px;
 }
 .article-head {
-  max-width: 1180px;
+  max-width: var(--reading-width);
   padding: 64px 0 40px;
 }
 .article-head h1 {
-  font-size: clamp(38px, 4.9vw, 64px);
+  font-weight: 750;
+  letter-spacing: -.035em;
+  font-size: var(--article-title);
   max-width: 1050px;
   line-height: 1.12;
 }
 .article-head > p {
-  max-width: 850px;
-  font-size: 22px;
+  max-width: var(--reading-width);
+  font-size: 20px;
   line-height: 1.6;
 }
 .article-meta {
@@ -556,7 +558,7 @@ body:has(dialog[open]) {
   display: none;
 }
 .article-hero {
-  max-width: 1180px;
+  max-width: var(--reading-width);
   margin-bottom: 0;
 }
 .article-hero .hero-cover {
@@ -576,12 +578,12 @@ body:has(dialog[open]) {
 }
 .article-layout {
   display: grid;
-  grid-template-columns: var(--sidebar-width) minmax(0, var(--reading-width));
-  gap: var(--reading-gap);
+  grid-template-columns: minmax(0, 1fr) minmax(0, var(--reading-width)) minmax(0, 1fr);
+  gap: 32px;
   justify-content: center;
   align-items: start;
   padding: 56px 0 88px;
-  max-width: 1180px;
+  max-width: var(--container-width);
 }
 .article-main-column {
   grid-column: 2;
@@ -651,15 +653,15 @@ body:has(dialog[open]) {
 .article-body p {
   font-size: inherit;
   line-height: var(--leading-article);
-  margin: 24px 0;
+  margin: 20px 0;
 }
 .article-body h2 {
-  font-size: 36px;
+  font-size: var(--article-h2);
   line-height: 1.2;
   margin-top: 48px;
 }
 .article-body h3 {
-  font-size: 28px;
+  font-size: var(--article-h3);
   line-height: 1.3;
 }
 .article-body figcaption,
@@ -720,7 +722,7 @@ body:has(dialog[open]) {
   line-height: 1.6;
 }
 .sidebar-promo h3 {
-  font-size: 25px;
+  font-size: 22px;
   line-height: 1.25;
 }
 .sidebar-promo > p:not(.eyebrow) {
@@ -1835,11 +1837,11 @@ body:has(dialog[open]) {
     padding-top: 40px;
   }
   .article-head h1 {
-    font-size: 38px;
-    line-height: 1.12;
+    font-size: var(--article-title);
+    line-height: 1.16;
   }
   .article-head > p {
-    font-size: 20px;
+    font-size: 18px;
   }
   .breadcrumbs {
     font-size: var(--text-meta);
@@ -1859,11 +1861,11 @@ body:has(dialog[open]) {
     padding: 10px 14px;
   }
   .article-body h2 {
-    font-size: 30px;
+    font-size: var(--article-h2);
     line-height: 1.25;
   }
   .article-body h3 {
-    font-size: 26px;
+    font-size: var(--article-h3);
   }
   .article-body table,
   .article-body figcaption {
@@ -2077,3 +2079,33 @@ body:has(dialog[open]) {
 @media(max-width:1100px){.article-banners-desktop{display:none}.article-banners-mobile{display:grid}}
 .preview-mobile .article-banners-desktop{display:none}
 .preview-mobile .article-banners-mobile{display:grid}
+
+/* Equal side rails keep the reading column on the page's centerline. */
+.article-promo-rail {grid-column:3;grid-row:1;min-width:0;position:sticky;top:110px;max-height:calc(100dvh - 134px);overflow:auto;overscroll-behavior:contain}
+.article-promo-rail .article-banner {margin:0}
+.article-promo-rail .sidebar-promo {padding:20px}
+.article-promo-rail .article-banner h2 {font-size:22px}
+.article-promo-rail .article-banner>div {padding:20px}
+.article-layout .article-extra h2,.article-layout .article-comments h2 {font-size:var(--article-h2);line-height:1.25}
+.article-body blockquote {font-size:20px;line-height:var(--leading-article)}
+.article-body h2 {margin-bottom:16px;letter-spacing:-.03em}
+.article-body h3 {margin:32px 0 12px;letter-spacing:-.025em}
+@media(max-width:1279px){
+ .article-layout {display:flex;flex-direction:column;gap:28px;max-width:var(--reading-width)}
+ .article-main-column {width:100%}
+ .article-aside {position:static;max-height:none;overflow:visible;width:100%;order:-1;display:block}
+ .article-promo-rail {display:none}
+ .article-main-column .promo-mobile {display:block;margin:40px 0}
+ .article-banners-mobile {display:grid}
+ .article-aside .tag-list,.article-aside>a {display:none}
+ .article-toc nav {max-height:220px;overflow:auto}
+}
+@media(max-width:767px){.article-body blockquote{font-size:18px}}
+.preview-mobile {--article-title:32px;--article-h2:26px;--article-h3:22px;--text-article:16px}
+.preview-mobile .article-promo-rail {display:none}
+.preview-mobile .article-head h1 {font-size:var(--article-title)}
+.preview-mobile .article-head>p {font-size:18px}
+.preview-mobile .article-body h2 {font-size:var(--article-h2)}
+.preview-mobile .article-body h3 {font-size:var(--article-h3)}
+
+.preview-mobile .article-toc nav {max-height:220px;overflow:auto}
