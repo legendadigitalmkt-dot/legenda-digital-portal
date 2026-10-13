@@ -1,7 +1,8 @@
 import React, { lazy, Suspense, useState, useEffect } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { PageIntro } from "./PublicPages";
-import { toolRegistry, type ToolDefinition } from "../lib/tools-engine.mjs";
+import type { ToolDefinition } from "../lib/tools-engine.mjs";
+import { toolCatalog as toolRegistry } from "../lib/tool-catalog";
 import { db } from "../services/supabase";
 export function downloadText(text: string, name: string, type = "text/plain") {
   const u = URL.createObjectURL(new Blob([text], { type }));
@@ -36,6 +37,7 @@ export function ToolsPage() {
             toolRegistry.map((t) => ({
               ...t,
               ...data.find((x) => x.id === t.id),
+              version: t.version,
             })),
           );
       });
@@ -200,6 +202,17 @@ export function ToolPage({
             <h2>Metodologia e limites</h2>
             <p>{tool.methodology}</p>
             <p>{tool.limits}</p>
+            {tool.sources && (
+              <ul>
+                {tool.sources.map((s) => (
+                  <li key={s.url}>
+                    <a href={s.url} target="_blank" rel="noopener noreferrer">
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
             <details>
               <summary>Preciso de uma conta?</summary>
               <p>

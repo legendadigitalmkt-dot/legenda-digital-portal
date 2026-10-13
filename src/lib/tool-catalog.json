@@ -1,0 +1,171 @@
+[
+  {
+    "id": "claro",
+    "slug": "claro",
+    "name": "CLARO Workspace",
+    "category": "IA",
+    "type": "Workspace",
+    "description": "Estruture contexto, audiência e objetivo em um prompt, brief, plano ou checklist revisável.",
+    "image": "/images/work.jpg",
+    "version": 2,
+    "status": "published",
+    "methodology": "Organiza as informações no método CLARO; sugestões e templates são determinísticos. Não chama modelos de IA.",
+    "limits": "A ferramenta organiza o trabalho, sem inventar pesquisa, fontes ou informações de mercado. Revise o que está incompleto.",
+    "next_action": "Escolha uma tarefa pequena e compare a execução com seus critérios de qualidade.",
+    "related_content": [],
+    "related_tools": [
+      "checklist-conteudo",
+      "planner-editorial"
+    ]
+  },
+  {
+    "id": "checklist-conteudo",
+    "slug": "checklist-conteudo",
+    "name": "Auditoria de qualidade de conteúdo",
+    "category": "Conteúdo",
+    "type": "Diagnóstico",
+    "description": "Revise 12 dimensões, identifique lacunas e prepare uma nova versão do conteúdo.",
+    "image": "/images/team.webp",
+    "version": 2,
+    "status": "published",
+    "methodology": "Cada dimensão usa duas respostas de 0 a 4. Nota = média dos itens respondidos ÷ 4 × 100. A média geral usa dimensões respondidas com peso igual. A cobertura é mostrada separadamente; desconhecidos não são zero.",
+    "limits": "Autoavaliação baseada nas respostas informadas. Escala própria da Legenda Digital, sem validação externa ou benchmark de mercado. Campos desconhecidos não recebem zero. Não substitui checagem de fatos ou revisão editorial.",
+    "next_action": "Revise as dimensões mais baixas e salve uma nova execução para comparar.",
+    "related_content": [],
+    "related_tools": [
+      "seo-aeo-geo",
+      "claro",
+      "planner-editorial"
+    ]
+  },
+  {
+    "id": "calculadora-conversao",
+    "slug": "calculadora-conversao",
+    "name": "Calculadora de conversão e funil",
+    "category": "Growth",
+    "type": "Calculadora",
+    "description": "Compare conversão, perdas por etapa e cenários atual, meta e alternativo com seus dados.",
+    "image": "/images/work.jpg",
+    "version": 2,
+    "status": "published",
+    "methodology": "Conversão = etapa seguinte ÷ etapa anterior × 100; perdas = etapa anterior − seguinte. Total = vendas ÷ visitas × 100. Use contagens do mesmo período e coorte, com etapas cumulativas. Denominador zero produz resultado indisponível.",
+    "limits": "Metas e cenários são premissas do usuário, não previsões. Não há taxa ideal universal. Não compare eventos ou coortes incompatíveis.",
+    "next_action": "Investigue as passagens com perda, considerando custos, qualidade e objetivo do funil.",
+    "related_content": [],
+    "related_tools": [
+      "cac-ltv-payback",
+      "follow-up"
+    ]
+  },
+  {
+    "id": "planner-editorial",
+    "slug": "planner-editorial",
+    "name": "Planner editorial",
+    "category": "Conteúdo",
+    "type": "Workspace",
+    "description": "Planeje tema, pergunta, tese, distribuição e publicação em lista, calendário ou Kanban.",
+    "image": "/images/team.webp",
+    "version": 2,
+    "status": "published",
+    "methodology": "Organiza até 50 pautas informadas; lista, calendário e Kanban são visões dos mesmos dados. Alterar status não publica conteúdo no CMS.",
+    "limits": "Desempenho e receita não são estimados. URL publicada é registrada pelo usuário; marcar publicado não comprova resultados.",
+    "next_action": "Escolha uma pauta viável, revise suas fontes e defina distribuição e CTA.",
+    "related_content": [],
+    "related_tools": [
+      "claro",
+      "checklist-conteudo"
+    ]
+  },
+  {
+    "id": "maturidade-growth",
+    "slug": "maturidade-growth",
+    "name": "Diagnóstico de maturidade de crescimento",
+    "category": "Growth",
+    "type": "Diagnóstico",
+    "description": "Avalie seis dimensões do seu sistema de crescimento e organize prioridades.",
+    "image": "/images/work.jpg",
+    "version": 1,
+    "status": "published",
+    "methodology": "Três perguntas por dimensão, escala 0–4. Nota de dimensão = média respondida ÷ 4 × 100; média geral com peso igual por dimensão respondida. Prioridade usa as menores notas; cobertura é explícita.",
+    "limits": "Autoavaliação baseada nas respostas informadas. Escala própria da Legenda Digital, sem validação externa ou benchmark de mercado. Campos desconhecidos não recebem zero. Não é benchmark brasileiro nem diagnóstico auditado da empresa.",
+    "next_action": "Escolha uma dimensão prioritária e um processo observável para melhorar.",
+    "related_content": [],
+    "related_tools": [
+      "follow-up",
+      "calculadora-conversao"
+    ]
+  },
+  {
+    "id": "cac-ltv-payback",
+    "slug": "cac-ltv-payback",
+    "name": "Calculadora CAC, LTV e payback",
+    "category": "Growth",
+    "type": "Calculadora",
+    "description": "Conecte custo de aquisição, receita, margem e retenção em um cenário de assinatura.",
+    "image": "/images/work.jpg",
+    "version": 1,
+    "status": "published",
+    "methodology": "CAC = custo de aquisição ÷ novos clientes. Contribuição mensal = receita média × margem bruta. LTV de contribuição estimado = contribuição × meses de retenção informados. LTV:CAC = LTV ÷ CAC. Payback simples = CAC ÷ contribuição mensal.",
+    "limits": "Modelo simplificado para assinaturas com receita/margem constantes. Retenção é premissa, não previsão. LTV não é lucro líquido; não inclui desconto temporal, impostos, expansão, sazonalidade ou mudanças de churn. Zero no denominador é informado como indisponível.",
+    "next_action": "Revise custos completos, margem e retenção por coortes antes de tomar decisões financeiras.",
+    "related_content": [],
+    "related_tools": [
+      "calculadora-conversao",
+      "maturidade-growth"
+    ],
+    "sources": [
+      {
+        "label": "Stripe: cálculo do payback",
+        "url": "https://stripe.com/resources/more/what-is-the-cac-payback-period"
+      },
+      {
+        "label": "Stripe: modelo econômico de SaaS",
+        "url": "https://stripe.com/guides/atlas/business-of-saas"
+      }
+    ]
+  },
+  {
+    "id": "follow-up",
+    "slug": "follow-up",
+    "name": "Auditoria de follow-up",
+    "category": "Vendas",
+    "type": "Diagnóstico",
+    "description": "Identifique oportunidades sem responsável, próximo passo ou retorno no prazo.",
+    "image": "/images/work.jpg",
+    "version": 1,
+    "status": "published",
+    "methodology": "Calcula cada condição ÷ total da carteira × 100. Condições podem se sobrepor; não são somadas como pessoas/oportunidades únicas. O prazo de parada é informado pelo usuário.",
+    "limits": "Diagnóstico autodeclarado, sem conexão automática com CRM/WhatsApp. Aguardar o cliente não representa necessariamente um problema. Não calcula vendas perdidas ou receita inventada.",
+    "next_action": "Atribua responsável, próximo passo e data às oportunidades que precisam de ação.",
+    "related_content": [],
+    "related_tools": [
+      "maturidade-growth",
+      "calculadora-conversao"
+    ]
+  },
+  {
+    "id": "seo-aeo-geo",
+    "slug": "seo-aeo-geo",
+    "name": "Auditoria SEO, AEO e GEO",
+    "category": "Conteúdo",
+    "type": "Diagnóstico",
+    "description": "Revise indexabilidade, respostas, fontes, autoria e atualização do conteúdo.",
+    "image": "/images/team.webp",
+    "version": 1,
+    "status": "published",
+    "methodology": "Autoavaliação por oito dimensões, duas perguntas cada. Nota = média dos itens respondidos ÷ 4 × 100. Cobertura e critérios pendentes aparecem separados. Nenhuma página externa é rastreada automaticamente.",
+    "limits": "Autoavaliação baseada nas respostas informadas. Escala própria da Legenda Digital, sem validação externa ou benchmark de mercado. Campos desconhecidos não recebem zero. Não garante indexação, posição, tráfego ou citação por sistemas de IA; não exige um schema especial para IA.",
+    "next_action": "Verifique os aspectos técnicos em ferramentas oficiais e revise as lacunas editoriais.",
+    "related_content": [],
+    "related_tools": [
+      "checklist-conteudo",
+      "planner-editorial"
+    ],
+    "sources": [
+      {
+        "label": "Google Search Central: recursos de IA e seu site",
+        "url": "https://developers.google.com/search/docs/appearance/ai-features"
+      }
+    ]
+  }
+]
