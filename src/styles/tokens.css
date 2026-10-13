@@ -37,7 +37,7 @@ small {
 @media (max-width: 767px) {
   :root {
     --text-base: 17px;
-    --text-article: 16px;
+    --text-article: 18px;
     --article-title: 32px;
     --article-h2: 26px;
     --article-h3: 22px;

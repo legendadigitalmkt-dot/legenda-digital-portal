@@ -134,8 +134,16 @@ export function ArticlePage({
   const event = (name: string) => {
     if (!preview) void trackEditorial(name, post.id);
   };
+  const trackLink = (href: string) => {
+    const target = new URL(href, canonical);
+    const internal = ["legendadigital.com.br", "www.legendadigital.com.br"].includes(target.hostname);
+    event(internal && target.pathname === "/newsletter" ? "newsletter_cta_clicked"
+      : target.hostname === "app.legendadigital.com.br" || internal && target.pathname === "/produtos/growth-os" ? "growth_os_cta_clicked"
+      : internal ? "internal_link_clicked" : "source_clicked");
+  };
   useEffect(() => {
     if (server || preview) return;
+    recorded.current.clear();
     const once = (name: string) => {
       if (
         localStorage.getItem("ld-analytics-consent") === "yes" &&
@@ -163,9 +171,9 @@ export function ArticlePage({
       );
       setProgress(value);
       [25, 50, 75].forEach((n) => {
-        if (value >= n) once("article_scroll_" + n);
+        if (value >= n) once("article_" + n + "_percent");
       });
-      if (value >= 95) once("article_read_completed");
+      if (value >= 100) once("article_completed");
     };
     const scroll = () => {
       if (!tick) {
@@ -191,7 +199,7 @@ export function ArticlePage({
     try {
       await navigator.clipboard.writeText(canonical);
       setShareStatus("Link copiado");
-      event("article_shared");
+      event("share_clicked");
     } catch {
       setShareStatus("Copie este endereço: " + canonical);
     }
@@ -200,7 +208,7 @@ export function ArticlePage({
     try {
       if (navigator.share) {
         await navigator.share({ title: post.title, url: canonical });
-        event("article_shared");
+        event("share_clicked");
       } else await copy();
     } catch {
       setShareStatus("Compartilhamento cancelado");
@@ -264,7 +272,7 @@ export function ArticlePage({
               }
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => event("article_shared")}
+              onClick={() => event("share_clicked")}
             >
               WhatsApp
               <ArrowUpRight size={14} />
@@ -276,7 +284,7 @@ export function ArticlePage({
               }
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => event("article_shared")}
+              onClick={() => event("share_clicked")}
             >
               LinkedIn
               <ArrowUpRight size={14} />
@@ -337,7 +345,7 @@ export function ArticlePage({
             className="article-toc"
             open={
               typeof window === "undefined" ||
-              window.matchMedia("(min-width: 1280px)").matches
+              window.matchMedia("(min-width: 1366px)").matches
             }
           >
             <summary>
@@ -350,13 +358,17 @@ export function ArticlePage({
                   <a
                     key={h.id}
                     href={"#" + h.id}
-                    onClick={() => event("article_toc_clicked")}
+                    onClick={() => event("toc_clicked")}
                   >
                     {h.title}
                   </a>
                 ))}
             </nav>
           </details>
+          {(sidebarBanners.length>0 || showDefaultPromo) && <div className="article-promo-rail" aria-label="Banner do artigo">
+            <ArticleBanners banners={sidebarBanners} onLinkClick={trackLink}/>
+            {showDefaultPromo && <SidebarPromo onClick={() => event("growth_os_cta_clicked")} />}
+          </div>}
           <div className="tag-list">
             {post.tags?.map((t) => (
               <a href={"/conteudos?tag=" + encodeURIComponent(t)} key={t}>
@@ -366,13 +378,13 @@ export function ArticlePage({
           </div>
           <a
             href="/newsletter"
-            onClick={() => event("article_newsletter_clicked")}
+            onClick={() => event("newsletter_cta_clicked")}
           >
             <Mail size={20} />
             Receba o LD Brief
           </a>
 
-          {!!extras.links.length&&<nav className="article-manual-links" aria-label="Links selecionados"><h2>Links selecionados</h2>{extras.links.map((l,i)=><a key={i} href={l.url} target={l.newTab?"_blank":undefined} rel={l.newTab?"noopener noreferrer":undefined}>{l.label}{l.newTab&&<span className="sr-only"> (abre em nova aba)</span>}</a>)}</nav>}
+          {!!extras.links.length&&<nav className="article-manual-links" aria-label="Links selecionados"><h2>Links selecionados</h2>{extras.links.map((l,i)=><a key={i} href={l.url} onClick={()=>trackLink(l.url)} target={l.newTab?"_blank":undefined} rel={l.newTab?"noopener noreferrer":undefined}>{l.label}{l.newTab&&<span className="sr-only"> (abre em nova aba)</span>}</a>)}</nav>}
         </aside>
         <div className="article-main-column">
           <article
@@ -381,25 +393,13 @@ export function ArticlePage({
             onClick={(e) => {
               const a = (e.target as HTMLElement).closest("a");
               if (!a) return;
-              const href = (a.getAttribute("href") || "").replace(
-                "https://legendadigital.com.br",
-                "",
-              );
-              event(
-                href === "/newsletter"
-                  ? "article_newsletter_clicked"
-                  : href === "/produtos/growth-os"
-                    ? "article_growth_cta_clicked"
-                    : href.startsWith("/")
-                      ? "article_internal_link_clicked"
-                      : "article_source_clicked",
-              );
+              trackLink(a.getAttribute("href") || "");
             }}
             dangerouslySetInnerHTML={{ __html: prepared.html }}
           />
-          <ArticleBanners banners={sidebarBanners} mobile/>
-          <ArticleBanners banners={afterBanners}/>
-          {showDefaultPromo&&<SidebarPromo mobile onClick={() => event("article_growth_cta_clicked")}/> }
+          <ArticleBanners banners={sidebarBanners} mobile onLinkClick={trackLink}/>
+          <ArticleBanners banners={afterBanners} onLinkClick={trackLink}/>
+          {showDefaultPromo&&<SidebarPromo mobile onClick={() => event("growth_os_cta_clicked")}/> }
           {post.references?.length &&
           !/fontes|refer[eê]ncias|registro de checagem/i.test(
             prepared.headings.map((h) => h.title).join(" "),
@@ -413,7 +413,7 @@ export function ArticlePage({
                       href={s.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => event("article_source_clicked")}
+                      onClick={() => event("source_clicked")}
                     >
                       {s.title}
                       <LinkIcon size={14} />
@@ -425,7 +425,7 @@ export function ArticlePage({
             </section>
           ) : null}
           {relevantPosts(post, posts).length > 0 && (
-            <section className="article-extra article-related">
+            <section className="article-extra article-related" onClick={e=>{const a=(e.target as HTMLElement).closest('a');if(a)trackLink(a.getAttribute('href')||'')}}>
               <div className="article-related-inner">
                 <SectionHead
                   title="Continue explorando"
@@ -485,10 +485,6 @@ export function ArticlePage({
             </div>
           </section>
         </div>
-        {(sidebarBanners.length>0 || showDefaultPromo) && <aside className="article-promo-rail" aria-label="Banner do artigo">
-          <ArticleBanners banners={sidebarBanners}/>
-          {showDefaultPromo && <SidebarPromo onClick={() => event("article_growth_cta_clicked")} />}
-        </aside>}
       </div>
       <BriefSection config={config} />
     </>

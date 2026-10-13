@@ -579,11 +579,12 @@ body:has(dialog[open]) {
 .article-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, var(--reading-width)) minmax(0, 1fr);
-  gap: 32px;
+  gap: 20px;
   justify-content: center;
   align-items: start;
   padding: 56px 0 88px;
-  max-width: var(--container-width);
+  width: min(1320px, calc(100% - 40px));
+  max-width: 1320px;
 }
 .article-main-column {
   grid-column: 2;
@@ -591,7 +592,7 @@ body:has(dialog[open]) {
   min-width: 0;
 }
 .article-aside {
-  grid-column: 1;
+  grid-column: 3;
   grid-row: 1;
   position: sticky;
   top: 110px;
@@ -622,7 +623,8 @@ body:has(dialog[open]) {
   display: grid;
   gap: 4px;
   margin-top: 16px;
-  max-height: none;
+  max-height: min(240px, 26dvh);
+  overflow: auto;
 }
 .article-toc nav a {
   font-size: var(--text-meta);
@@ -2081,7 +2083,7 @@ body:has(dialog[open]) {
 .preview-mobile .article-banners-mobile{display:grid}
 
 /* Equal side rails keep the reading column on the page's centerline. */
-.article-promo-rail {grid-column:3;grid-row:1;min-width:0;position:sticky;top:110px;max-height:calc(100dvh - 134px);overflow:auto;overscroll-behavior:contain}
+.article-promo-rail {min-width:0}
 .article-promo-rail .article-banner {margin:0}
 .article-promo-rail .sidebar-promo {padding:20px}
 .article-promo-rail .article-banner h2 {font-size:22px}
@@ -2090,7 +2092,7 @@ body:has(dialog[open]) {
 .article-body blockquote {font-size:20px;line-height:var(--leading-article)}
 .article-body h2 {margin-bottom:16px;letter-spacing:-.03em}
 .article-body h3 {margin:32px 0 12px;letter-spacing:-.025em}
-@media(max-width:1279px){
+@media(max-width:1365px){
  .article-layout {display:flex;flex-direction:column;gap:28px;max-width:var(--reading-width)}
  .article-main-column {width:100%}
  .article-aside {position:static;max-height:none;overflow:visible;width:100%;order:-1;display:block}
@@ -2101,12 +2103,13 @@ body:has(dialog[open]) {
  .article-toc nav {max-height:220px;overflow:auto}
 }
 @media(max-width:767px){.article-body blockquote{font-size:18px}}
-.preview-mobile {--article-title:32px;--article-h2:26px;--article-h3:22px;--text-article:16px}
+.preview-mobile {--article-title:32px;--article-h2:26px;--article-h3:22px;--text-article:18px}
 .preview-mobile .article-promo-rail {display:none}
 .preview-mobile .article-head h1 {font-size:var(--article-title)}
 .preview-mobile .article-head>p {font-size:18px}
 .preview-mobile .article-body h2 {font-size:var(--article-h2)}
 .preview-mobile .article-body h3 {font-size:var(--article-h3)}
+.preview-mobile .article-body {font-size:var(--text-article)}
 
 .preview-mobile .article-toc nav {max-height:220px;overflow:auto}
 

@@ -415,7 +415,7 @@ export function SidebarPromo({
       aria-label="Conheça o software da Legenda Digital"
     >
       <p className="eyebrow">GROWTH OS · POR LEGENDA DIGITAL</p>
-      <h3>Suas oportunidades têm um próximo passo?</h3>
+      <h3>Acompanhamento comercial com contexto.</h3>
       <p>
         Organize conversas, responsáveis e retornos comerciais em um só fluxo.
       </p>
@@ -426,7 +426,7 @@ export function SidebarPromo({
         <b>Retomar a conversa</b>
         <span>Contexto → responsável → retorno</span>
       </div>
-      <a className="text-link" href="/produtos/growth-os" onClick={onClick}>
+      <a className="text-link" href="https://app.legendadigital.com.br/" onClick={onClick}>
         Conhecer o Growth OS
         <ArrowRight size={18} />
       </a>

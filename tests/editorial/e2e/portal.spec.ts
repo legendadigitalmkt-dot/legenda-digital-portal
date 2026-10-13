@@ -79,6 +79,7 @@ async function fixtures(page: Page) {
       const respond = (data: any, status = 200) =>
         route.fulfill({ status, headers, body: JSON.stringify(data) });
       if (req.method() === "OPTIONS") return respond({});
+      if (url.pathname.endsWith('/settings')) return respond({disable_signup:true,external:{email:true}});
       if (url.pathname.endsWith("/token")) {
         authenticated = true;
         return respond({
@@ -273,9 +274,46 @@ test('Homepage editorial cards have compact, aligned grids and preserve readable
  await expect(page.getByRole('heading',{level:1,name:manifest.articles[0].post.title})).toBeVisible();
 });
 
+test('article share, consent, mobile Web Share and unavailable registration use real controls',async({page})=>{
+ const f=await fixtures(page);
+ await page.goto('/conteudos/'+manifest.articles[0].post.slug);
+ await page.getByRole('button',{name:'Entrar na conta do portal'}).click();
+ await expect(page.getByText('Novos cadastros do portal ainda não estão liberados. Contas existentes podem entrar e contribuir.')).toBeVisible();
+ await expect(page.getByRole('button',{name:'Criar minha conta'})).toHaveCount(0);
+ await page.evaluate(()=>{
+  Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async(value:string)=>{(window as any).__copied=value}}});
+  Object.defineProperty(navigator,'share',{configurable:true,value:async(value:any)=>{(window as any).__shared=value}});
+  document.querySelector('.article-share>a')!.addEventListener('click',e=>e.preventDefault());
+ });
+ await page.getByRole('button',{name:'Copiar link',exact:true}).click();
+ expect(await page.evaluate(()=>(window as any).__copied)).toBe('https://legendadigital.com.br/conteudos/'+manifest.articles[0].post.slug);
+ expect(f.analytics).toEqual([]);
+ await page.getByRole('button',{name:'Permitir estatísticas'}).click();
+ await page.getByRole('link',{name:'WhatsApp',exact:true}).click();
+ await expect.poll(()=>f.analytics.filter(e=>e==='share_clicked').length).toBe(1);
+ await page.setViewportSize({width:390,height:844});
+ await page.getByRole('button',{name:'Compartilhar',exact:true}).click();
+ expect(await page.evaluate(()=>(window as any).__shared.url)).toBe('https://legendadigital.com.br/conteudos/'+manifest.articles[0].post.slug);
+ await expect.poll(()=>f.analytics.filter(e=>e==='share_clicked').length).toBe(2);
+ await expect(page.locator('.article-main-column .sidebar-promo a')).toHaveAttribute('href','https://app.legendadigital.com.br/');
+});
+
+test('comment logical replies retain their parents after the third visual level without exposing email',async({page})=>{
+ const f=await fixtures(page);
+ for(let depth=1;depth<=5;depth++)f.comments.push({...f.comments[0],id:'00000000-0000-4000-8000-'+String(301+depth).padStart(12,'0'),parent_id:f.comments.at(-1).id,root_id:f.comments[0].id,depth,body:'Resposta nível '+depth});
+ await page.goto('/conteudos/'+manifest.articles[0].post.slug);
+ await expect(page.locator('.comment-text')).toHaveCount(6);
+ await expect(page.locator('.comment-replies')).toHaveCount(2);
+ await expect(page.locator('.comment-replies-flat')).toHaveCount(3);
+ const widths=await page.evaluate(()=>({body:document.querySelector('.article-body')!.getBoundingClientRect().width,comments:document.querySelector('.article-comments')!.getBoundingClientRect().width}));
+ expect(widths.comments).toBe(widths.body);
+ await expect(page.locator('.comment-tree')).not.toContainText('@');
+});
+
 test("public article: real SSR, TOC, sources, images, share and mobile overflow", async ({
   page,
 }) => {
+  await page.setViewportSize({width:1440,height:900});
   await fixtures(page);
   const post = manifest.articles[0].post;
   await page.goto("/conteudos/" + post.slug);
@@ -290,14 +328,16 @@ test("public article: real SSR, TOC, sources, images, share and mobile overflow"
     1200,
   );
   const tocBox=await page.locator('.article-aside').boundingBox(),bodyBox=await page.locator('.article-main-column').boundingBox();
-  expect(tocBox!.x+tocBox!.width).toBeLessThan(bodyBox!.x);
+  expect(tocBox!.x).toBeGreaterThan(bodyBox!.x+bodyBox!.width);
+  expect(tocBox!.width).toBeGreaterThanOrEqual(260);
+  expect(tocBox!.width).toBeLessThanOrEqual(320);
   const promoBox=await page.locator('.article-promo-rail').boundingBox();
   const heroBox=await page.locator('.article-hero').boundingBox();
   expect(Math.abs(heroBox!.x-bodyBox!.x)).toBeLessThan(1);
   expect(Math.abs(heroBox!.width-bodyBox!.width)).toBeLessThan(1);
   expect(bodyBox!.x+bodyBox!.width).toBeLessThan(promoBox!.x);
   expect(Math.abs(bodyBox!.x+bodyBox!.width/2-(page.viewportSize()!.width/2))).toBeLessThan(1);
-  await expect(page.locator('.article-aside .sidebar-promo,.article-aside .article-banner')).toHaveCount(0);
+  await expect(page.locator('.article-aside .sidebar-promo')).toHaveCount(1);
   await expect(page.locator('.article-body')).toHaveCSS('font-size','18px');
   await expect(page.locator('.article-body h2').first()).toHaveCSS('font-size','30px');
   await page.locator(".article-toc a").nth(3).click();
@@ -307,7 +347,7 @@ test("public article: real SSR, TOC, sources, images, share and mobile overflow"
   ).toHaveAttribute("href", new RegExp(encodeURIComponent(post.slug)));
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/conteudos/" + post.slug);
-  await expect(page.locator('.article-body')).toHaveCSS('font-size','16px');
+  await expect(page.locator('.article-body')).toHaveCSS('font-size','18px');
   await expect(page.locator('.article-promo-rail')).toBeHidden();
   await expect(page.locator('.article-main-column .promo-mobile')).toBeVisible();
   await expect(page.locator(".article-hero img")).toHaveJSProperty(
@@ -320,7 +360,7 @@ test("public article: real SSR, TOC, sources, images, share and mobile overflow"
     ),
   ).toBe(true);
   await expect(
-    page.getByRole("button", { name: "Entrar ou criar conta" }),
+    page.getByRole("button", { name: "Entrar na conta do portal" }),
   ).toBeVisible();
   expect(
     await page.locator('script[type="application/ld+json"]').textContent(),
@@ -521,7 +561,7 @@ test("portal account: contribution, nested reply, moderation and private report 
   const f = await fixtures(page);
   const post = manifest.articles[0].post;
   await page.goto("/conteudos/" + post.slug);
-  await page.getByRole("button", { name: "Entrar ou criar conta" }).click();
+  await page.getByRole("button", { name: "Entrar na conta do portal" }).click();
   await page
     .getByLabel("E-mail", { exact: true })
     .fill("editorial-admin@example.test");
@@ -613,7 +653,7 @@ test("editorial analytics respects consent and starts collecting after explicit 
   await page
     .getByRole("heading", { name: "Comentários", exact: true })
     .scrollIntoViewIfNeeded();
-  await expect.poll(() => f.analytics.includes("article_scroll_75")).toBe(true);
+  await expect.poll(() => f.analytics.includes("article_75_percent")).toBe(true);
   expect(f.analytics.filter((e) => e === "article_viewed")).toHaveLength(1);
 });
 

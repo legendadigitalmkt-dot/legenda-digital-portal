@@ -54,6 +54,7 @@ async function init() {
   await db.exec(scheduler);
   await db.exec(await readFile('supabase/migrations/20261012140046_portal_ux_image_variants.sql','utf8'));
   await db.exec(await readFile('supabase/migrations/20261012153255_editorial_media_banners.sql','utf8'));
+  await db.exec(await readFile('supabase/migrations/20261013181236_editorial_batch1_stabilization.sql','utf8'));
   await db.exec('grant usage on schema storage to anon,authenticated;grant select,insert,update,delete on storage.objects to anon,authenticated;');
   for (const [name, id] of Object.entries(ids)) {
     await db.query(
@@ -97,6 +98,24 @@ async function publish(db, id) {
     [id],
   );
 }
+
+test('Approved article taxonomy preserves legacy clients and rejects private or arbitrary analytics', async (t) => {
+  const db = await init(); t.after(() => db.close());
+  const id = await article(db, 'taxonomy-public'); await publish(db,id);
+  const draft = await article(db,'taxonomy-private');
+  await role(db,'anon');
+  const names=['article_viewed','article_25_percent','article_50_percent','article_75_percent','article_completed','toc_clicked','source_clicked','internal_link_clicked','share_clicked','comment_started','comment_submitted','comment_replied','growth_os_cta_clicked','newsletter_cta_clicked'];
+  for(const name of names) await db.query('select public.track_editorial($1,$2)',[name,id]);
+  await db.query('select public.track_editorial($1,$2)',['article_scroll_25',id]);
+  await assert.rejects(db.query('select public.track_editorial($1,$2)',['untrusted_email@example.test',id]),/Invalid editorial event/);
+  await assert.rejects(db.query('select public.track_editorial($1,$2)',[null,id]),/Invalid editorial event/);
+  await assert.rejects(db.query('select public.track_editorial($1,$2)',['article_viewed',draft]),/Published article/);
+  await db.exec('reset role');
+  const rows=(await db.query('select event_name,metadata from public.analytics_events where article_id=$1 order by id',[id])).rows;
+  assert.deepEqual(rows.map(r=>r.event_name),[...names,'article_25_percent']);
+  assert.ok(rows.every(r=>r.metadata.slug==='taxonomy-public'&&!('email' in r.metadata)&&!('user_id' in r.metadata)));
+  await db.query("insert into public.analytics_events(event_name,path) values('newsletter_subscribed','/newsletter')");
+});
 
 test("Editorial database: RLS, workflow, ownership, versions, comments and scheduled publication", async (t) => {
   const db = await init();

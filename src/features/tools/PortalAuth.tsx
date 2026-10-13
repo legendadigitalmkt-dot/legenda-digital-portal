@@ -43,14 +43,8 @@ export function usePortalUser() {
   }, []);
   return { user, ready, error };
 }
-export function PortalAuth() {
-  const [email, setEmail] = useState(""),
-    [password, setPassword] = useState(""),
-    [signup, setSignup] = useState(false),
-    [busy, setBusy] = useState(false),
-    [message, setMessage] = useState(""),
-    [registration, setRegistration] = useState<boolean | null>(null),
-    [consent, setConsent] = useState(false);
+export function usePortalRegistration() {
+  const [registration, setRegistration] = useState<boolean | null>(null);
   useEffect(() => {
     let active = true;
     const url = import.meta.env.VITE_SUPABASE_URL,
@@ -77,6 +71,16 @@ export function PortalAuth() {
       active = false;
     };
   }, []);
+  return registration;
+}
+export function PortalAuth() {
+  const [email, setEmail] = useState(""),
+    [password, setPassword] = useState(""),
+    [signup, setSignup] = useState(false),
+    [busy, setBusy] = useState(false),
+    [message, setMessage] = useState(""),
+    [consent, setConsent] = useState(false);
+  const registration = usePortalRegistration();
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!db) return;
@@ -110,7 +114,7 @@ export function PortalAuth() {
         Use a mesma conta dos comentários. Seu histórico de ferramentas é
         privado.
       </p>
-      <form onSubmit={submit}>
+      <form method="post" onSubmit={submit}>
         <label>
           E-mail
           <input
