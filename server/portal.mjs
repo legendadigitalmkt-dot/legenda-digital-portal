@@ -115,7 +115,7 @@ export async function createPortalHandler({root, config, renderArticle, renderCo
       const admin = path === '/admin' || path.startsWith('/admin/');
       const privatePage=['/newsletter/confirmar','/newsletter/preferencias'].includes(path)||admin||path==='/conta'||path.startsWith('/conta/')||path.startsWith('/ferramentas/')&&new URL(req.url,DOMAIN).searchParams.has('run');
       if (privatePage) { res.setHeader('Cache-Control','private, no-store'); res.setHeader('X-Robots-Tag','noindex, nofollow'); }
-      if (path === '/api/health') { send(200,JSON.stringify({status:'ok',release:'ld-brief-v1',runtime:'node'}),'application/json'); return; }
+      if (path === '/api/health') { send(200,JSON.stringify({status:'ok',release:'editorial-batch1-stable-v1',runtime:'node'}),'application/json'); return; }
       const signal = AbortSignal.timeout(6000), instant = now();
       const filter = {status:'eq.published',published_at:'lte.' + new Date(instant).toISOString()};
       if (path === '/sitemap.xml') {

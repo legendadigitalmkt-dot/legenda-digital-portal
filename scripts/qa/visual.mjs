@@ -147,7 +147,7 @@ try {
         (metrics.scrollWidth > width ||
           errors.length ||
           (name === 'home' && width >= 1180 && (metrics.homeLeadHeight > 320 || Math.max(...metrics.homeCompactHeights) > 210 || Math.max(...metrics.homeLatestHeights) > 500 || Math.max(...metrics.homeLatestHeights)-Math.min(...metrics.homeLatestHeights)>1)) ||
-          (name === 'article' && (metrics.articleCenterDelta > 1 || metrics.bannerSide === 'wrong' || metrics.articleFont !== (width < 768 ? '16px' : '18px'))) ||
+          (name === 'article' && (metrics.articleCenterDelta > 1 || metrics.bannerSide === 'wrong' || metrics.articleFont !== '18px')) ||
           metrics.failedImages.length ||
           metrics.cls > 0.1 ||
           metrics.lcp > 2500)

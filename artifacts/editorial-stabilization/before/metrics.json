@@ -1,0 +1,506 @@
+{
+  "origin": "https://legendadigital.com.br",
+  "stage": "before",
+  "checked_at": "2026-10-13T18:18:22.777Z",
+  "read_only": true,
+  "results": [
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "url": "/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "title": "O novo funil de vendas na era da IA",
+      "canonical": "https://legendadigital.com.br/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "category": "Growth & Negócios",
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "heroFit": "contain",
+      "heroWidth": 1200,
+      "sidebarWidth": 248,
+      "sidebarRight": false,
+      "inlineCTA": "none",
+      "cta": "https://legendadigital.com.br/produtos/growth-os",
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "O novo funil de vendas na era da IA",
+        "description": "Como conectar descoberta, conversa, oportunidade e próximo compromisso sem confundir automação com resultado.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/o-novo-funil-de-vendas-na-era-da-ia-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/o-novo-funil-de-vendas-na-era-da-ia"
+      },
+      "headings": 23,
+      "tables": 1
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "url": "/conteudos/marketing-de-campanha-para-sistema",
+      "title": "Marketing está deixando de ser campanha para se tornar sistema",
+      "canonical": "https://legendadigital.com.br/conteudos/marketing-de-campanha-para-sistema",
+      "category": "Growth & Negócios",
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "heroFit": "contain",
+      "heroWidth": 1200,
+      "sidebarWidth": 248,
+      "sidebarRight": false,
+      "inlineCTA": "none",
+      "cta": "https://legendadigital.com.br/produtos/growth-os",
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Marketing está deixando de ser campanha para se tornar sistema",
+        "description": "Uma campanha tem começo e fim. O trabalho de aprender, acompanhar e atender precisa continuar entre elas.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/marketing-de-campanha-para-sistema-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/marketing-de-campanha-para-sistema"
+      },
+      "headings": 27,
+      "tables": 1,
+      "commentsWidth": 720
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "url": "/conteudos/ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "title": "AI Search: como ChatGPT, Google e assistentes estão mudando a descoberta",
+      "canonical": "https://legendadigital.com.br/conteudos/ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "category": "Futuro",
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "heroFit": "contain",
+      "heroWidth": 1200,
+      "sidebarWidth": 248,
+      "sidebarRight": false,
+      "inlineCTA": "none",
+      "cta": "https://legendadigital.com.br/produtos/growth-os",
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "AI Search: como ChatGPT, Google e assistentes estão mudando a descoberta",
+        "description": "A busca passa a participar da definição do problema e da comparação de alternativas. Para as empresas, o desafio é conectar presença, confiança e ação.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/ai-search-como-chatgpt-google-assistentes-mudam-descoberta-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/ai-search-como-chatgpt-google-assistentes-mudam-descoberta"
+      },
+      "headings": 19,
+      "tables": 1,
+      "commentsWidth": 720
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "url": "/conteudos/seo-aeo-geo-busca-por-ia",
+      "title": "SEO, AEO e GEO: o que realmente muda com a busca por IA",
+      "canonical": "https://legendadigital.com.br/conteudos/seo-aeo-geo-busca-por-ia",
+      "category": "Aplicação",
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "heroFit": "contain",
+      "heroWidth": 1200,
+      "sidebarWidth": 248,
+      "sidebarRight": false,
+      "inlineCTA": "none",
+      "cta": "https://legendadigital.com.br/produtos/growth-os",
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "SEO, AEO e GEO: o que realmente muda com a busca por IA",
+        "description": "Um guia para separar fundamentos verificáveis, decisões editoriais e experimentos de visibilidade, sem prometer citações.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/seo-aeo-geo-busca-por-ia-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/seo-aeo-geo-busca-por-ia"
+      },
+      "headings": 26,
+      "tables": 2,
+      "commentsWidth": 720
+    },
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "errors": [],
+      "url": "/conteudos/agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "title": "Agentes de IA: onde terminam os chatbots e começam os sistemas de trabalho",
+      "canonical": "https://legendadigital.com.br/conteudos/agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "category": "Futuro",
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "heroFit": "contain",
+      "heroWidth": 1200,
+      "sidebarWidth": 248,
+      "sidebarRight": false,
+      "inlineCTA": "none",
+      "cta": "https://legendadigital.com.br/produtos/growth-os",
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Agentes de IA: onde terminam os chatbots e começam os sistemas de trabalho",
+        "description": "Uma conversa convincente não comprova execução. Para transformar IA em operação, empresas precisam definir ferramentas, permissões, critérios de sucesso e evidências do que realmente aconteceu.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/agentes-de-ia-chatbots-sistemas-de-trabalho-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/agentes-de-ia-chatbots-sistemas-de-trabalho"
+      },
+      "headings": 19,
+      "tables": 1,
+      "commentsWidth": 720
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "url": "/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "title": "O novo funil de vendas na era da IA",
+      "canonical": "https://legendadigital.com.br/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "category": "Growth & Negócios",
+      "font": "16px",
+      "bodyWidth": 350,
+      "centerDelta": 0,
+      "overflow": false,
+      "heroFit": "contain",
+      "heroWidth": 720,
+      "sidebarWidth": 350,
+      "sidebarRight": false,
+      "inlineCTA": "block",
+      "cta": "https://legendadigital.com.br/produtos/growth-os",
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "O novo funil de vendas na era da IA",
+        "description": "Como conectar descoberta, conversa, oportunidade e próximo compromisso sem confundir automação com resultado.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/o-novo-funil-de-vendas-na-era-da-ia-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/o-novo-funil-de-vendas-na-era-da-ia"
+      },
+      "headings": 23,
+      "tables": 1
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "url": "/conteudos/marketing-de-campanha-para-sistema",
+      "title": "Marketing está deixando de ser campanha para se tornar sistema",
+      "canonical": "https://legendadigital.com.br/conteudos/marketing-de-campanha-para-sistema",
+      "category": "Growth & Negócios",
+      "font": "16px",
+      "bodyWidth": 350,
+      "centerDelta": 0,
+      "overflow": false,
+      "heroFit": "contain",
+      "heroWidth": 720,
+      "sidebarWidth": 350,
+      "sidebarRight": false,
+      "inlineCTA": "block",
+      "cta": "https://legendadigital.com.br/produtos/growth-os",
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Marketing está deixando de ser campanha para se tornar sistema",
+        "description": "Uma campanha tem começo e fim. O trabalho de aprender, acompanhar e atender precisa continuar entre elas.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/marketing-de-campanha-para-sistema-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/marketing-de-campanha-para-sistema"
+      },
+      "headings": 27,
+      "tables": 1,
+      "commentsWidth": 350
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "url": "/conteudos/ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "title": "AI Search: como ChatGPT, Google e assistentes estão mudando a descoberta",
+      "canonical": "https://legendadigital.com.br/conteudos/ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "category": "Futuro",
+      "font": "16px",
+      "bodyWidth": 350,
+      "centerDelta": 0,
+      "overflow": false,
+      "heroFit": "contain",
+      "heroWidth": 720,
+      "sidebarWidth": 350,
+      "sidebarRight": false,
+      "inlineCTA": "block",
+      "cta": "https://legendadigital.com.br/produtos/growth-os",
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "AI Search: como ChatGPT, Google e assistentes estão mudando a descoberta",
+        "description": "A busca passa a participar da definição do problema e da comparação de alternativas. Para as empresas, o desafio é conectar presença, confiança e ação.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/ai-search-como-chatgpt-google-assistentes-mudam-descoberta-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/ai-search-como-chatgpt-google-assistentes-mudam-descoberta"
+      },
+      "headings": 19,
+      "tables": 1,
+      "commentsWidth": 350
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "url": "/conteudos/seo-aeo-geo-busca-por-ia",
+      "title": "SEO, AEO e GEO: o que realmente muda com a busca por IA",
+      "canonical": "https://legendadigital.com.br/conteudos/seo-aeo-geo-busca-por-ia",
+      "category": "Aplicação",
+      "font": "16px",
+      "bodyWidth": 350,
+      "centerDelta": 0,
+      "overflow": false,
+      "heroFit": "contain",
+      "heroWidth": 720,
+      "sidebarWidth": 350,
+      "sidebarRight": false,
+      "inlineCTA": "block",
+      "cta": "https://legendadigital.com.br/produtos/growth-os",
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "SEO, AEO e GEO: o que realmente muda com a busca por IA",
+        "description": "Um guia para separar fundamentos verificáveis, decisões editoriais e experimentos de visibilidade, sem prometer citações.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/seo-aeo-geo-busca-por-ia-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/seo-aeo-geo-busca-por-ia"
+      },
+      "headings": 26,
+      "tables": 2,
+      "commentsWidth": 350
+    },
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "errors": [],
+      "url": "/conteudos/agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "title": "Agentes de IA: onde terminam os chatbots e começam os sistemas de trabalho",
+      "canonical": "https://legendadigital.com.br/conteudos/agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "category": "Futuro",
+      "font": "16px",
+      "bodyWidth": 350,
+      "centerDelta": 0,
+      "overflow": false,
+      "heroFit": "contain",
+      "heroWidth": 720,
+      "sidebarWidth": 350,
+      "sidebarRight": false,
+      "inlineCTA": "block",
+      "cta": "https://legendadigital.com.br/produtos/growth-os",
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Agentes de IA: onde terminam os chatbots e começam os sistemas de trabalho",
+        "description": "Uma conversa convincente não comprova execução. Para transformar IA em operação, empresas precisam definir ferramentas, permissões, critérios de sucesso e evidências do que realmente aconteceu.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/agentes-de-ia-chatbots-sistemas-de-trabalho-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/agentes-de-ia-chatbots-sistemas-de-trabalho"
+      },
+      "headings": 19,
+      "tables": 1,
+      "commentsWidth": 350
+    }
+  ]
+}

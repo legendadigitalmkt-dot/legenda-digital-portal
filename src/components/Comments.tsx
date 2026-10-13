@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   MessageCircle,
   Reply,
@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import type { Post } from "../types";
 import { db, trackEditorial } from "../services/supabase";
+import { usePortalRegistration } from "../features/tools/PortalAuth";
 type Comment = {
   id: string;
   article_id: string;
@@ -25,6 +26,8 @@ type Comment = {
   edited_at: string | null;
 };
 export default function Comments({ post }: { post: Post }) {
+  const registration = usePortalRegistration();
+  const started = useRef(false);
   const [rows, setRows] = useState<Comment[]>([]);
   const [names, setNames] = useState<Record<string, string>>({});
   const [user, setUser] = useState<string | null>(null);
@@ -76,6 +79,7 @@ export default function Comments({ post }: { post: Post }) {
     }
     setLoading(false);
   };
+  useEffect(() => { started.current = false; }, [post.id]);
   useEffect(() => {
     if (!db) {
       setLoading(false);
@@ -127,6 +131,7 @@ export default function Comments({ post }: { post: Post }) {
   const auth = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!db) return;
+    if (signup && registration !== true) return;
     setBusy(true);
     const r = signup
       ? await db.auth.signUp({
@@ -206,8 +211,8 @@ export default function Comments({ post }: { post: Post }) {
     }
     event(
       editing || !reply
-        ? "article_comment_submitted"
-        : "article_reply_submitted",
+        ? "comment_submitted"
+        : "comment_replied",
     );
     setBody("");
     setReply(null);
@@ -386,7 +391,7 @@ export default function Comments({ post }: { post: Post }) {
         {message}
       </p>
       {report && (
-        <form className="comment-report" onSubmit={sendReport}>
+        <form method="post" className="comment-report" onSubmit={sendReport}>
           <h3>Denunciar contribuição</h3>
           <label>
             Motivo
@@ -426,6 +431,7 @@ export default function Comments({ post }: { post: Post }) {
       )}
       {user ? (
         <form
+          method="post"
           id="comment-compose"
           className="comment-compose"
           onSubmit={submit}
@@ -456,7 +462,12 @@ export default function Comments({ post }: { post: Post }) {
               rows={5}
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              onFocus={() => event("article_comment_started")}
+              onFocus={() => {
+                if (!started.current && localStorage.getItem("ld-analytics-consent") === "yes") {
+                  started.current = true;
+                  event("comment_started");
+                }
+              }}
             />
           </label>
           <small>{body.length}/3000 · edição por até 24 horas</small>
@@ -493,10 +504,10 @@ export default function Comments({ post }: { post: Post }) {
               className="btn btn-secondary"
               onClick={() => setAuthOpen(true)}
             >
-              Entrar ou criar conta
+              Entrar na conta do portal
             </button>
           ) : (
-            <form onSubmit={auth}>
+            <form method="post" onSubmit={auth}>
               <label>
                 E-mail
                 <input
@@ -512,7 +523,7 @@ export default function Comments({ post }: { post: Post }) {
                 <input
                   type="password"
                   required
-                  minLength={signup ? 8 : 1}
+                  minLength={signup ? 12 : 1}
                   maxLength={128}
                   autoComplete={signup ? "new-password" : "current-password"}
                   value={password}
@@ -526,13 +537,13 @@ export default function Comments({ post }: { post: Post }) {
                     ? "Criar conta do portal"
                     : "Entrar"}
               </button>
-              <button
+              {registration === true && <button
                 type="button"
                 className="text-link"
                 onClick={() => setSignup(!signup)}
               >
                 {signup ? "Já tenho uma conta" : "Criar minha conta"}
-              </button>
+              </button>}
               <p className="microcopy">
                 Ao contribuir, você aceita os <a href="/termos">termos</a> e a{" "}
                 <a href="/privacidade">política de privacidade</a>. Seu e-mail
@@ -540,6 +551,7 @@ export default function Comments({ post }: { post: Post }) {
               </p>
             </form>
           )}
+          {registration === false && <p className="microcopy">Novos cadastros do portal ainda não estão liberados. Contas existentes podem entrar e contribuir.</p>}
         </div>
       )}
     </div>
