@@ -2797,3 +2797,16 @@ body:has(dialog[open]) {
     display: none;
   }
 }
+
+/* LD Brief — readable forms, archive and preference controls. */
+.brief-manage h1,.brief-public-issue h1{font-size:clamp(30px,5vw,48px);text-wrap:balance;margin-bottom:24px}
+.brief-manage p{margin-block:18px}.brief-manage .btn,.brief-admin .btn{margin:12px 12px 12px 0}
+.brief-manage input:not([type=checkbox]),.brief-admin input,.brief-admin select,.brief-admin textarea{font-size:16px;min-height:48px}
+.brief-manage form{border:1px solid var(--border);border-radius:16px;padding:24px;background:var(--soft);margin-top:24px}
+.brief-archive h2{font-size:28px;margin-bottom:18px}.brief-archive-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-block:24px}.brief-archive-list h3{font-size:22px;margin-block:12px}.brief-archive-list .info-card{padding:24px}
+.brief-public-issue .narrow{max-width:720px}.brief-public-issue .eyebrow{margin-top:28px}.brief-preheader{font-size:20px}.brief-issue-body{font-size:18px;line-height:1.8;margin-block:32px}.brief-issue-body p{white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:24px}
+.brief-tool-capture{border-top:1px solid var(--border);padding-top:24px;margin-top:32px}.brief-tool-capture h2{font-size:24px}.brief-tool-capture .form-row{flex-wrap:wrap}.brief-tool-capture .email-field{flex-basis:220px}.brief-tool-capture .btn{white-space:normal}.brief-admin details{margin-block:28px}.brief-admin summary{cursor:pointer;font-weight:650;min-height:44px}.brief-admin label{margin-block:20px}.brief-admin .stats-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:767px){.brief-archive-list{grid-template-columns:1fr}.brief-issue-body{font-size:16px}.brief-manage form{padding:18px}.brief-admin .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.brief-manage .btn{width:100%;white-space:normal}.brief-admin .section-head{flex-wrap:wrap}.brief-admin .admin-table{max-width:calc(100vw - 64px);overflow:auto}}
+.newsletter-hero{overflow:clip}.newsletter-hero .split-layout>div{min-width:0}.lead-form .form-status{overflow-wrap:anywhere}
+@media(max-width:767px){.newsletter-hero .brief-mockup{width:100%;transform:none;margin:0}.newsletter-hero .brief-mockup:before{inset:0}}
+.brief-mockup .brief-mockup-title{font-size:25px;font-weight:700;line-height:1.1;letter-spacing:-.045em;margin:0;color:var(--navy)}

@@ -123,7 +123,7 @@ export default function Account() {
               </div>
               <nav className="tool-account-nav" aria-label="Minha conta">
                 <a href="/conta/ferramentas">Histórico de ferramentas</a>
-                <a href="/ferramentas">Explorar ferramentas</a>
+                <a href="/ferramentas">Explorar ferramentas</a><a href="/conta/newsletter">Newsletter</a>
                 <a href="#preferencias">Privacidade</a>
               </nav>
               <h2>Resultados salvos</h2>

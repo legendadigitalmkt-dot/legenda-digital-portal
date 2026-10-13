@@ -1,0 +1,21 @@
+import React,{useEffect,useState} from 'react';
+import {briefRequest,type BriefPreferences} from '../../services/newsletter';
+import {LeadForm} from '../../components/forms';
+import {PortalAuth,usePortalUser} from '../tools/PortalAuth';
+export default function NewsletterPreferences({mode,account=false}:{mode:'confirm'|'preferences';account?:boolean}){
+ return account?<AccountNewsletter/>:<Preferences mode={mode}/>;
+}
+function AccountNewsletter(){const {user,ready,error}=usePortalUser();return !ready?<p role="status">Verificando sua conta…</p>:user?<Preferences mode="preferences" account/>:<section className="section"><div className="container narrow"><h1>Newsletter da sua conta</h1><p>Entre com sua conta confirmada do portal para gerenciar a inscrição vinculada ao seu e-mail.</p>{error&&<p role="alert">{error}</p>}<PortalAuth/></div></section>;}
+function Preferences({mode,account=false}:{mode:'confirm'|'preferences';account?:boolean}){
+ const [token]=useState(()=>typeof location==='undefined'?'':new URLSearchParams(location.hash.slice(1)).get('token')||'');
+ const [data,setData]=useState<BriefPreferences|null>(null),[error,setError]=useState(''),[message,setMessage]=useState(''),[busy,setBusy]=useState(false),[ld,setLd]=useState(true);
+ useEffect(()=>{if(typeof location!=='undefined'&&token)history.replaceState(null,'',location.pathname);},[token]);
+ const run=async(action:string,extra:Record<string,unknown>={})=>{setBusy(true);setError('');try{const next=await briefRequest({action,token,...extra},account);setData(next);setLd(next.preferences?.ld_brief??true);return true;}catch(e){setError((e as Error).message);return false;}finally{setBusy(false);}};
+ useEffect(()=>{if(mode==='preferences'&&(token||account))void run(account?'account':'read');},[]);
+ const subscribed=data?.status==='subscribed';
+ return <section className="section brief-manage"><div className="container narrow"><p className="eyebrow">LD BRIEF</p><h1>{mode==='confirm'?'Confirmar inscrição':'Preferências de e-mail'}</h1>
+ {mode==='confirm'?data?.status==='subscribed'?<><p role="status">Inscrição confirmada. Você poderá receber as próximas edições do LD Brief.</p><a className="btn btn-primary" href="/newsletter">Voltar ao LD Brief</a></>:<><p>Confirme que deseja receber o LD Brief. Apenas abrir este link não ativa a inscrição.</p><button className="btn btn-primary" disabled={busy||!token} onClick={()=>run('confirm')}>{busy?'Confirmando…':'Confirmar minha inscrição'}</button>{!token&&<p>Abra o link enviado para seu e-mail ou peça uma nova confirmação.</p>}</>:
+ data?<><p>Estado da inscrição: <strong>{{subscribed:'Confirmada',pending:'Aguardando confirmação',unsubscribed:'Descadastrada',bounced:'Envio interrompido',complained:'Envio interrompido',not_registered:'Sem inscrição'}[data.status]||data.status}</strong>.</p>{subscribed?<form onSubmit={async e=>{e.preventDefault();if(await run(account?'account_preferences':'preferences',{ld_brief:ld}))setMessage(ld?'Preferência salva.':'Descadastro concluído. Você não receberá novas edições.');}}><label className="consent"><input type="checkbox" checked={ld} onChange={e=>setLd(e.target.checked)}/>Receber LD Brief: contexto, guias e ferramentas</label><p className="microcopy">Growth Intelligence, Produto e Comunidade são preferências reservadas para etapas futuras. Nenhum envio desses tipos está ativado.</p><button className="btn btn-primary" disabled={busy}>Salvar preferência</button><button type="button" className="btn btn-secondary" disabled={busy} onClick={async()=>{if(await run(account?'account_preferences':'unsubscribe',{ld_brief:false}))setMessage('Descadastro concluído. Você não receberá novas edições.');}}>Cancelar minha inscrição</button></form>:<><p>Uma nova inscrição precisa de confirmação por e-mail. Cancelar a inscrição não exclui sua conta do portal.</p><LeadForm source="newsletter-preferences"/></>}</>:<p>{token||account?'Carregando preferências…':'Abra o link de preferências no e-mail ou entre na sua conta do portal.'}</p>}
+ {busy&&<p role="status">Processando…</p>}{message&&<p role="status">{message}</p>}{error&&<p role="alert" className="form-error">{error}</p>}<p className="microcopy"><a href="/privacidade#newsletter">Privacidade e tratamento dos dados</a> · <a href="/newsletter">LD Brief</a></p>
+ </div></section>;
+}
