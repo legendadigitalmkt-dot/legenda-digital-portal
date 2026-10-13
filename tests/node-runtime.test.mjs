@@ -20,7 +20,7 @@ async function serve(t, fetchImpl = async () => Response.json([post])) {
 }
 
 test('Node build has standalone entry, routes and no PHP artifacts',async () => {
-  assert.equal(routes.length,42);assert.ok(routes.includes('/conta'));assert.ok(routes.includes('/conta/ferramentas')); assert.ok(routes.includes('/categorias/growth-negocios'));
+  assert.equal(routes.length,45);assert.ok(routes.includes('/conta'));assert.ok(routes.includes('/conta/ferramentas')); assert.ok(routes.includes('/categorias/growth-negocios'));
   for (const name of ['index.php','sitemap.php','site-runtime.php','.htaccess']) await assert.rejects(readFile('dist/' + name));
   assert.match(await readFile('dist/portal-runtime.cjs','utf8'),/createPortalHandler/);
 });
@@ -119,7 +119,7 @@ test('Sitemap uses only currently published posts and excludes admin, search and
 test('Sitemap paginates public API results',async t => {
   const offsets=[];
   const origin = await serve(t,async url => {
-    if(new URL(url).pathname.endsWith('/content_categories'))return Response.json([]);const offset = new URL(url).searchParams.get('offset');offsets.push(offset);
+    if(['/content_categories','/newsletter_issues'].some(p=>new URL(url).pathname.endsWith(p)))return Response.json([]);const offset = new URL(url).searchParams.get('offset');offsets.push(offset);
     return Response.json(offset === '0' ? Array.from({length:1000},(_,i) => ({...post,slug:'artigo-' + i})) : [{...post,slug:'pagina-dois'}]);
   });
   const result = await fetch(origin + '/sitemap.xml');
@@ -159,5 +159,5 @@ test('POST is rejected without backend mutation and HEAD preserves metadata with
 
 test('Health identifies Node release without credentials or user data',async t => {
   const origin = await serve(t,async () => {throw new Error('Health must not access backend');});
-  assert.deepEqual(await (await fetch(origin + '/api/health')).json(),{status:'ok',release:'tools-wave-one-v1',runtime:'node'});
+  assert.deepEqual(await (await fetch(origin + '/api/health')).json(),{status:'ok',release:'ld-brief-v1',runtime:'node'});
 });

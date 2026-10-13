@@ -70,7 +70,7 @@ function articleHtml(base, post, body) {
   return page.replace('</body>','<script type="application/json" id="ld-initial-content">'+JSON.stringify([post]).replace(/</g,'\\u003c')+'</script></body>');
 }
 
-export async function createPortalHandler({root, config, renderArticle, renderCollection, fetchImpl = fetch, now = () => Date.now()}) {
+export async function createPortalHandler({root, config, renderArticle, renderCollection, renderNewsletter, fetchImpl = fetch, now = () => Date.now()}) {
   if (config?.url !== BACKEND || typeof config.key !== 'string' || !/^sb_publishable_[A-Za-z0-9_-]+$/.test(config.key)) throw new Error('Only the portal publishable configuration is accepted');
   const rootReal = await realpath(resolve(root));
   const routeSet = new Set(config.routes);
@@ -83,7 +83,7 @@ export async function createPortalHandler({root, config, renderArticle, renderCo
   const base = (await file('index.html')).toString();
   const notFound = (await file('404/index.html')).toString();
   async function api(query, signal,table='content_posts') {
-    if(!['content_posts','content_categories'].includes(table))throw new Error('Invalid public resource');
+    if(!['content_posts','content_categories','newsletter_issues'].includes(table))throw new Error('Invalid public resource');
     const url = new URL('/rest/v1/'+table, BACKEND);
     for (const [key,value] of Object.entries(query)) url.searchParams.set(key,value);
     const response = await fetchImpl(url, {method:'GET',headers:{apikey:config.key,Accept:'application/json'},signal,redirect:'error'});
@@ -113,9 +113,9 @@ export async function createPortalHandler({root, config, renderArticle, renderCo
       if (/[\\\x00-\x1f]/.test(path) || path.split('/').some(part => part === '.' || part === '..')) { send(400,'Invalid path','text/plain'); return; }
       path = path.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
       const admin = path === '/admin' || path.startsWith('/admin/');
-      const privatePage=admin||path==='/conta'||path.startsWith('/conta/')||path.startsWith('/ferramentas/')&&new URL(req.url,DOMAIN).searchParams.has('run');
+      const privatePage=['/newsletter/confirmar','/newsletter/preferencias'].includes(path)||admin||path==='/conta'||path.startsWith('/conta/')||path.startsWith('/ferramentas/')&&new URL(req.url,DOMAIN).searchParams.has('run');
       if (privatePage) { res.setHeader('Cache-Control','private, no-store'); res.setHeader('X-Robots-Tag','noindex, nofollow'); }
-      if (path === '/api/health') { send(200,JSON.stringify({status:'ok',release:'tools-wave-one-v1',runtime:'node'}),'application/json'); return; }
+      if (path === '/api/health') { send(200,JSON.stringify({status:'ok',release:'ld-brief-v1',runtime:'node'}),'application/json'); return; }
       const signal = AbortSignal.timeout(6000), instant = now();
       const filter = {status:'eq.published',published_at:'lte.' + new Date(instant).toISOString()};
       if (path === '/sitemap.xml') {
@@ -129,7 +129,9 @@ export async function createPortalHandler({root, config, renderArticle, renderCo
         if (!complete) throw new Error('Sitemap size limit reached');
         const categories = await api({select:'name,slug,active',active:'eq.true',limit:'100'},signal,'content_categories');
         const categoryRoutes=categories.filter(c=>typeof c.name==='string'&&SLUG.test(c.slug)&&c.active!==false).map(c=>'/categorias/'+c.slug);
-        const fixed = [...routeSet].filter(route => !['/admin','/conta','/conta/ferramentas','/busca','/404'].includes(route) && !route.startsWith('/conteudos/') && !route.startsWith('/categorias/')).concat(categoryRoutes);
+        const fixed = [...routeSet].filter(route => !['/admin','/conta','/conta/ferramentas','/conta/newsletter','/newsletter/confirmar','/newsletter/preferencias','/busca','/404'].includes(route) && !route.startsWith('/conteudos/') && !route.startsWith('/categorias/')).concat(categoryRoutes);
+        const publicIssues=await api({select:'slug,status,is_public,sent_at',status:'eq.sent',is_public:'eq.true',sent_at:'lte.'+new Date(instant).toISOString(),limit:'1000'},signal,'newsletter_issues');
+        fixed.push(...publicIssues.filter(i=>SLUG.test(i.slug)&&i.status==='sent'&&i.is_public&&Date.parse(i.sent_at)<=instant).map(i=>'/newsletter/'+i.slug));
         const seen = new Set();
         const xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + fixed.map(route => '<url><loc>' + escape(DOMAIN + route) + '</loc></url>').join('') + posts.filter(post => !seen.has(post.slug) && seen.add(post.slug)).map(post => '<url><loc>' + DOMAIN + '/conteudos/' + escape(post.slug) + '</loc>' + (/^\d{4}-\d{2}-\d{2}/.test(post.updated_at ?? '') ? '<lastmod>' + post.updated_at.slice(0,10) + '</lastmod>' : '') + '</url>').join('') + '</urlset>';
         res.setHeader('Cache-Control','public, max-age=300'); send(200,xml,'application/xml; charset=utf-8'); return;
@@ -148,6 +150,17 @@ export async function createPortalHandler({root, config, renderArticle, renderCo
         let html=base.replace(/<title>[\s\S]*?<\/title>/,'<title>'+escape(title)+'</title>').replace(/<link rel="canonical"[^>]*>/g,'').replace('</head>','<link rel="canonical" href="'+DOMAIN+path+'"></head>');
         const start=html.indexOf('<div id="root">'),end=html.lastIndexOf('</div>');
         html=html.slice(0,start)+'<div id="root">'+renderCollection(path,rows.filter(p=>published(p,instant)).map(normalizePost),category)+'</div>'+html.slice(end+6);html=html.replace('</body>','<script type="application/json" id="ld-initial-content">'+JSON.stringify(rows.filter(p=>published(p,instant)).map(normalizePost)).replace(/</g,'\\u003c')+'</script></body>');if(category)html=html.replace('</body>','<script type="application/json" id="ld-initial-category">'+JSON.stringify(category).replace(/</g,'\\u003c')+'</script></body>');send(200,html);return;
+      }
+      if (path.startsWith('/newsletter/') && !['/newsletter/confirmar','/newsletter/preferencias'].includes(path)) {
+        const slug=path.slice(12);if(!SLUG.test(slug)||slug.length>160){send(404,notFound);return;}
+        const rows=await api({select:'id,slug,subject,preheader,content,author,issue_date,sent_at,status,is_public',slug:'eq.'+slug,status:'eq.sent',is_public:'eq.true',sent_at:'lte.'+new Date(instant).toISOString(),limit:'1'},signal,'newsletter_issues');
+        const issue=rows.find(i=>i.slug===slug&&i.status==='sent'&&i.is_public&&Date.parse(i.sent_at)<=instant);
+        if(!issue||!renderNewsletter){send(404,notFound);return;}
+        const title=issue.subject+' | LD Brief | Legenda Digital',url=DOMAIN+'/newsletter/'+slug;
+        let html=base.replace(/<title>[\s\S]*?<\/title>/,'<title>'+escape(title)+'</title>').replace(/<meta (?:name="description"|property="og:[^"]+"|name="twitter:[^"]+")[^>]*>|<link rel="canonical"[^>]*>|<script type="application\/ld\+json">[\s\S]*?<\/script>/g,'');
+        html=html.replace('</head>','<meta name="description" content="'+escape(issue.preheader)+'"><link rel="canonical" href="'+url+'"><meta property="og:title" content="'+escape(title)+'"><meta property="og:description" content="'+escape(issue.preheader)+'"><meta property="og:url" content="'+url+'"><meta property="og:image" content="'+DOMAIN+'/images/hero.webp"></head>');
+        const start=html.indexOf('<div id="root">'),end=html.lastIndexOf('</div>');html=html.slice(0,start)+'<div id="root">'+renderNewsletter(issue)+'</div>'+html.slice(end+6);
+        html=html.replace('</body>','<script type="application/json" id="ld-initial-issue">'+JSON.stringify(issue).replace(/</g,'\\u003c')+'</script></body>');send(200,html);return;
       }
       if (path.startsWith('/conteudos/')) {
         const slug = path.slice('/conteudos/'.length);

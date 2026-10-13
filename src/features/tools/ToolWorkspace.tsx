@@ -1,3 +1,4 @@
+import {LeadForm} from '../../components/forms';
 import React, { useEffect, useRef, useState } from "react";
 import { Copy, Download, Plus, Save, Trash2, CheckCircle2 } from "lucide-react";
 import { Button } from "../../components/ui/button";
@@ -450,7 +451,7 @@ export default function ToolWorkspace({
               </p>
             </>
           )}
-        </section>
+        {result&&<div className="brief-tool-capture"><h2>Continue aprendendo no LD Brief</h2><p>Receba novos guias e ferramentas. A inscrição é opcional.</p><LeadForm source={"tool-"+tool.id}/></div>}</section>
       </div>
     </div>
   );
