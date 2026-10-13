@@ -3,8 +3,10 @@ import { Copy, Download, Plus, Save, Trash2, CheckCircle2 } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import {
   calculateTool,
+  toolRegistry,
   initialAnswers,
   normalizeToolAnswers,
+  upgradeToolAnswers,
   exportToolCSV,
   type ToolDefinition,
   type ToolAnswers,
@@ -13,153 +15,21 @@ import {
 import { db } from "../../services/supabase";
 import { getRun, saveRun, toolEvent, recordExport } from "../../services/tools";
 import { PortalAuth, usePortalUser } from "./PortalAuth";
+import ToolForm from "./ToolForm";
+import ToolResultPanel from "./ToolResultPanel";
+import ToolPrintReport from "./ToolPrintReport";
 import { downloadText } from "../../pages/Tools";
 
-export function ToolForm({
-  tool,
-  answers,
-  onChange,
-  onStep,
+export default function ToolWorkspace({
+  tool: summaryTool,
 }: {
   tool: ToolDefinition;
-  answers: ToolAnswers;
-  onChange: (a: ToolAnswers) => void;
-  onStep: (key: string) => void;
 }) {
-  return (
-    <>
-      {tool.input_schema.map((f) =>
-        f.type === "rows" ? (
-          <div key={f.id} className="tool-planner">
-            <h3>Pautas</h3>
-            {answers.rows.map((r: Record<string, string>, i: number) => (
-              <fieldset key={i}>
-                <legend>Pauta {i + 1}</legend>
-                {[
-                  ["theme", "Tema", "text"],
-                  ["format", "Formato", "text"],
-                  ["channel", "Canal", "text"],
-                  ["date", "Data", "date"],
-                ].map(([key, label, type]) => (
-                  <label key={key}>
-                    {label}
-                    <input
-                      type={type}
-                      maxLength={500}
-                      value={r[key]}
-                      onBlur={() => onStep(f.id)}
-                      onChange={(e) =>
-                        onChange({
-                          ...answers,
-                          rows: answers.rows.map((row: unknown, j: number) =>
-                            j === i ? { ...r, [key]: e.target.value } : row,
-                          ),
-                        })
-                      }
-                    />
-                  </label>
-                ))}
-                <Button
-                  type="button"
-                  variant="ghost"
-                  aria-label={"Remover pauta " + (i + 1)}
-                  onClick={() =>
-                    onChange({
-                      ...answers,
-                      rows: answers.rows.filter(
-                        (_: unknown, j: number) => j !== i,
-                      ),
-                    })
-                  }
-                >
-                  <Trash2 size={18} />
-                </Button>
-              </fieldset>
-            ))}
-            <Button
-              type="button"
-              variant="secondary"
-              disabled={answers.rows.length >= 50}
-              onClick={() =>
-                onChange({
-                  ...answers,
-                  rows: [
-                    ...answers.rows,
-                    { theme: "", format: "Artigo", channel: "Site", date: "" },
-                  ],
-                })
-              }
-            >
-              <Plus size={17} />
-              Adicionar pauta
-            </Button>
-          </div>
-        ) : f.type === "checkbox" ? (
-          <label className="tool-check" key={f.id}>
-            <input
-              type="checkbox"
-              checked={answers[f.id] === true}
-              onChange={(e) => {
-                onChange({ ...answers, [f.id]: e.target.checked });
-                onStep(f.id);
-              }}
-            />
-            {f.label}
-          </label>
-        ) : (
-          <label key={f.id}>
-            {f.label}
-            {f.type === "textarea" ? (
-              <textarea
-                rows={3}
-                maxLength={2000}
-                placeholder={f.placeholder}
-                value={answers[f.id]}
-                onBlur={() => onStep(f.id)}
-                onChange={(e) =>
-                  onChange({ ...answers, [f.id]: e.target.value })
-                }
-              />
-            ) : (
-              <input
-                type={f.type}
-                min={f.min}
-                step="1"
-                value={answers[f.id]}
-                onBlur={() => onStep(f.id)}
-                onChange={(e) =>
-                  onChange({ ...answers, [f.id]: e.target.value })
-                }
-              />
-            )}
-          </label>
-        ),
-      )}
-    </>
-  );
-}
-export function ToolResultPanel({ result }: { result: ToolResult }) {
-  return (
-    <>
-      <h2>{result.title}</h2>
-      {result.value && (
-        <strong className="tool-result-value">{result.value}</strong>
-      )}
-      <div className="tool-result-lines">
-        {result.lines.map((line, i) => (
-          <p key={i}>{line}</p>
-        ))}
-      </div>
-      <h3>Como interpretar</h3>
-      <p>{result.methodology}</p>
-      <p className="microcopy">{result.limits}</p>
-      <h3>Próximo passo</h3>
-      <p>{result.next_action}</p>
-    </>
-  );
-}
-
-export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
+  const tool = {
+    ...toolRegistry.find((t) => t.id === summaryTool.id)!,
+    name: summaryTool.name,
+    description: summaryTool.description,
+  };
   const { user, ready } = usePortalUser();
   const [answers, setAnswers] = useState<ToolAnswers>(() =>
       initialAnswers(tool),
@@ -176,6 +46,8 @@ export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
     [localConsent, setLocalConsent] = useState(false),
     [savedId, setSavedId] = useState(""),
     [paused, setPaused] = useState(false),
+    [printReport, setPrintReport] = useState(false),
+    [parentId, setParentId] = useState<string | null>(null),
     [legacyAnswers, setLegacyAnswers] = useState<ToolAnswers | null>(null);
   const viewed = useRef(false);
   const runId = useRef(""),
@@ -185,7 +57,7 @@ export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
     completed = useRef(false),
     steps = useRef(new Set<string>()),
     resultPanel = useRef<HTMLElement>(null);
-  const localKey = "ld-tool-draft-v1-" + tool.id;
+  const localKey = "ld-tool-draft-v" + tool.version + "-" + tool.id;
   useEffect(() => {
     runId.current = crypto.randomUUID();
     sessionId.current = crypto.randomUUID();
@@ -204,8 +76,12 @@ export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
           old.every((x) => typeof x === "boolean")
         )
           setLegacyAnswers(
-            Object.fromEntries(
-              old.map((value, i) => ["criterion_" + (i + 1), value]),
+            upgradeToolAnswers(
+              tool,
+              Object.fromEntries(
+                old.map((value, i) => ["criterion_" + (i + 1), value]),
+              ),
+              1,
             ),
           );
       } else if (tool.id === "planner-editorial") {
@@ -213,9 +89,18 @@ export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
           localStorage.getItem("ld-editorial-plan") || "null",
         );
         if (Array.isArray(old))
-          setLegacyAnswers(normalizeToolAnswers(tool, { rows: old }));
+          setLegacyAnswers(upgradeToolAnswers(tool, { rows: old }, 1));
       }
     } catch {}
+    if (tool.version === 2) {
+      try {
+        const previous = JSON.parse(
+          sessionStorage.getItem("ld-tool-draft-v1-" + tool.id) || "null",
+        );
+        if (previous?.answers && Date.now() - previous.at < 7 * 86400000)
+          setLegacyAnswers(upgradeToolAnswers(tool, previous.answers, 1));
+      } catch {}
+    }
     db?.from("tools")
       .select("status")
       .eq("id", tool.id)
@@ -228,12 +113,17 @@ export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
       if (id) {
         try {
           const run = await getRun(id);
-          if (run.tool_id !== tool.id || run.tool_version !== tool.version)
+          if (run.tool_id !== tool.id)
             throw Error("Esta versão não pode ser duplicada nesta ferramenta.");
           if (active) {
-            setAnswers(normalizeToolAnswers(tool, run.answers));
-            setName(run.name + " (cópia)");
-            setMessage("Cópia carregada. O resultado original foi preservado.");
+            setAnswers(upgradeToolAnswers(tool, run.answers, run.tool_version));
+            setParentId(run.id);
+            setName(run.name.slice(0, 112) + " (cópia)");
+            setMessage(
+              run.tool_version === tool.version
+                ? "Cópia carregada. O resultado original foi preservado."
+                : "Revisão carregada na versão atual. Confira os novos critérios; a execução original foi preservada.",
+            );
           }
         } catch (e) {
           if (active) setError((e as Error).message);
@@ -270,6 +160,16 @@ export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
       );
     }
   }, [answers, localConsent, localKey]);
+  useEffect(() => {
+    if (!printReport) return;
+    const finish = () => setPrintReport(false);
+    window.addEventListener("afterprint", finish);
+    const timer = setTimeout(() => window.print(), 100);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("afterprint", finish);
+    };
+  }, [printReport]);
   const change = (a: ToolAnswers) => {
     setAnswers(a);
     setResult(null);
@@ -343,6 +243,7 @@ export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
         result.result,
         startedAt.current,
         sessionId.current,
+        parentId,
       );
       setSavedId(id);
       setMessage("Resultado salvo no seu histórico privado.");
@@ -376,7 +277,15 @@ export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
       </div>
     );
   return (
-    <div className="tools-engine">
+    <div
+      className={
+        "tools-engine " +
+        (tool.id === "planner-editorial" ? "tools-engine-planner" : "")
+      }
+    >
+      {printReport && result && (
+        <ToolPrintReport tool={tool} result={result.result} />
+      )}
       <div className="tool-workspace engine-workspace">
         <section className="tool-input">
           <h2>1. Informe seu contexto</h2>
@@ -434,7 +343,7 @@ export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
         >
           {result ? (
             <>
-              <ToolResultPanel result={result.result} />
+              <ToolResultPanel result={result.result} tool={tool} />
               <div className="tool-actions">
                 <Button
                   type="button"
@@ -476,6 +385,16 @@ export default function ToolWorkspace({ tool }: { tool: ToolDefinition }) {
                   {savedId ? "Salvo" : "Salvar resultado"}
                 </Button>
               </div>
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => setPrintReport(true)}
+              >
+                Imprimir / salvar PDF
+              </Button>
+              <p className="microcopy">
+                Escolha “Salvar como PDF” no diálogo de impressão do navegador.
+              </p>
               {saveOpen && (
                 <div className="tool-save">
                   {!ready ? (

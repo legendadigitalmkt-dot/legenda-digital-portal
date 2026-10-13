@@ -64,7 +64,7 @@ async function fixture(page: Page) {
         return respond({});
       }
       const table = url.pathname.split("/").pop();
-      if (table === "save_tool_run") {
+      if (table === "save_tool_run" || table === "save_tool_run_v2") {
         const p = req.postDataJSON();
         saves.push(p);
         if (!authenticated)
@@ -75,6 +75,7 @@ async function fixture(page: Page) {
             tool_id: p.p_tool_id,
             tool_version: p.p_version,
             name: p.p_name,
+            parent_run_id: p.p_parent_id || null,
             favorite: false,
             answers: p.p_answers,
             result_summary: p.p_result,
@@ -241,7 +242,7 @@ test("Consented events omit answers/results/identity; corrupt drafts and invalid
   await page.evaluate(() => {
     localStorage.setItem("ld-analytics-consent", "yes");
     sessionStorage.setItem(
-      "ld-tool-draft-v1-planner-editorial",
+      "ld-tool-draft-v2-planner-editorial",
       JSON.stringify({ at: Date.now(), answers: { rows: "corrupt" } }),
     );
   });
@@ -312,7 +313,7 @@ test("CLARO, checklist and planner preserve local drafts only by choice and keep
   await page.getByRole("button", { name: "Preparar resultado" }).click();
   await expect(page.locator(".engine-result")).toContainText("CONTEXTO");
   expect(
-    await page.evaluate(() => sessionStorage.getItem("ld-tool-draft-v1-claro")),
+    await page.evaluate(() => sessionStorage.getItem("ld-tool-draft-v2-claro")),
   ).toBeNull();
   await page.goto("/ferramentas");
   await page.evaluate(() =>
@@ -337,13 +338,20 @@ test("CLARO, checklist and planner preserve local drafts only by choice and keep
     page.getByRole("button", { name: "Recuperar rascunho anterior" }),
   ).toBeVisible();
   await expect(
-    page.getByLabel("O público e a pergunta principal estão claros."),
-  ).not.toBeChecked();
+    page.getByLabel("O público e a pergunta estão explícitos."),
+  ).toHaveValue("");
   await page
     .getByRole("button", { name: "Recuperar rascunho anterior" })
     .click();
   await page.getByRole("button", { name: "Preparar resultado" }).click();
-  await expect(page.getByText("2 de 10 critérios revisados")).toBeVisible();
+  await expect(
+    page.getByLabel("Revisão anterior (referência, sem nota)"),
+  ).toContainText("[x]");
+  await page
+    .getByLabel("O público e a pergunta estão explícitos.")
+    .selectOption("4");
+  await page.getByRole("button", { name: "Preparar resultado" }).click();
+  await expect(page.locator(".engine-result")).toContainText("parcial");
   expect(
     await page.evaluate(() => localStorage.getItem("ld-checklist")),
   ).not.toBeNull();
@@ -358,6 +366,152 @@ test("CLARO, checklist and planner preserve local drafts only by choice and keep
   );
   await page.getByRole("button", { name: "Preparar resultado" }).click();
   await expect(page.getByText("1 pauta(s)", { exact: true })).toBeVisible();
+  expect(f.saves).toEqual([]);
+  expect(f.errors).toEqual([]);
+});
+
+async function prepareWaveResult(page: Page, id: string) {
+  if (id === "claro") {
+    await page
+      .getByLabel("Contexto", { exact: true })
+      .fill("Processo com contexto real");
+    await page
+      .getByLabel("Objetivo", { exact: true })
+      .fill("Preparar um brief revisável");
+  } else if (id === "checklist-conteudo")
+    await page
+      .getByLabel("O público e a pergunta estão explícitos.")
+      .selectOption("3");
+  else if (id === "maturidade-growth")
+    await page
+      .getByLabel("Canais e público prioritários estão definidos.")
+      .selectOption("2");
+  else if (id === "seo-aeo-geo")
+    await page
+      .getByLabel("A página responde e não exige login.")
+      .selectOption("4");
+  else if (id === "calculadora-conversao") {
+    await page.getByLabel("Modo de análise").selectOption("full");
+    for (const [label, value] of [
+      ["Visitas", "1000"],
+      ["Leads", "200"],
+      ["MQL", "100"],
+      ["SQL", "50"],
+      ["Demos", "30"],
+      ["Propostas", "20"],
+      ["Vendas", "10"],
+    ])
+      await page.getByLabel("Atual · " + label, { exact: true }).fill(value);
+  } else if (id === "planner-editorial") {
+    await page
+      .getByLabel("Tema", { exact: true })
+      .fill("Planejamento com fontes");
+    await page.getByLabel("Data", { exact: true }).fill("2026-10-15");
+  } else if (id === "cac-ltv-payback") {
+    for (const [label, value] of [
+      ["Custo total de aquisição no período (R$)", "12000"],
+      ["Novos clientes no período", "20"],
+      ["Receita mensal média por cliente (R$)", "100"],
+      ["Margem bruta (%)", "80"],
+      ["Retenção média estimada (meses)", "24"],
+    ])
+      await page.getByLabel(label, { exact: true }).fill(value);
+  } else if (id === "follow-up") {
+    for (const [label, value] of [
+      ["Oportunidades na carteira", "10"],
+      ["Sem responsável", "2"],
+      ["Sem próximo passo", "3"],
+      ["Atrasadas", "1"],
+      ["Aguardando cliente", "4"],
+      ["Paradas além do prazo definido", "2"],
+      ["Prazo considerado para uma oportunidade parada (dias)", "7"],
+    ])
+      await page.getByLabel(label, { exact: true }).fill(value);
+  }
+  await page.getByRole("button", { name: "Preparar resultado" }).click();
+  await expect(
+    page
+      .locator(
+        ".engine-result .tool-result-value, .engine-result .tool-result-lines",
+      )
+      .first(),
+  ).toBeVisible();
+}
+for (const id of toolRegistry.map((t) => t.id))
+  for (const width of [390, 1440])
+    test(`Wave one ${id} usable and accessible at ${width}`, async ({
+      page,
+    }) => {
+      const f = await fixture(page);
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/ferramentas/" + id);
+      await prepareWaveResult(page, id);
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth - innerWidth,
+        ),
+      ).toBeLessThanOrEqual(1);
+      const results = await new AxeBuilder({ page })
+        .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+        .analyze();
+      expect(results.violations).toEqual([]);
+      expect(f.saves).toEqual([]);
+      expect(f.events).toEqual([]);
+      expect(f.errors).toEqual([]);
+    });
+test("Planner list/calendar/Kanban share data; duplicate, published URL and PDF report work", async ({
+  page,
+}) => {
+  const f = await fixture(page);
+  await page.goto("/ferramentas/planner-editorial");
+  await prepareWaveResult(page, "planner-editorial");
+  await page.getByRole("button", { name: "Calendário", exact: true }).click();
+  await page.getByLabel("Mês do calendário").fill("2026-10");
+  await expect(page.locator(".tool-calendar")).toContainText(
+    "Planejamento com fontes",
+  );
+  await page.getByRole("button", { name: "Kanban", exact: true }).click();
+  await page
+    .getByLabel("Mover pauta: Planejamento com fontes")
+    .selectOption("review");
+  await expect(
+    page.getByRole("region", { name: "Etapa Revisão" }),
+  ).toContainText("Planejamento com fontes");
+  await page.getByRole("button", { name: "Lista", exact: true }).click();
+  await expect(page.getByLabel("Status", { exact: true })).toHaveValue(
+    "review",
+  );
+  await page.getByRole("button", { name: "Duplicar pauta" }).click();
+  await expect(page.getByLabel("Tema", { exact: true })).toHaveCount(2);
+  await page
+    .getByLabel("Status", { exact: true })
+    .first()
+    .selectOption("published");
+  await page.getByRole("button", { name: "Preparar resultado" }).click();
+  await expect(page.getByRole("alert")).toContainText("URL publicada");
+  await page
+    .getByText("Contexto, distribuição e publicação", { exact: true })
+    .first()
+    .click();
+  await page
+    .getByLabel("URL publicada", { exact: true })
+    .first()
+    .fill("https://example.test/artigo");
+  await page.getByRole("button", { name: "Preparar resultado" }).click();
+  await expect(page.locator(".engine-result")).toContainText("2 pauta(s)");
+  await page.evaluate(() => {
+    window.print = () => {};
+  });
+  await page.getByRole("button", { name: "Imprimir / salvar PDF" }).click();
+  await page.emulateMedia({ media: "print" });
+  await expect(page.locator(".tool-print-report")).toBeVisible();
+  await expect(page.locator(".tool-input")).not.toBeVisible();
+  await expect(page.locator(".tool-print-report")).toContainText(
+    "Metodologia e limites",
+  );
+  const bytes = await page.pdf({ format: "A4", printBackground: true });
+  expect(bytes.byteLength).toBeGreaterThan(5000);
+  await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
   expect(f.saves).toEqual([]);
   expect(f.errors).toEqual([]);
 });

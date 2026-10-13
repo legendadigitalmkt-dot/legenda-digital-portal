@@ -5,6 +5,7 @@ import { downloadText } from "../../pages/Tools";
 import {
   calculateTool,
   toolRegistry,
+  getToolVersion,
   exportToolCSV,
   csvCell,
 } from "../../lib/tools-engine.mjs";
@@ -144,7 +145,7 @@ export default function Account() {
                   Exportar registros carregados
                 </Button>
               </div>
-              {loading ? (
+              {loading && !rows.length ? (
                 <p role="status">Carregando resultados…</p>
               ) : !rows.length ? (
                 <div className="info-card">
@@ -162,13 +163,19 @@ export default function Account() {
                   {rows
                     .filter((r) => !favoriteOnly || r.favorite)
                     .map((r) => {
-                      const tool = toolRegistry.find((t) => t.id === r.tool_id);
+                      const tool = getToolVersion(r.tool_id, r.tool_version);
                       return (
                         <article key={r.id} className="tool-history-card">
                           <small>
                             {tool?.name || r.tool_id} · v{r.tool_version}
                           </small>
                           <h3>{r.name}</h3>
+                          {r.parent_run_id && (
+                            <p className="microcopy">
+                              Revisão de uma execução anterior. O original foi
+                              preservado.
+                            </p>
+                          )}
                           <time dateTime={r.completed_at}>
                             {new Date(r.completed_at).toLocaleDateString(
                               "pt-BR",
@@ -397,6 +404,12 @@ export default function Account() {
                         {compare.map((r) => (
                           <div className="info-card" key={r.id}>
                             <h3>{r.name}</h3>
+                            {r.parent_run_id && (
+                              <p className="microcopy">
+                                Revisão de uma execução anterior. O original foi
+                                preservado.
+                              </p>
+                            )}
                             <p>{r.result_summary.value}</p>
                             <div className="tool-result-lines">
                               {r.result_summary.lines.map((line, i) => (

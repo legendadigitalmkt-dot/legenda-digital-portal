@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  toolRegistry,
+  legacyToolRegistry as toolRegistry,
   calculateTool,
   initialAnswers,
   exportToolCSV,

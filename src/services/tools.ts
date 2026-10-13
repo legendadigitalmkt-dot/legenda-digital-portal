@@ -10,6 +10,7 @@ export type SavedRun = {
   id: string;
   tool_id: string;
   tool_version: number;
+  parent_run_id?: string | null;
   name: string;
   favorite: boolean;
   completed_at: string;
@@ -59,6 +60,7 @@ export async function saveRun(
   result: ToolResult,
   startedAt: string,
   sessionId: string,
+  parentId: string | null = null,
 ) {
   if (!db) throw new Error("Histórico temporariamente indisponível.");
   if (
@@ -74,7 +76,8 @@ export async function saveRun(
   } = await db.auth.getUser();
   if (authError || !user)
     throw new Error("Entre na sua conta do portal para salvar.");
-  const { data, error } = await db.rpc("save_tool_run", {
+  const { data, error } = await db.rpc("save_tool_run_v2", {
+    p_parent_id: parentId,
     p_id: runId,
     p_tool_id: tool.id,
     p_version: tool.version,
@@ -96,7 +99,7 @@ export async function loadRuns(offset = 0) {
   const { data, error } = await db
     .from("tool_runs")
     .select(
-      "id,tool_id,tool_version,name,favorite,completed_at,answers,result_summary",
+      "id,tool_id,tool_version,parent_run_id,name,favorite,completed_at,answers,result_summary",
     )
     .order("completed_at", { ascending: false })
     .range(offset, offset + 19);
@@ -109,7 +112,7 @@ export async function getRun(id: string) {
   const { data, error } = await db
     .from("tool_runs")
     .select(
-      "id,tool_id,tool_version,name,favorite,completed_at,answers,result_summary",
+      "id,tool_id,tool_version,parent_run_id,name,favorite,completed_at,answers,result_summary",
     )
     .eq("id", id)
     .maybeSingle();

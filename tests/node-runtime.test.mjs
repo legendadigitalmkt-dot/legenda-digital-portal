@@ -20,7 +20,7 @@ async function serve(t, fetchImpl = async () => Response.json([post])) {
 }
 
 test('Node build has standalone entry, routes and no PHP artifacts',async () => {
-  assert.equal(routes.length,38);assert.ok(routes.includes('/conta'));assert.ok(routes.includes('/conta/ferramentas')); assert.ok(routes.includes('/categorias/growth-negocios'));
+  assert.equal(routes.length,42);assert.ok(routes.includes('/conta'));assert.ok(routes.includes('/conta/ferramentas')); assert.ok(routes.includes('/categorias/growth-negocios'));
   for (const name of ['index.php','sitemap.php','site-runtime.php','.htaccess']) await assert.rejects(readFile('dist/' + name));
   assert.match(await readFile('dist/portal-runtime.cjs','utf8'),/createPortalHandler/);
 });
@@ -159,5 +159,5 @@ test('POST is rejected without backend mutation and HEAD preserves metadata with
 
 test('Health identifies Node release without credentials or user data',async t => {
   const origin = await serve(t,async () => {throw new Error('Health must not access backend');});
-  assert.deepEqual(await (await fetch(origin + '/api/health')).json(),{status:'ok',release:'tools-foundation-v1',runtime:'node'});
+  assert.deepEqual(await (await fetch(origin + '/api/health')).json(),{status:'ok',release:'tools-wave-one-v1',runtime:'node'});
 });

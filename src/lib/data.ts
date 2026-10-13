@@ -1,4 +1,4 @@
-import {toolRegistry} from './tools-engine.mjs';
+import {toolCatalog as toolRegistry} from './tool-catalog';
 import {growthProduct} from './growth-product';
 import type {Post,SiteConfig} from '../types';
 export const categories=['IA','Marketing','Vendas','Tecnologia','Growth','Negócios','Conteúdo','Creators'];

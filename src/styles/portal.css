@@ -2495,3 +2495,305 @@ body:has(dialog[open]) {
     }
   }
 }
+/* Wave 1: diagnosis, funnel, planner and browser PDF reports. */
+.tool-template {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin: 24px 0;
+}
+.tool-stepper {
+  margin: 20px 0;
+}
+.tool-stepper h3 {
+  margin: 18px 0;
+}
+.tool-stepper .tool-filters button[aria-pressed="true"] {
+  background: var(--navy);
+  color: white;
+}
+.tool-breakdown {
+  display: grid;
+  gap: 18px;
+  margin: 24px 0;
+}
+.tool-breakdown > div > div:first-child,
+.tool-funnel li > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 14px;
+}
+.tool-breakdown span {
+  color: var(--muted);
+}
+.tool-score-bar {
+  height: 8px;
+  background: #dce5f1;
+  border-radius: 999px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.tool-score-bar > span {
+  height: 100%;
+  display: block;
+  background: linear-gradient(90deg, #163efa, #12bed5);
+  border-radius: inherit;
+}
+.tool-funnel ol {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+.tool-result-table {
+  margin-block: 24px;
+  min-width: 0;
+}
+.tool-result-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;
+}
+.tool-result-table th,
+.tool-result-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.tool-result-table th {
+  background: #eaf0fc;
+  color: var(--navy);
+}
+.tool-recommendations .info-card {
+  padding: 16px;
+  margin: 12px 0;
+}
+.tool-recommendations h4 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.tool-sources summary {
+  min-height: 44px;
+  cursor: pointer;
+  padding: 10px 0;
+}
+.tool-sources a {
+  text-decoration: underline;
+}
+.tools-engine-planner .engine-workspace {
+  grid-template-columns: minmax(0, 1fr);
+}
+.tools-engine-planner .engine-result {
+  position: static;
+}
+.tool-plan-primary {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 16px;
+}
+.tool-planner details summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding: 12px 0;
+}
+.tool-planner details label {
+  margin-top: 14px;
+}
+.tool-kanban {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.tool-kanban > section {
+  padding: 16px;
+  background: var(--soft);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  min-height: 160px;
+}
+.tool-kanban h3 {
+  font-size: 20px;
+  margin: 0 0 16px;
+}
+.tool-plan-card {
+  padding: 14px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.tool-plan-card p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.tool-plan-card label {
+  font-size: 13px;
+}
+.tool-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  margin: 20px 0;
+}
+.tool-calendar-day {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px;
+  min-height: 100px;
+  background: var(--soft);
+}
+.tool-calendar-day h4 {
+  font-size: 16px;
+}
+.tool-calendar .tool-plan-card {
+  padding: 8px;
+}
+.tool-calendar input[type="month"] {
+  max-width: 260px;
+}
+.tool-print-report {
+  display: none;
+}
+.tool-input select {
+  min-height: 48px;
+  width: 100%;
+  font-size: 16px;
+}
+.tool-print-value {
+  font-weight: 700;
+  font-size: 22px;
+}
+.engine-result h3 {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 767px) {
+  .tool-plan-primary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tool-kanban {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tool-calendar-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .tool-calendar-day.empty {
+    display: none;
+  }
+  .tool-result-table table,
+  .tool-result-table tbody,
+  .tool-result-table tr,
+  .tool-result-table td {
+    display: block;
+    width: 100%;
+  }
+  .tool-result-table thead {
+    display: none;
+  }
+  .tool-result-table tr {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 12px 0;
+    padding: 8px;
+  }
+  .tool-result-table td {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    border: 0;
+    padding: 8px;
+  }
+  .tool-result-table td:before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .tool-template {
+    padding: 16px;
+  }
+  .tool-breakdown > div > div:first-child {
+    flex-direction: column;
+  }
+}
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm;
+  }
+  .site-header,
+  .footer,
+  .cookie-choice,
+  .skip-link,
+  .update-warning {
+    display: none !important;
+  }
+  main > .page-intro,
+  .tool-page > .container > .back-link,
+  .tool-methodology,
+  .tool-related,
+  .tools-engine > .engine-workspace {
+    display: none !important;
+  }
+  .tool-page {
+    padding: 0 !important;
+  }
+  .tool-page > .container {
+    width: 100%;
+    max-width: none;
+  }
+  .tool-print-report {
+    display: block;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #07152b;
+  }
+  .tool-print-report h1 {
+    font-size: 22pt;
+    margin: 16px 0;
+  }
+  .tool-print-report h2 {
+    font-size: 14pt;
+    margin: 18px 0 10px;
+    break-after: avoid;
+  }
+  .tool-print-report p {
+    font-size: 11pt;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    color: #07152b;
+    margin: 10px 0;
+    orphans: 3;
+    widows: 3;
+  }
+  .tool-print-report img {
+    width: 160px;
+    height: auto;
+  }
+  .tool-print-report footer {
+    font-size: 9pt;
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid #ccc;
+  }
+}
+
+.tool-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 20px;
+}
+@media (max-width: 767px) {
+  .tool-calendar-weekdays,
+  .tool-calendar-offset {
+    display: none;
+  }
+}
