@@ -83,12 +83,20 @@ export function PortalAuth() {
   const registration = usePortalRegistration();
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!db) return;
+    if (!db || busy) return;
+    if (signup && (registration !== true || !consent)) {
+      setMessage("O cadastro precisa estar disponível e você deve aceitar os termos e a política de privacidade.");
+      return;
+    }
     setBusy(true);
     setMessage("");
     try {
       const r = signup
-        ? await db.auth.signUp({ email: email.trim().toLowerCase(), password })
+        ? await db.auth.signUp({
+            email: email.trim().toLowerCase(),
+            password,
+            options: {emailRedirectTo: "https://legendadigital.com.br/conta"},
+          })
         : await db.auth.signInWithPassword({
             email: email.trim().toLowerCase(),
             password,

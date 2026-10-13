@@ -1,0 +1,34 @@
+{
+  "project_ref": "yltnjgngkomelfltdyky",
+  "site_url": "https://legendadigital.com.br",
+  "redirect_urls": [
+    "https://legendadigital.com.br/admin",
+    "https://legendadigital.com.br/conta",
+    "https://legendadigital.com.br/conteudos/*"
+  ],
+  "confirmed_hosted": {
+    "disable_signup": true,
+    "mailer_autoconfirm": false,
+    "anonymous_sign_ins": false,
+    "manual_linking": false,
+    "custom_smtp_enabled": false
+  },
+  "newsletter_non_secret_settings": {
+    "LD_BRIEF_SENDING_ENABLED": "false",
+    "LD_BRIEF_FROM": "Legenda Digital — LD Brief <brief@news.legendadigital.com.br>"
+  },
+  "pending_private_secret_names": [
+    "RESEND_API_KEY",
+    "NEWSLETTER_TOKEN_SECRET",
+    "RESEND_WEBHOOK_SECRET"
+  ],
+  "smtp_reference": {
+    "provider": "Resend",
+    "host": "smtp.resend.com",
+    "port": 465,
+    "username": "resend",
+    "password": "PROVISIONAR_PRIVADAMENTE_APOS_VERIFICAR_DOMINIO",
+    "documentation": "https://resend.com/docs/send-with-supabase-smtp",
+    "configured": false
+  }
+}

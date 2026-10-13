@@ -1,0 +1,28 @@
+{
+  "project_ref": "yltnjgngkomelfltdyky",
+  "sending_domain": "news.legendadigital.com.br",
+  "provider_domain_id": "6ac903af-d00c-4b07-95c0-c603e9d4b91d",
+  "records": [
+    {
+      "name": "resend._domainkey.news.legendadigital.com.br",
+      "type": "TXT",
+      "value": "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDV4eQkSTym+LXh/D1acWKBWZeRxESyYlxGFE5IigU8V6J3+S3Ubxf0N2PIkjlvNZq786QLUDuYPmegLOi0UD6niFdX1r1PLIJgJtMyuZVBTDuiQRzDctYlUiAOyj42D+BMoVuhDjZl4C0V4bxvEEtGQNrd5GgEBwmLCvJGiwsWcwIDAQAB"
+    },
+    {
+      "name": "send.news.legendadigital.com.br",
+      "type": "MX",
+      "value": "feedback-smtp.sa-east-1.amazonses.com",
+      "priority": 10
+    },
+    {
+      "name": "send.news.legendadigital.com.br",
+      "type": "TXT",
+      "value": "v=spf1 include:amazonses.com ~all"
+    },
+    {
+      "name": "rsend.news.legendadigital.com.br",
+      "type": "CNAME",
+      "value": "send.forge.rmta.net"
+    }
+  ]
+}

@@ -18,11 +18,12 @@ const token =
   "." +
   encode({ sub: owner, role: "authenticated", exp: 4102444800 }) +
   ".fixture_signature";
-async function fixture(page: Page) {
+async function fixture(page: Page, allowRegistration = false) {
   const runs: any[] = [],
     events: any[] = [],
     saves: any[] = [],
-    errors: string[] = [];
+    errors: string[] = [],
+    signups: any[] = [];
   let authenticated = false;
   page.on("pageerror", (e) => errors.push(e.message));
   await page.addInitScript(() => {
@@ -42,7 +43,11 @@ async function fixture(page: Page) {
         });
       if (req.method() === "OPTIONS") return respond({});
       if (url.pathname.endsWith("/settings"))
-        return respond({ disable_signup: true, external: { email: true } });
+        return respond({ disable_signup: !allowRegistration, external: { email: true } });
+      if (url.pathname.endsWith('/signup')) {
+        signups.push({redirect:url.searchParams.get('redirect_to'),body:req.postDataJSON()});
+        return respond({user:{...user,email_confirmed_at:null},session:null});
+      }
       if (url.pathname.endsWith("/token")) {
         authenticated = true;
         return respond({
@@ -130,7 +135,7 @@ async function fixture(page: Page) {
       return respond([]);
     },
   );
-  return { runs, events, saves, errors };
+  return { runs, events, saves, errors, signups };
 }
 async function login(page: Page) {
   await page
@@ -141,6 +146,24 @@ async function login(page: Page) {
     .fill("fixture-password-not-real");
   await page.getByRole("button", { name: "Entrar", exact: true }).click();
 }
+
+test('Portal signup requires consent and confirms back to the owned account route',async({page})=>{
+ const f=await fixture(page,true);
+ await page.goto('/conta');
+ const account=page.locator('.portal-auth');
+ await account.getByRole('button',{name:'Criar conta do portal',exact:true}).click();
+ await account.getByLabel('E-mail',{exact:true}).fill('signup-fixture@example.test');
+ await account.getByLabel('Senha',{exact:true}).fill('fictional-signup-password-123');
+ await account.getByRole('button',{name:'Criar conta',exact:true}).click();
+ expect(f.signups).toHaveLength(0);
+ await account.getByRole('checkbox').check();
+ await account.getByRole('button',{name:'Criar conta',exact:true}).click();
+ await expect(account.getByRole('status')).toContainText('Confira seu e-mail para confirmar');
+ expect(f.signups).toHaveLength(1);
+ expect(f.signups[0].redirect).toBe('https://legendadigital.com.br/conta');
+ expect(f.signups[0].body.email).toBe('signup-fixture@example.test');
+ expect(f.errors).toEqual([]);
+});
 async function compute(page: Page, visits = "100", actions = "12") {
   await page.getByLabel("Visitas ou oportunidades").fill(visits);
   await page.getByLabel("Ações concluídas").fill(actions);
