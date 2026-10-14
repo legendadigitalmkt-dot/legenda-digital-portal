@@ -1,5 +1,7 @@
 # Portal — GitHub → Hostinger Web app Node.js
 
+> Atualizado em 14/10: integração GitHub/main → Hostinger Node em produção; entrada `dist/server.js`; 45 rotas no build atual. Health observado: `portal-auth-confirmation-v1`. Seções iniciais abaixo são históricas (31 rotas/portal-node-v2). Limites e evidências em [PRODUCT_BOUNDARIES.md](docs/PRODUCT_BOUNDARIES.md) e na [auditoria](PORTAL_GROWTHOS_SEPARATION_AUDIT.md). Documentação não cria nova release de runtime.
+
 Decisão do titular em 11/10/2026: usar a opção **Web app Node.js** em vez da conexão SSH preparada anteriormente. Fonte: `legendadigitalmkt-dot/legenda-digital-portal`, branch `main`. O software permanece em repositório, banco e domínio próprios.
 
 ## Configuração compatível

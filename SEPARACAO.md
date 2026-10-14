@@ -1,5 +1,7 @@
 # Separação do portal e do Growth OS
 
+> Registro histórico de 08/10. Estado vigente: [PRODUCT_BOUNDARIES.md](docs/PRODUCT_BOUNDARIES.md) e [auditoria de 14/10](PORTAL_GROWTHOS_SEPARATION_AUDIT.md). Não reaplicar importador nem interpretar publicação PHP histórica como pipeline atual.
+
 Status em 08/10/2026: o portal está publicado na Hostinger usando o Supabase exclusivo `yltnjgngkomelfltdyky`, chamado `Legenda Digital Portal`. A foundation e a importação foram aplicadas e conferidas. O repositório privado `legendadigitalmkt-dot/legenda-digital-portal` contém os 53 arquivos de fonte, com integridade conferida e CI aprovado. A inclusão dele no ChatGPT Codex Connector foi autorizada pelo titular, salva e validada. O software mantém `legendadigitalmkt-dot/ld` e `cknlzuinwcdupdxilzcf`. O titular criou e confirmou sua conta própria do CMS, que foi vinculada a `site_staff` como `super_admin`. As permissões foram verificadas no banco; o login interativo no navegador do titular ainda não foi observado.
 
 | Recurso | Portal | Software |

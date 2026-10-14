@@ -1,0 +1,331 @@
+{
+  "checked_at": "2026-10-14T17:21:28.363Z",
+  "read_only": true,
+  "portal": {
+    "project_ref": "yltnjgngkomelfltdyky",
+    "storage": [
+      {
+        "id": "authors",
+        "public": true
+      },
+      {
+        "id": "community",
+        "public": true
+      },
+      {
+        "id": "content-images",
+        "public": true
+      },
+      {
+        "id": "editorial-files",
+        "public": true
+      },
+      {
+        "id": "private-admin",
+        "public": false
+      },
+      {
+        "id": "site-assets",
+        "public": true
+      }
+    ],
+    "public_tables": [
+      {
+        "rls": true,
+        "name": "analytics_events"
+      },
+      {
+        "rls": true,
+        "name": "article_comments"
+      },
+      {
+        "rls": true,
+        "name": "article_versions"
+      },
+      {
+        "rls": true,
+        "name": "authors"
+      },
+      {
+        "rls": true,
+        "name": "comment_bans"
+      },
+      {
+        "rls": true,
+        "name": "comment_moderation_log"
+      },
+      {
+        "rls": true,
+        "name": "comment_profiles"
+      },
+      {
+        "rls": true,
+        "name": "comment_reports"
+      },
+      {
+        "rls": true,
+        "name": "community_events"
+      },
+      {
+        "rls": true,
+        "name": "community_interests"
+      },
+      {
+        "rls": true,
+        "name": "contact_messages"
+      },
+      {
+        "rls": true,
+        "name": "content_categories"
+      },
+      {
+        "rls": true,
+        "name": "content_posts"
+      },
+      {
+        "rls": true,
+        "name": "content_tags"
+      },
+      {
+        "rls": true,
+        "name": "editorial_notes"
+      },
+      {
+        "rls": true,
+        "name": "newsletter_admin_audit"
+      },
+      {
+        "rls": true,
+        "name": "newsletter_consents"
+      },
+      {
+        "rls": true,
+        "name": "newsletter_deliveries"
+      },
+      {
+        "rls": true,
+        "name": "newsletter_events"
+      },
+      {
+        "rls": true,
+        "name": "newsletter_issues"
+      },
+      {
+        "rls": true,
+        "name": "newsletter_preferences"
+      },
+      {
+        "rls": true,
+        "name": "newsletter_subscribers"
+      },
+      {
+        "rls": true,
+        "name": "site_settings"
+      },
+      {
+        "rls": true,
+        "name": "site_staff"
+      },
+      {
+        "rls": true,
+        "name": "site_tools"
+      },
+      {
+        "rls": true,
+        "name": "tool_admin_audit"
+      },
+      {
+        "rls": true,
+        "name": "tool_consents"
+      },
+      {
+        "rls": true,
+        "name": "tool_events"
+      },
+      {
+        "rls": true,
+        "name": "tool_exports"
+      },
+      {
+        "rls": true,
+        "name": "tool_runs"
+      },
+      {
+        "rls": true,
+        "name": "tool_versions"
+      },
+      {
+        "rls": true,
+        "name": "tools"
+      }
+    ],
+    "foreign_tables": 0,
+    "auth_user_count": 1,
+    "foreign_servers": 0,
+    "migration_count": 9,
+    "public_functions_cross_ref": [],
+    "site_staff": 1,
+    "content_posts": 14,
+    "stored_objects": [],
+    "analytics_events": 383,
+    "foreign_extensions": [],
+    "content_body_checksum": "f64fca57184d93037e4dd15c0a45d911",
+    "newsletter_subscribers": 0,
+    "legacy_cross_project_urls": 0
+  },
+  "growth_os": {
+    "project_ref": "cknlzuinwcdupdxilzcf",
+    "storage": [
+      {
+        "id": "authors",
+        "public": true
+      },
+      {
+        "id": "community",
+        "public": true
+      },
+      {
+        "id": "content-images",
+        "public": true
+      },
+      {
+        "id": "private-admin",
+        "public": false
+      },
+      {
+        "id": "site-assets",
+        "public": true
+      }
+    ],
+    "public_tables": [
+      {
+        "rls": true,
+        "name": "activities"
+      },
+      {
+        "rls": true,
+        "name": "analytics_events"
+      },
+      {
+        "rls": true,
+        "name": "authors"
+      },
+      {
+        "rls": true,
+        "name": "automations"
+      },
+      {
+        "rls": true,
+        "name": "community_events"
+      },
+      {
+        "rls": true,
+        "name": "community_interests"
+      },
+      {
+        "rls": true,
+        "name": "contact_channels"
+      },
+      {
+        "rls": true,
+        "name": "contact_messages"
+      },
+      {
+        "rls": true,
+        "name": "contacts"
+      },
+      {
+        "rls": true,
+        "name": "content_categories"
+      },
+      {
+        "rls": true,
+        "name": "content_posts"
+      },
+      {
+        "rls": true,
+        "name": "content_tags"
+      },
+      {
+        "rls": true,
+        "name": "conversations"
+      },
+      {
+        "rls": true,
+        "name": "deals"
+      },
+      {
+        "rls": true,
+        "name": "integration_connections"
+      },
+      {
+        "rls": true,
+        "name": "knowledge_entries"
+      },
+      {
+        "rls": true,
+        "name": "message_status_events"
+      },
+      {
+        "rls": true,
+        "name": "messages"
+      },
+      {
+        "rls": true,
+        "name": "newsletter_subscribers"
+      },
+      {
+        "rls": true,
+        "name": "profiles"
+      },
+      {
+        "rls": true,
+        "name": "site_settings"
+      },
+      {
+        "rls": true,
+        "name": "site_staff"
+      },
+      {
+        "rls": true,
+        "name": "site_tools"
+      },
+      {
+        "rls": true,
+        "name": "tasks"
+      },
+      {
+        "rls": true,
+        "name": "webhook_events"
+      },
+      {
+        "rls": true,
+        "name": "workspace_invites"
+      },
+      {
+        "rls": true,
+        "name": "workspace_members"
+      },
+      {
+        "rls": true,
+        "name": "workspaces"
+      }
+    ],
+    "foreign_tables": 0,
+    "auth_user_count": 2,
+    "foreign_servers": 0,
+    "migration_count": 10,
+    "public_functions_cross_ref": [],
+    "site_staff": 1,
+    "content_posts": 9,
+    "stored_objects": [],
+    "analytics_events": 20,
+    "foreign_extensions": [],
+    "content_body_checksum": "0ab8422e972167357b2d4318e0446b5a",
+    "newsletter_subscribers": 0,
+    "legacy_cross_project_urls": 0
+  },
+  "hosted_secret_values_verified": false,
+  "authenticated_flows_verified": false,
+  "changes_to_production_data": false
+}

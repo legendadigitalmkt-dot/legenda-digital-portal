@@ -10,6 +10,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Check Portal product boundaries
+        run: npm run check:boundaries
+        env:
+          VITE_SUPABASE_URL: https://yltnjgngkomelfltdyky.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_only_not_a_real_key
       - run: npm run build
         env:
           VITE_SUPABASE_URL: https://yltnjgngkomelfltdyky.supabase.co
