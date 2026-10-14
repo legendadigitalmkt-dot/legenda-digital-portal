@@ -1,0 +1,546 @@
+{
+  "checked_at": "2026-10-14T17:19:27.774Z",
+  "read_only": true,
+  "counterpart_hosts_blocked": true,
+  "authenticated_flows_verified": false,
+  "results": [
+    {
+      "product": "portal",
+      "requested_path": "/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/",
+      "title": "Inteligência práticapara negóciosna era da IA.",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/conteudos",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/conteudos",
+      "title": "Conhecimento que encontra a prática.",
+      "overflow": false,
+      "visible": true,
+      "forms": [],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "title": "O novo funil de vendas na era da IA",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/conteudos/o-novo-funil-de-vendas-na-era-da-ia"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/newsletter",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/newsletter",
+      "title": "Menos ruído.Mais contexto.Um próximo passo.",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/newsletter"
+        },
+        {
+          "method": "post",
+          "actionPath": "/newsletter"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/ferramentas",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/ferramentas",
+      "title": "Ferramentas para aplicar.",
+      "overflow": false,
+      "visible": true,
+      "forms": [],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/community",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/community",
+      "title": "Aprenda com quemestá construindo.",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/community"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/building",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/building",
+      "title": "Construindo em público.",
+      "overflow": false,
+      "visible": true,
+      "forms": [],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/conta",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/conta",
+      "title": "Seu histórico, com contexto.",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/conta"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/admin",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/admin",
+      "title": "Admin Legenda Digital",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "get",
+          "actionPath": "/admin"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/produtos/growth-os",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/produtos/growth-os",
+      "title": "Cada oportunidade precisa de um próximo passo.",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/produtos/growth-os"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/",
+      "title": "Inteligência práticapara negóciosna era da IA.",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/conteudos",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/conteudos",
+      "title": "Conhecimento que encontra a prática.",
+      "overflow": false,
+      "visible": true,
+      "forms": [],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "title": "O novo funil de vendas na era da IA",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/conteudos/o-novo-funil-de-vendas-na-era-da-ia"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/newsletter",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/newsletter",
+      "title": "Menos ruído.Mais contexto.Um próximo passo.",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/newsletter"
+        },
+        {
+          "method": "post",
+          "actionPath": "/newsletter"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/ferramentas",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/ferramentas",
+      "title": "Ferramentas para aplicar.",
+      "overflow": false,
+      "visible": true,
+      "forms": [],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/community",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/community",
+      "title": "Aprenda com quemestá construindo.",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/community"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/building",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/building",
+      "title": "Construindo em público.",
+      "overflow": false,
+      "visible": true,
+      "forms": [],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/conta",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/conta",
+      "title": "Seu histórico, com contexto.",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/conta"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/admin",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/admin",
+      "title": "Admin Legenda Digital",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "get",
+          "actionPath": "/admin"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "portal",
+      "requested_path": "/produtos/growth-os",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/produtos/growth-os",
+      "title": "Cada oportunidade precisa de um próximo passo.",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/produtos/growth-os"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "growth-os",
+      "requested_path": "/",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/",
+      "title": "Growth OSO sistema operacional de crescimento da sua operação comercial.",
+      "overflow": false,
+      "visible": true,
+      "forms": [],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "growth-os",
+      "requested_path": "/login",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/login",
+      "title": "LD Growth OS",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/login"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "growth-os",
+      "requested_path": "/forgot-password",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/forgot-password",
+      "title": "Recuperar acesso",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/forgot-password"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "growth-os",
+      "requested_path": "/app",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/login",
+      "title": "LD Growth OS",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/login"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "growth-os",
+      "requested_path": "/control-center",
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "path": "/login",
+      "title": "LD Growth OS",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/login"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "growth-os",
+      "requested_path": "/",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/",
+      "title": "Growth OSO sistema operacional de crescimento da sua operação comercial.",
+      "overflow": false,
+      "visible": true,
+      "forms": [],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "growth-os",
+      "requested_path": "/login",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/login",
+      "title": "LD Growth OS",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/login"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "growth-os",
+      "requested_path": "/forgot-password",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/forgot-password",
+      "title": "Recuperar acesso",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/forgot-password"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "growth-os",
+      "requested_path": "/app",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/login",
+      "title": "LD Growth OS",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/login"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    },
+    {
+      "product": "growth-os",
+      "requested_path": "/control-center",
+      "width": 1440,
+      "height": 900,
+      "status": 200,
+      "path": "/login",
+      "title": "LD Growth OS",
+      "overflow": false,
+      "visible": true,
+      "forms": [
+        {
+          "method": "post",
+          "actionPath": "/login"
+        }
+      ],
+      "errors": [],
+      "blocked_requests": []
+    }
+  ]
+}
