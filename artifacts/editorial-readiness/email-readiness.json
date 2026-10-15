@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-10-15T12:01:05.322Z",
+  "project_ref": "yltnjgngkomelfltdyky",
+  "sending_domain": "news.legendadigital.com.br",
+  "read_only": true,
+  "checks": [
+    {
+      "name": "resend._domainkey.news.legendadigital.com.br",
+      "type": "TXT",
+      "dns_status": 3,
+      "matches": false
+    },
+    {
+      "name": "send.news.legendadigital.com.br",
+      "type": "MX",
+      "dns_status": 3,
+      "matches": false
+    },
+    {
+      "name": "send.news.legendadigital.com.br",
+      "type": "TXT",
+      "dns_status": 3,
+      "matches": false
+    },
+    {
+      "name": "rsend.news.legendadigital.com.br",
+      "type": "CNAME",
+      "dns_status": 3,
+      "matches": false
+    }
+  ],
+  "dns_ready": false,
+  "auth_signup_enabled": false,
+  "auth_confirmation_required": true,
+  "newsletter_runtime_ready": false,
+  "gates_green": false,
+  "delivery_verified": false,
+  "note": "Configuração e DNS não comprovam recebimento de emails. Confirmar entrega, opt-in e cancelamento em teste autorizado."
+}

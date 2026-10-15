@@ -34,3 +34,7 @@ QA final: Home, conteúdo/artigo, newsletter/arquivo, catálogo e cada tool, Com
 14/10: quatro registros do domínio de envio ausentes (NXDOMAIN); signup desativado, confirmação obrigatória; envio indisponível. Sign-in Hostinger restrito no navegador da sessão impede editar DNS; não repetir nem contornar. Hostinger Mail não gerencia DNS. Manter envio/cadastro desativados até provisionamento e validação; instalar plugin não fecha gate.
 
 Mudança de estratégia/marca/domínio/pricing/escopo SaaS/modelo de negócio exige HQ; não resolver por conveniência técnica.
+
+## Continuidade — 15/10/2026
+
+O titular confirmou acesso à conta do Portal em seu próprio navegador; não equivale à sessão autenticada do agente. A verificação pública de funcionalidades editoriais existentes foi ampliada do Batch 1 para o catálogo publicado inteiro. Escopo, evidências, resultados e metadados pendentes em [PORTAL_EDITORIAL_READINESS_2026-10-15.md](PORTAL_EDITORIAL_READINESS_2026-10-15.md). Essa verificação não libera automaticamente novas fases, cadastro público ou envio de email.

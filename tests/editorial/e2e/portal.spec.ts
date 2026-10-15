@@ -672,3 +672,28 @@ test('UX v2 mobile drawers, separate filters, tabs and demo form remain human-co
  await tabs.getByRole('tab',{name:'Próxima ação',exact:true}).click();await page.getByRole('button',{name:'Revisar próxima ação'}).click();await expect(page.getByRole('tabpanel')).toContainText('nenhuma mensagem foi enviada');expect(f.contacts).toHaveLength(0);
  const form=page.locator('#demonstracao form');await expect(form.getByLabel('Assunto',{exact:true})).toHaveValue('Demonstração Growth OS');await form.getByLabel('Nome',{exact:true}).fill('Pessoa de teste');await form.getByLabel('E-mail',{exact:true}).fill('demo@example.test');await form.getByLabel('Mensagem',{exact:true}).fill('Quero conhecer o acompanhamento de oportunidades.');await form.getByRole('checkbox').check();await form.getByRole('button',{name:'Enviar mensagem'}).click();await expect.poll(()=>f.contacts.length).toBe(1);expect(f.contacts[0].subject).toBe('Demonstração Growth OS');expect(f.contacts[0].consent).toBe(true);await expect(form.getByRole('status')).toContainText('Mensagem recebida');
 });
+
+
+test('article reading progress preserves expanded diagrams and body DOM', async ({page}) => {
+  await fixtures(page);
+  const post=manifest.articles[0].post;
+  await page.goto('/conteudos/'+post.slug);
+  const body=page.locator('.article-body');
+  await expect(body.locator('h2').first()).toBeVisible();
+  await body.evaluate(el=>{
+    const heading=el.querySelector('h2')!;
+    (window as any).__editorialHeading=heading;
+    const details=el.querySelector('details');
+    if(details) details.open=true;
+  });
+  const progress=page.locator('.reading-progress span');
+  const before=await progress.getAttribute('style');
+  await page.evaluate(()=>window.scrollTo(0,document.documentElement.scrollHeight/2));
+  await expect.poll(()=>progress.getAttribute('style')).not.toBe(before);
+  await expect.poll(()=>page.evaluate(()=>{
+    const body=document.querySelector('.article-body')!;
+    return (window as any).__editorialHeading===body.querySelector('h2') &&
+      (!body.querySelector('details') || (body.querySelector('details') as HTMLDetailsElement).open);
+  })).toBe(true);
+  expect(await page.evaluate(()=>(window as any).__editorialHeading.isConnected)).toBe(true);
+});

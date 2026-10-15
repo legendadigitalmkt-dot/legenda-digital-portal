@@ -1,0 +1,1202 @@
+{
+  "checked_at": "2026-10-15T12:22:18.324Z",
+  "read_only": true,
+  "scope": "public_editorial_existing_features",
+  "origin": "https://legendadigital.com.br",
+  "published_articles": 14,
+  "audited_articles": 14,
+  "viewports": [
+    [
+      1920,
+      1080
+    ]
+  ],
+  "full_scope": false,
+  "expected_samples": 14,
+  "samples": 14,
+  "technical_pass": true,
+  "metadata_review_required": true,
+  "new_reader_signup_verified": false,
+  "authenticated_session_verified_by_agent": false,
+  "blocked_writes": [],
+  "metadata": [
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "kind": "article",
+      "warnings": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "kind": "article",
+      "warnings": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "kind": "guide",
+      "warnings": [
+        "missing_subtitle",
+        "missing_hero_image_alt",
+        "missing_hero_image_credit",
+        "missing_hero_image_caption",
+        "missing_seo_title",
+        "missing_seo_description",
+        "missing_og_image",
+        "no_structured_references"
+      ]
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "kind": "article",
+      "warnings": [
+        "missing_subtitle",
+        "missing_hero_image_alt",
+        "missing_hero_image_credit",
+        "missing_hero_image_caption",
+        "missing_seo_title",
+        "missing_seo_description",
+        "missing_og_image",
+        "no_structured_references"
+      ]
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "kind": "article",
+      "warnings": [
+        "missing_subtitle",
+        "missing_hero_image_alt",
+        "missing_hero_image_credit",
+        "missing_hero_image_caption",
+        "missing_seo_title",
+        "missing_seo_description",
+        "missing_og_image",
+        "no_structured_references"
+      ]
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "kind": "building",
+      "warnings": [
+        "missing_subtitle",
+        "missing_hero_image_alt",
+        "missing_hero_image_credit",
+        "missing_hero_image_caption",
+        "missing_seo_title",
+        "missing_seo_description",
+        "missing_og_image",
+        "no_structured_references"
+      ]
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "kind": "article",
+      "warnings": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "kind": "article",
+      "warnings": [
+        "missing_subtitle",
+        "missing_hero_image_alt",
+        "missing_hero_image_credit",
+        "missing_hero_image_caption",
+        "missing_seo_title",
+        "missing_seo_description",
+        "missing_og_image",
+        "no_structured_references"
+      ]
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "kind": "article",
+      "warnings": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "kind": "guide",
+      "warnings": [
+        "missing_subtitle",
+        "missing_hero_image_alt",
+        "missing_hero_image_credit",
+        "missing_hero_image_caption",
+        "missing_seo_title",
+        "missing_seo_description",
+        "missing_og_image",
+        "no_structured_references"
+      ]
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "kind": "building",
+      "warnings": [
+        "missing_subtitle",
+        "missing_hero_image_alt",
+        "missing_hero_image_credit",
+        "missing_hero_image_caption",
+        "missing_seo_title",
+        "missing_seo_description",
+        "missing_og_image",
+        "no_structured_references"
+      ]
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "kind": "guide",
+      "warnings": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "kind": "article",
+      "warnings": [
+        "missing_subtitle",
+        "missing_hero_image_alt",
+        "missing_hero_image_credit",
+        "missing_hero_image_caption",
+        "missing_seo_title",
+        "missing_seo_description",
+        "missing_og_image",
+        "no_structured_references"
+      ]
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "kind": "guide",
+      "warnings": [
+        "missing_subtitle",
+        "missing_hero_image_alt",
+        "missing_hero_image_credit",
+        "missing_hero_image_caption",
+        "missing_seo_title",
+        "missing_seo_description",
+        "missing_og_image",
+        "no_structured_references"
+      ]
+    }
+  ],
+  "bodies": [
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "sha256": "13f6bd289c55fd31b062dd3995e4655fc54b5c397b7acbfba09f3b7ff2dcb366"
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "sha256": "2b3bf65a93b30de896e35a913ac580c76e942a220a5771f544c3c6383eb2e7de"
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "sha256": "e70485adf4a9158a37129f9a371a466b0047ab308eedb96253eed10b5ffe102e"
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "sha256": "f5c5fa7754f517c7c08677f4bc496e5627bbc9ed19a397bc6df2d31a7adca9d0"
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "sha256": "fe3f076fe8c83fe2a79413d018f766cbff21db869f60f20aade0de9ecfab1962"
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "sha256": "ab4b1d02d999ef219503b27128a26bfb58a28f28e18b7d830c0e663c208416e0"
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "sha256": "debebbcfeee1c1912d9c75445b4e954baddbea94e084ceb597563751ab2f5fb5"
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "sha256": "3ed090fc5a3e7f415ddf2720d2f1e2004ad1cf2f6f05365769dd4f7af590de1d"
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "sha256": "0ddf617d5049b386660572c8c00aff704b48902ebefee6a3d62469d5b78def5d"
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "sha256": "a3621d29f9eadc663de8beb248bce4ee6ecf31f651f2a475906da192a565b7fc"
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "sha256": "e5c4069722e2a4bc8763433fad5a549a03a825855acc989cae645ca4910d44d2"
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "sha256": "83fe79634d8830bfd0c646a866c5e3d95715886b01c23b01742e343b4100f623"
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "sha256": "a1ee853067e30c10be2a5d6f2098bd945ac83034acbc9ba3bdb6483db7151e75"
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "sha256": "705a09b9da1fbd82f86ee92c8671775ec9af226cb4a5947cabbf611c4cf6f7fd"
+    }
+  ],
+  "results": [
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 41628,
+      "path": "/conteudos/agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "title": "Agentes de IA: onde terminam os chatbots e começam os sistemas de trabalho",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "ogUrl": "https://legendadigital.com.br/conteudos/agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "description": "Uma conversa convincente não comprova execução. Para transformar IA em operação, empresas precisam definir ferramentas, permissões, critérios de sucesso e evidências do que realmente aconteceu.",
+      "subtitle": "Uma conversa convincente não comprova execução. Para transformar IA em operação, empresas precisam definir ferramentas, permissões, critérios de sucesso e evidências do que realmente aconteceu.",
+      "author": "Redação Legenda Digital",
+      "publication": "LDRedação Legenda DigitalPublicado em 12/10/2026 · 13 min de leituraRevisão editorial: LD HQ",
+      "breadcrumb": true,
+      "category": "Futuro",
+      "bodyText": 16519,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 19,
+      "headingIds": 19,
+      "uniqueHeadingIds": 19,
+      "tocLinks": 13,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Um balão de conversa e uma lista de ações representam a distinção entre interface conversacional e capacidade de agir com permissões.",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Agentes de IA: onde terminam os chatbots e começam os sistemas de trabalho",
+        "description": "Uma conversa convincente não comprova execução. Para transformar IA em operação, empresas precisam definir ferramentas, permissões, critérios de sucesso e evidências do que realmente aconteceu.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/agentes-de-ia-chatbots-sistemas-de-trabalho-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/agentes-de-ia-chatbots-sistemas-de-trabalho"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 1229,
+      "path": "/conteudos/ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "title": "AI Search: como ChatGPT, Google e assistentes estão mudando a descoberta",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "ogUrl": "https://legendadigital.com.br/conteudos/ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "description": "A busca passa a participar da definição do problema e da comparação de alternativas. Para as empresas, o desafio é conectar presença, confiança e ação.",
+      "subtitle": "A busca passa a participar da definição do problema e da comparação de alternativas. Para as empresas, o desafio é conectar presença, confiança e ação.",
+      "author": "Redação Legenda Digital",
+      "publication": "LDRedação Legenda DigitalPublicado em 12/10/2026 · 12 min de leituraRevisão editorial: LD HQ",
+      "breadcrumb": true,
+      "category": "Futuro",
+      "bodyText": 16085,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 19,
+      "headingIds": 19,
+      "uniqueHeadingIds": 19,
+      "tocLinks": 13,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Uma resposta sintetizada sobre documentos e pequenos blocos de referência representa a busca mediada por IA, sem simular uma plataforma real.",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "AI Search: como ChatGPT, Google e assistentes estão mudando a descoberta",
+        "description": "A busca passa a participar da definição do problema e da comparação de alternativas. Para as empresas, o desafio é conectar presença, confiança e ação.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/ai-search-como-chatgpt-google-assistentes-mudam-descoberta-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/ai-search-como-chatgpt-google-assistentes-mudam-descoberta"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 861,
+      "path": "/conteudos/como-aplicar-ia-no-negocio",
+      "title": "Como começar a aplicar IA no seu negócio",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/como-aplicar-ia-no-negocio",
+      "ogUrl": "https://legendadigital.com.br/conteudos/como-aplicar-ia-no-negocio",
+      "description": "Um caminho prático para escolher uma tarefa, testar com contexto e avaliar o que realmente melhora.",
+      "subtitle": "Um caminho prático para escolher uma tarefa, testar com contexto e avaliar o que realmente melhora.",
+      "author": "Equipe Legenda Digital",
+      "publication": "LDEquipe Legenda DigitalPublicado em 08/10/2026 · 4 min de leitura",
+      "breadcrumb": true,
+      "category": "IA",
+      "bodyText": 1815,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 9,
+      "headingIds": 9,
+      "uniqueHeadingIds": 9,
+      "tocLinks": 7,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Imagem editorial de apoio: Como começar a aplicar IA no seu negócio",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Como começar a aplicar IA no seu negócio",
+        "description": "Um caminho prático para escolher uma tarefa, testar com contexto e avaliar o que realmente melhora.",
+        "image": "https://legendadigital.com.br/images/work.jpg",
+        "datePublished": "2026-10-08T00:00:00+00:00",
+        "dateModified": "2026-10-08T06:20:22.440746+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Equipe Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/como-aplicar-ia-no-negocio"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 899,
+      "path": "/conteudos/conteudo-e-audiencia-com-proposito",
+      "title": "Do conteúdo à relação: construir uma audiência com propósito",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/conteudo-e-audiencia-com-proposito",
+      "ogUrl": "https://legendadigital.com.br/conteudos/conteudo-e-audiencia-com-proposito",
+      "description": "A atenção é o começo. O trabalho está em criar relevância, continuidade e uma razão para voltar.",
+      "subtitle": "A atenção é o começo. O trabalho está em criar relevância, continuidade e uma razão para voltar.",
+      "author": "Equipe Legenda Digital",
+      "publication": "LDEquipe Legenda DigitalPublicado em 08/10/2026 · 4 min de leitura",
+      "breadcrumb": true,
+      "category": "Conteúdo",
+      "bodyText": 1355,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 5,
+      "headingIds": 5,
+      "uniqueHeadingIds": 5,
+      "tocLinks": 5,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Imagem editorial de apoio: Do conteúdo à relação: construir uma audiência com propósito",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Do conteúdo à relação: construir uma audiência com propósito",
+        "description": "A atenção é o começo. O trabalho está em criar relevância, continuidade e uma razão para voltar.",
+        "image": "https://legendadigital.com.br/images/team.webp",
+        "datePublished": "2026-10-08T00:00:00+00:00",
+        "dateModified": "2026-10-08T06:20:22.440746+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Equipe Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/conteudo-e-audiencia-com-proposito"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 828,
+      "path": "/conteudos/creators-rotina-de-publicacao",
+      "title": "Creators: transformar ideias em uma rotina de publicação",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/creators-rotina-de-publicacao",
+      "ogUrl": "https://legendadigital.com.br/conteudos/creators-rotina-de-publicacao",
+      "description": "Um processo leve para capturar, selecionar, produzir e revisar conteúdo sem depender só de inspiração.",
+      "subtitle": "Um processo leve para capturar, selecionar, produzir e revisar conteúdo sem depender só de inspiração.",
+      "author": "Equipe Legenda Digital",
+      "publication": "LDEquipe Legenda DigitalPublicado em 08/10/2026 · 4 min de leitura",
+      "breadcrumb": true,
+      "category": "Creators",
+      "bodyText": 1065,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 5,
+      "headingIds": 5,
+      "uniqueHeadingIds": 5,
+      "tocLinks": 5,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Imagem editorial de apoio: Creators: transformar ideias em uma rotina de publicação",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Creators: transformar ideias em uma rotina de publicação",
+        "description": "Um processo leve para capturar, selecionar, produzir e revisar conteúdo sem depender só de inspiração.",
+        "image": "https://legendadigital.com.br/images/work.jpg",
+        "datePublished": "2026-10-08T00:00:00+00:00",
+        "dateModified": "2026-10-08T06:20:22.440746+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Equipe Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/creators-rotina-de-publicacao"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 388,
+      "path": "/conteudos/infraestrutura-da-legenda-digital",
+      "title": "Uma infraestrutura que acompanha a construção",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/infraestrutura-da-legenda-digital",
+      "ogUrl": "https://legendadigital.com.br/conteudos/infraestrutura-da-legenda-digital",
+      "description": "GitHub, Supabase e Hostinger: os papéis de cada parte no site da Legenda Digital.",
+      "subtitle": "GitHub, Supabase e Hostinger: os papéis de cada parte no site da Legenda Digital.",
+      "author": "Equipe Legenda Digital",
+      "publication": "LDEquipe Legenda DigitalPublicado em 08/10/2026 · 4 min de leitura",
+      "breadcrumb": true,
+      "category": "Tecnologia",
+      "bodyText": 1098,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 6,
+      "headingIds": 6,
+      "uniqueHeadingIds": 6,
+      "tocLinks": 6,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Imagem editorial de apoio: Uma infraestrutura que acompanha a construção",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Uma infraestrutura que acompanha a construção",
+        "description": "GitHub, Supabase e Hostinger: os papéis de cada parte no site da Legenda Digital.",
+        "image": "https://legendadigital.com.br/images/team.webp",
+        "datePublished": "2026-10-08T00:00:00+00:00",
+        "dateModified": "2026-10-08T06:20:22.440746+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Equipe Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/infraestrutura-da-legenda-digital"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 1295,
+      "path": "/conteudos/marketing-de-campanha-para-sistema",
+      "title": "Marketing está deixando de ser campanha para se tornar sistema",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/marketing-de-campanha-para-sistema",
+      "ogUrl": "https://legendadigital.com.br/conteudos/marketing-de-campanha-para-sistema",
+      "description": "Uma campanha tem começo e fim. O trabalho de aprender, acompanhar e atender precisa continuar entre elas.",
+      "subtitle": "Uma campanha tem começo e fim. O trabalho de aprender, acompanhar e atender precisa continuar entre elas.",
+      "author": "Redação Legenda Digital",
+      "publication": "LDRedação Legenda DigitalPublicado em 12/10/2026 · 12 min de leituraRevisão editorial: LD HQ",
+      "breadcrumb": true,
+      "category": "Growth & Negócios",
+      "bodyText": 15890,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 27,
+      "headingIds": 27,
+      "uniqueHeadingIds": 27,
+      "tocLinks": 17,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Três módulos conectados em um circuito envolvem um centro identificado como sistema; a composição ilustra continuidade operacional.",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Marketing está deixando de ser campanha para se tornar sistema",
+        "description": "Uma campanha tem começo e fim. O trabalho de aprender, acompanhar e atender precisa continuar entre elas.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/marketing-de-campanha-para-sistema-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/marketing-de-campanha-para-sistema"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 898,
+      "path": "/conteudos/metricas-alem-do-alcance",
+      "title": "Métricas de crescimento: o que observar além do alcance",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/metricas-alem-do-alcance",
+      "ogUrl": "https://legendadigital.com.br/conteudos/metricas-alem-do-alcance",
+      "description": "Conecte cada número a uma pergunta de negócio antes de montar um dashboard.",
+      "subtitle": "Conecte cada número a uma pergunta de negócio antes de montar um dashboard.",
+      "author": "Equipe Legenda Digital",
+      "publication": "LDEquipe Legenda DigitalPublicado em 08/10/2026 · 4 min de leitura",
+      "breadcrumb": true,
+      "category": "Growth",
+      "bodyText": 1140,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 5,
+      "headingIds": 5,
+      "uniqueHeadingIds": 5,
+      "tocLinks": 5,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Imagem editorial de apoio: Métricas de crescimento: o que observar além do alcance",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Métricas de crescimento: o que observar além do alcance",
+        "description": "Conecte cada número a uma pergunta de negócio antes de montar um dashboard.",
+        "image": "https://legendadigital.com.br/images/work.jpg",
+        "datePublished": "2026-10-08T00:00:00+00:00",
+        "dateModified": "2026-10-08T06:20:22.440746+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Equipe Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/metricas-alem-do-alcance"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 834,
+      "path": "/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "title": "O novo funil de vendas na era da IA",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "ogUrl": "https://legendadigital.com.br/conteudos/o-novo-funil-de-vendas-na-era-da-ia",
+      "description": "Como conectar descoberta, conversa, oportunidade e próximo compromisso sem confundir automação com resultado.",
+      "subtitle": "Como conectar descoberta, conversa, oportunidade e próximo compromisso sem confundir automação com resultado.",
+      "author": "Redação Legenda Digital",
+      "publication": "LDRedação Legenda DigitalPublicado em 12/10/2026 · 12 min de leituraRevisão editorial: LD HQ",
+      "breadcrumb": true,
+      "category": "Growth & Negócios",
+      "bodyText": 16012,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 23,
+      "headingIds": 23,
+      "uniqueHeadingIds": 23,
+      "tocLinks": 17,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Uma composição com pontos de descoberta, um dossiê de contexto e caminhos de retorno sugere uma jornada comercial com múltiplos contatos.",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "O novo funil de vendas na era da IA",
+        "description": "Como conectar descoberta, conversa, oportunidade e próximo compromisso sem confundir automação com resultado.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/o-novo-funil-de-vendas-na-era-da-ia-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/o-novo-funil-de-vendas-na-era-da-ia"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 386,
+      "path": "/conteudos/oferta-clara-problema-certo",
+      "title": "Uma oferta clara começa pelo problema certo",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/oferta-clara-problema-certo",
+      "ogUrl": "https://legendadigital.com.br/conteudos/oferta-clara-problema-certo",
+      "description": "Organize público, problema, resultado e limites antes de escolher a frase de venda.",
+      "subtitle": "Organize público, problema, resultado e limites antes de escolher a frase de venda.",
+      "author": "Equipe Legenda Digital",
+      "publication": "LDEquipe Legenda DigitalPublicado em 08/10/2026 · 4 min de leitura",
+      "breadcrumb": true,
+      "category": "Marketing",
+      "bodyText": 1136,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 5,
+      "headingIds": 5,
+      "uniqueHeadingIds": 5,
+      "tocLinks": 5,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Imagem editorial de apoio: Uma oferta clara começa pelo problema certo",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Uma oferta clara começa pelo problema certo",
+        "description": "Organize público, problema, resultado e limites antes de escolher a frase de venda.",
+        "image": "https://legendadigital.com.br/images/team.webp",
+        "datePublished": "2026-10-08T00:00:00+00:00",
+        "dateModified": "2026-10-08T06:20:22.440746+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Equipe Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/oferta-clara-problema-certo"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 820,
+      "path": "/conteudos/por-que-comecamos-pela-midia",
+      "title": "Por que começamos pela mídia e pelo conteúdo",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/por-que-comecamos-pela-midia",
+      "ogUrl": "https://legendadigital.com.br/conteudos/por-que-comecamos-pela-midia",
+      "description": "A decisão de construir relacionamento antes de ampliar o catálogo de produtos.",
+      "subtitle": "A decisão de construir relacionamento antes de ampliar o catálogo de produtos.",
+      "author": "Equipe Legenda Digital",
+      "publication": "LDEquipe Legenda DigitalPublicado em 08/10/2026 · 4 min de leitura",
+      "breadcrumb": true,
+      "category": "Negócios",
+      "bodyText": 1112,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 7,
+      "headingIds": 7,
+      "uniqueHeadingIds": 7,
+      "tocLinks": 7,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Imagem editorial de apoio: Por que começamos pela mídia e pelo conteúdo",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Por que começamos pela mídia e pelo conteúdo",
+        "description": "A decisão de construir relacionamento antes de ampliar o catálogo de produtos.",
+        "image": "https://legendadigital.com.br/images/team.webp",
+        "datePublished": "2026-10-08T00:00:00+00:00",
+        "dateModified": "2026-10-08T06:20:22.440746+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Equipe Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/por-que-comecamos-pela-midia"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 848,
+      "path": "/conteudos/seo-aeo-geo-busca-por-ia",
+      "title": "SEO, AEO e GEO: o que realmente muda com a busca por IA",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/seo-aeo-geo-busca-por-ia",
+      "ogUrl": "https://legendadigital.com.br/conteudos/seo-aeo-geo-busca-por-ia",
+      "description": "Um guia para separar fundamentos verificáveis, decisões editoriais e experimentos de visibilidade, sem prometer citações.",
+      "subtitle": "Um guia para separar fundamentos verificáveis, decisões editoriais e experimentos de visibilidade, sem prometer citações.",
+      "author": "Redação Legenda Digital",
+      "publication": "LDRedação Legenda DigitalPublicado em 12/10/2026 · 15 min de leituraRevisão editorial: LD HQ",
+      "breadcrumb": true,
+      "category": "Aplicação",
+      "bodyText": 20325,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 26,
+      "headingIds": 26,
+      "uniqueHeadingIds": 26,
+      "tocLinks": 19,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Três pastas sobrepostas rotuladas SEO, AEO e GEO representam práticas relacionadas que compartilham fundamentos de conteúdo e descoberta.",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "SEO, AEO e GEO: o que realmente muda com a busca por IA",
+        "description": "Um guia para separar fundamentos verificáveis, decisões editoriais e experimentos de visibilidade, sem prometer citações.",
+        "image": "https://legendadigital.com.br/images/editorial/batch1/seo-aeo-geo-busca-por-ia-hero.png",
+        "datePublished": "2026-10-12T13:13:17.196193+00:00",
+        "dateModified": "2026-10-12T13:13:17.196193+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Redação Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/seo-aeo-geo-busca-por-ia"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 827,
+      "path": "/conteudos/tecnologia-util-no-processo",
+      "title": "Tecnologia útil é a que cabe no seu processo",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/tecnologia-util-no-processo",
+      "ogUrl": "https://legendadigital.com.br/conteudos/tecnologia-util-no-processo",
+      "description": "Como avaliar uma ferramenta sem confundir novidade com necessidade.",
+      "subtitle": "Como avaliar uma ferramenta sem confundir novidade com necessidade.",
+      "author": "Equipe Legenda Digital",
+      "publication": "LDEquipe Legenda DigitalPublicado em 08/10/2026 · 4 min de leitura",
+      "breadcrumb": true,
+      "category": "Tecnologia",
+      "bodyText": 1046,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 5,
+      "headingIds": 5,
+      "uniqueHeadingIds": 5,
+      "tocLinks": 5,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Imagem editorial de apoio: Tecnologia útil é a que cabe no seu processo",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Tecnologia útil é a que cabe no seu processo",
+        "description": "Como avaliar uma ferramenta sem confundir novidade com necessidade.",
+        "image": "https://legendadigital.com.br/images/team.webp",
+        "datePublished": "2026-10-08T00:00:00+00:00",
+        "dateModified": "2026-10-08T06:20:22.440746+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Equipe Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/tecnologia-util-no-processo"
+      },
+      "jsErrors": [],
+      "issues": []
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "width": 1920,
+      "height": 1080,
+      "status": 200,
+      "related_wait_ms": 835,
+      "path": "/conteudos/vendas-perguntas-antes-da-proposta",
+      "title": "Vendas: boas perguntas antes de uma boa proposta",
+      "h1Count": 1,
+      "canonical": "https://legendadigital.com.br/conteudos/vendas-perguntas-antes-da-proposta",
+      "ogUrl": "https://legendadigital.com.br/conteudos/vendas-perguntas-antes-da-proposta",
+      "description": "Uma conversa de diagnóstico ajuda a descobrir se existe um problema que você pode resolver.",
+      "subtitle": "Uma conversa de diagnóstico ajuda a descobrir se existe um problema que você pode resolver.",
+      "author": "Equipe Legenda Digital",
+      "publication": "LDEquipe Legenda DigitalPublicado em 08/10/2026 · 4 min de leitura",
+      "breadcrumb": true,
+      "category": "Vendas",
+      "bodyText": 1025,
+      "font": "18px",
+      "bodyWidth": 720,
+      "centerDelta": 0,
+      "overflow": false,
+      "sidebarWidth": 280,
+      "sidebarRight": true,
+      "headings": 5,
+      "headingIds": 5,
+      "uniqueHeadingIds": 5,
+      "tocLinks": 5,
+      "missingTocTargets": 0,
+      "heroLoaded": true,
+      "heroAlt": "Imagem editorial de apoio: Vendas: boas perguntas antes de uma boa proposta",
+      "heroFit": "contain",
+      "failedBodyImages": [],
+      "relatedCount": 4,
+      "relatedSelfLink": false,
+      "shareControls": true,
+      "commentsPresent": true,
+      "public_update_warning": null,
+      "comment_load_warning": null,
+      "unsafeLinks": 0,
+      "schemaTypes": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "articleSchema": {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Vendas: boas perguntas antes de uma boa proposta",
+        "description": "Uma conversa de diagnóstico ajuda a descobrir se existe um problema que você pode resolver.",
+        "image": "https://legendadigital.com.br/images/team.webp",
+        "datePublished": "2026-10-08T00:00:00+00:00",
+        "dateModified": "2026-10-08T06:20:22.440746+00:00",
+        "author": {
+          "@type": "Organization",
+          "name": "Equipe Legenda Digital"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Legenda Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://legendadigital.com.br/images/legenda-digital-logo.png"
+          }
+        },
+        "mainEntityOfPage": "https://legendadigital.com.br/conteudos/vendas-perguntas-antes-da-proposta"
+      },
+      "jsErrors": [],
+      "issues": []
+    }
+  ],
+  "full_editorial_matrix_pass": false
+}

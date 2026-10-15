@@ -1,0 +1,787 @@
+{
+  "checked_at": "2026-10-15T12:22:43.369854+00:00",
+  "method": "Latest sample per article and viewport across preserved read-only runs; not a single uninterrupted run.",
+  "source_runs": [
+    {
+      "file": "public-editorial.json",
+      "sha256": "add134f017c48a361323e5d5879162585e31917711f6785d73f42d70640d5dcd",
+      "samples": 117,
+      "technical_pass": false,
+      "execution_error": "page.goto: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://legendadigital.com.br/conteudos/infraestrutura-da-legenda-digital\", waiting until \"domcontentloaded\"\u001b[22m\n"
+    },
+    {
+      "file": "recheck-1920/public-editorial.json",
+      "sha256": "95beadfa0925922503eeeec183a1ffa50f1d97b07abefa6cc237a396dc3817ca",
+      "samples": 14,
+      "technical_pass": true,
+      "execution_error": null
+    }
+  ],
+  "published_articles": 14,
+  "expected_unique_samples": 126,
+  "unique_samples": 126,
+  "complete_public_technical_coverage": true,
+  "blocked_writes": 0,
+  "metadata_review_required": true,
+  "editorial_gate_complete": false,
+  "new_reader_signup_verified": false,
+  "authenticated_session_verified_by_agent": false,
+  "samples": [
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "width": 360,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "width": 375,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "width": 390,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "width": 430,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "width": 768,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "width": 820,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "width": 1366,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "width": 1440,
+      "source": "public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "agentes-de-ia-chatbots-sistemas-de-trabalho",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "ai-search-como-chatgpt-google-assistentes-mudam-descoberta",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "como-aplicar-ia-no-negocio",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "conteudo-e-audiencia-com-proposito",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "creators-rotina-de-publicacao",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "infraestrutura-da-legenda-digital",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "marketing-de-campanha-para-sistema",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "metricas-alem-do-alcance",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "o-novo-funil-de-vendas-na-era-da-ia",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "oferta-clara-problema-certo",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "por-que-comecamos-pela-midia",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "seo-aeo-geo-busca-por-ia",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "tecnologia-util-no-processo",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    },
+    {
+      "slug": "vendas-perguntas-antes-da-proposta",
+      "width": 1920,
+      "source": "recheck-1920/public-editorial.json",
+      "issues": []
+    }
+  ]
+}

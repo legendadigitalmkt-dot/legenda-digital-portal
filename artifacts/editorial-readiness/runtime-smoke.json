@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-10-15T12:24:00.309Z",
+  "read_only": true,
+  "qa_proxy_tls_exception": true,
+  "initial_node_fetch": [
+    {
+      "url": "https://legendadigital.com.br/api/health",
+      "error": "TypeError"
+    },
+    {
+      "url": "https://www.legendadigital.com.br/api/health",
+      "error": "TypeError"
+    }
+  ],
+  "rows": [
+    {
+      "url": "https://legendadigital.com.br/api/health",
+      "status": 200,
+      "health": {
+        "status": "ok",
+        "release": "portal-auth-confirmation-v1",
+        "runtime": "node"
+      }
+    },
+    {
+      "url": "https://www.legendadigital.com.br/api/health",
+      "status": 200,
+      "health": {
+        "status": "ok",
+        "release": "portal-auth-confirmation-v1",
+        "runtime": "node"
+      }
+    }
+  ]
+}
