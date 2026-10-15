@@ -85,3 +85,7 @@ Branches próprias `chore/product-boundaries` em cada repo, PRs independentes; l
 ## Rollback / riscos
 
 Reverter PR documental/CI do produto correspondente, executar CI e redeploy se o provedor disparar rebuild. Sem rollback de banco. Preservar tabelas, Auth, arquivos, DNS e configuração de email. Novos scans são limitados, não scanner completo: não alegar ausência universal de secrets ou segurança total. Aviso de bundle Admin >500kB/lazy e advisory baixo de dependência dev já existiam; performance de campo não foi medida aqui.
+
+## Verificação adicional e confirmação do titular — 14/10
+
+O titular confirmou login no Portal no próprio navegador. Registro de confirmação do usuário, sem equivaler à sessão observada pelo agente. Teste read-only adicional: chaves publishable distintas, próprias aceitas com HTTP200 e cruzadas rejeitadas com HTTP401 nas duas direções. Isso não certifica valores privados hosted. Nenhuma chave/conta/dado alterado. Continuidade e limites da inspeção pública existente em [PORTAL_EDITORIAL_READINESS_2026-10-15.md](docs/PORTAL_EDITORIAL_READINESS_2026-10-15.md).
