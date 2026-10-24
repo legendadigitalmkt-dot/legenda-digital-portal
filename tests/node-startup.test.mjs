@@ -57,7 +57,7 @@ for (const mode of ['direct','hosting-loader']) {
     const origin = 'http://127.0.0.1:' + port;
     const health = await fetch(origin + '/api/health',{signal:AbortSignal.timeout(1500)});
     assert.equal(health.status,200);
-    assert.deepEqual(await health.json(),{status:'ok',release:'portal-auth-confirmation-v1',runtime:'node'});
+    assert.deepEqual(await health.json(),{status:'ok',release:'portal-security-dependencies-v1',runtime:'node'});
     assert.equal((await fetch(origin + '/', {signal:AbortSignal.timeout(1500)})).status,200);
     for (const path of ['/server.js','/portal-runtime.cjs','/portal-runtime.json','/package.json']) {
       assert.equal((await fetch(origin + path,{signal:AbortSignal.timeout(1500)})).status,404,path);
