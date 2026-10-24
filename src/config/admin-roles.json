@@ -1,0 +1,153 @@
+{
+  "platform_owner": [
+    "dashboard.read",
+    "articles.read",
+    "articles.write",
+    "articles.create",
+    "articles.edit",
+    "articles.approve",
+    "articles.publish",
+    "categories.manage",
+    "authors.manage",
+    "comments.manage",
+    "comments.read",
+    "comments.moderate",
+    "newsletter.manage",
+    "community.manage",
+    "tools.manage",
+    "intelligence.read",
+    "intelligence.manage",
+    "users.read",
+    "media.manage",
+    "settings.manage",
+    "project_memory.manage",
+    "audit.read",
+    "contacts.manage"
+  ],
+  "super_admin": [
+    "dashboard.read",
+    "articles.read",
+    "articles.write",
+    "articles.create",
+    "articles.edit",
+    "articles.approve",
+    "articles.publish",
+    "categories.manage",
+    "authors.manage",
+    "comments.manage",
+    "comments.read",
+    "comments.moderate",
+    "newsletter.manage",
+    "community.manage",
+    "tools.manage",
+    "intelligence.read",
+    "intelligence.manage",
+    "users.read",
+    "media.manage",
+    "settings.manage",
+    "project_memory.manage",
+    "audit.read",
+    "contacts.manage"
+  ],
+  "editorial_admin": [
+    "dashboard.read",
+    "articles.read",
+    "articles.write",
+    "articles.create",
+    "articles.edit",
+    "articles.approve",
+    "articles.publish",
+    "categories.manage",
+    "authors.manage",
+    "comments.read",
+    "comments.manage",
+    "comments.moderate",
+    "media.manage"
+  ],
+  "editor": [
+    "dashboard.read",
+    "articles.read",
+    "articles.write",
+    "articles.create",
+    "articles.edit",
+    "articles.approve",
+    "categories.manage",
+    "authors.manage",
+    "media.manage"
+  ],
+  "researcher": [
+    "dashboard.read",
+    "articles.read",
+    "project_memory.manage"
+  ],
+  "newsletter_admin": [
+    "dashboard.read",
+    "newsletter.manage",
+    "media.manage"
+  ],
+  "community_admin": [
+    "dashboard.read",
+    "community.manage",
+    "comments.read",
+    "comments.manage",
+    "comments.moderate",
+    "media.manage"
+  ],
+  "tools_admin": [
+    "dashboard.read",
+    "tools.manage",
+    "media.manage"
+  ],
+  "intelligence_admin": [
+    "dashboard.read",
+    "intelligence.read",
+    "intelligence.manage",
+    "project_memory.manage"
+  ],
+  "moderator": [
+    "dashboard.read",
+    "comments.read",
+    "comments.manage",
+    "comments.moderate"
+  ],
+  "analyst": [
+    "dashboard.read",
+    "intelligence.read"
+  ],
+  "viewer": [
+    "dashboard.read",
+    "articles.read"
+  ],
+  "admin": [
+    "dashboard.read",
+    "articles.read",
+    "articles.write",
+    "articles.create",
+    "articles.edit",
+    "articles.approve",
+    "articles.publish",
+    "categories.manage",
+    "authors.manage",
+    "comments.manage",
+    "comments.read",
+    "comments.moderate",
+    "newsletter.manage",
+    "community.manage",
+    "tools.manage",
+    "intelligence.read",
+    "intelligence.manage",
+    "users.read",
+    "media.manage",
+    "settings.manage",
+    "project_memory.manage",
+    "audit.read",
+    "contacts.manage"
+  ],
+  "author": [
+    "dashboard.read",
+    "articles.read",
+    "articles.write",
+    "articles.create",
+    "articles.edit"
+  ]
+}

@@ -22,3 +22,17 @@ test('Brief handler blocks forged origin, admin/JWT and webhook; no arbitrary se
  assert.equal((await handler(new Request('https://example.test/?action=webhook',{method:'POST',body:'{}'}))).status,401);
  const r=await handler(new Request('https://example.test/?action=unsubscribe&token=abc'));assert.equal(r.status,200);assert.equal(calls,0);
 });
+
+test('Brief dispatch checks live Portal staff roles; specialist scope never bypasses the sending gate',async()=>{
+ const matrix=JSON.parse(await (await import('node:fs/promises')).readFile('src/config/admin-roles.json','utf8'));
+ for(const role of [...Object.keys(matrix),'unknown']){
+  let called=0;
+  const handler=createHandler({SUPABASE_URL:'https://yltnjgngkomelfltdyky.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'fixture_not_a_real_secret'}, {fetchImpl:async(url)=>{
+   called++;if(String(url).includes('/auth/v1/user'))return Response.json({id:'00000000-0000-4000-8000-000000000001',email:'fixture@example.test',email_confirmed_at:'2026-10-24T00:00:00Z',user_metadata:{role:'platform_owner'}});
+   if(String(url).includes('/site_staff?'))return Response.json([{role}]);
+   throw Error('No provider or mutation should be called');
+  }});
+  const req=new Request('https://example.test/functions/v1/ld-brief',{method:'POST',headers:{Authorization:'Bearer fixture_not_a_real_jwt','Content-Type':'application/json'},body:JSON.stringify({action:'dispatch',issue_id:'00000000-0000-4000-8000-000000000005',confirm_send:true})});
+  assert.equal((await handler(req)).status,matrix[role]?.includes('newsletter.manage')?503:403,role);assert.equal(called,2);
+ }
+});

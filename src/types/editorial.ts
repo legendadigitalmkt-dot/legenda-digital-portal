@@ -4,33 +4,8 @@ export type Reference = {
   note?: string;
   consulted_at?: string;
 };
-export type PortalRole =
-  | "author"
-  | "editor"
-  | "moderator"
-  | "admin"
-  | "super_admin";
-export function can(role: string, permission: string) {
-  return (
-    ["admin", "super_admin"].includes(role) ||
-    (role === "editor" &&
-      [
-        "articles.read",
-        "articles.create",
-        "articles.edit",
-        "articles.approve",
-        "categories.manage",
-        "authors.manage",
-        "media.manage",
-      ].includes(permission)) ||
-    (role === "author" &&
-      ["articles.read", "articles.create", "articles.edit"].includes(
-        permission,
-      )) ||
-    (role === "moderator" &&
-      ["comments.read", "comments.moderate"].includes(permission))
-  );
-}
+export type {AdminRole as PortalRole} from '../features/admin/access';
+export {hasPermission as can} from '../features/admin/access';
 export const editorialCategories = [
   ["Futuro", "futuro"],
   ["Aplicação", "aplicacao"],

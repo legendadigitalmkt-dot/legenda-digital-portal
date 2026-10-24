@@ -75,7 +75,7 @@ export function createHandler(env,{fetchImpl=fetch,clock=Date.now}={}) {
    }
    if(b.action==='dispatch') {
     const u=await user(req);if(!UUID.test(b.issue_id||''))return json({error:'Edição inválida.'},400);
-    const staff=await api('site_staff?select=role&user_id=eq.'+u.id+'&limit=1',null,'GET');if(!['admin','super_admin'].includes(staff[0]?.role))return json({error:'Sem permissão.'},403);
+    const staff=await api('site_staff?select=role&user_id=eq.'+u.id+'&limit=1',null,'GET');if(!['platform_owner','super_admin','admin','newsletter_admin'].includes(staff[0]?.role))return json({error:'Sem permissão.'},403);
     if(!provider.ready)return json({error:'Envio bloqueado: configure e valide o Resend antes de enviar.'},503);
     if(b.confirm_send!==true)return json({error:'Confirme o envio desta edição.'},400);
     const queued=await rpc('claim_issue',{p_id:b.issue_id,p_actor:u.id});if(queued.empty)return json({empty:true,accepted:0,failed:0});let accepted=0,failed=0;

@@ -38,3 +38,7 @@ Mudança de estratégia/marca/domínio/pricing/escopo SaaS/modelo de negócio ex
 ## Continuidade — 15/10/2026
 
 O titular confirmou acesso à conta do Portal em seu próprio navegador; não equivale à sessão autenticada do agente. A verificação pública de funcionalidades editoriais existentes foi ampliada do Batch 1 para o catálogo publicado inteiro. Escopo, evidências, resultados e metadados pendentes em [PORTAL_EDITORIAL_READINESS_2026-10-15.md](PORTAL_EDITORIAL_READINESS_2026-10-15.md). Essa verificação não libera automaticamente novas fases, cadastro público ou envio de email.
+
+## Super Admin — atualização de 24/10/2026
+
+O titular forneceu novo prompt mestre com oito marcos para o Super Admin exclusivo do Portal. Referência: SUPER_ADMIN_MASTER_PROMPT.md; ciclo Foundation: SUPER_ADMIN_FOUNDATION.md e project-memory/records/LD-PORTAL-LL-005.md. Esta atualização autoriza a Foundation de segurança/Admin; não fecha os gates editoriais, de email ou de produção anteriores nem amplia escopo SaaS. Os demais marcos seguem a sequência do novo prompt e permanecem pendentes.
