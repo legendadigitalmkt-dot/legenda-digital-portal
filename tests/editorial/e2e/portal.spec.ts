@@ -1,6 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { test, expect, type Page } from "@playwright/test";
-import { readFileSync } from "node:fs";
+import { mkdirSync, readFileSync } from "node:fs";
 const manifest = JSON.parse(
   readFileSync("content/editorial/batch1-manifest.json", "utf8"),
 );
@@ -22,7 +22,9 @@ const user = {
   user_metadata: {},
   created_at: "2026-10-12T00:00:00Z",
 };
-async function fixtures(page: Page) {
+async function fixtures(page: Page, role="admin") {
+  const staff={role};
+  const foundationRequests:string[]=[];
   let authenticated = false;
   const posts = manifest.articles.map((a: any, i: number) => ({
     ...a.post,
@@ -112,8 +114,13 @@ async function fixtures(page: Page) {
         return route.fulfill({status:200,contentType:"image/png",body:readFileSync("public/favicon-48x48.png")});
       }
       const table = url.pathname.split("/").pop();
+      if(table?.startsWith('portal_admin_'))foundationRequests.push(table);
+      if(table==='portal_admin_dashboard')return respond([{id:'published',value:5,available:true,source:'Catálogo de teste'},{id:'drafts',value:0,available:true,source:'Contagem de teste'}]);
+      if(table==='portal_admin_users')return respond([{id:owner,created_at:'2026-10-12T00:00:00Z',confirmed:true,staff_role:staff.role}]);
+      if(table==='portal_admin_audit')return respond([{id:'audit-fixture',actor_id:owner,entity:'content_posts',entity_id:'post-fixture',action:'update',before:{status:'draft'},after:{status:'review'},metadata:{origin:'authenticated'},created_at:'2026-10-24T00:00:00Z'}]);
+
       if (table === "site_staff")
-        return respond(authenticated ? { role: "admin" } : null);
+        return respond(authenticated ? staff : null);
       if (table === "content_posts") {
         if (req.method() === "POST") {
           const p = {
@@ -240,7 +247,7 @@ async function fixtures(page: Page) {
       return respond([]);
     },
   );
-  return { posts, writes, comments, reports, analytics, contacts, uploads, storageFailure };
+  return { posts, writes, comments, reports, analytics, contacts, uploads, storageFailure, staff, foundationRequests };
 }
 async function login(page: Page) {
   await page.goto("/admin/articles");
@@ -696,4 +703,45 @@ test('article reading progress preserves expanded diagrams and body DOM', async 
       (!body.querySelector('details') || (body.querySelector('details') as HTMLDetailsElement).open);
   })).toBe(true);
   expect(await page.evaluate(()=>(window as any).__editorialHeading.isConnected)).toBe(true);
+});
+
+async function foundationLogin(page:Page,path='/admin') {
+ await page.goto(path);
+ await page.getByLabel('E-mail',{exact:true}).fill('editorial-admin@example.test');
+ await page.getByLabel('Senha',{exact:true}).fill('fixture_password_not_a_real_credential');
+ await page.getByRole('button',{name:'Entrar no admin',exact:true}).click();
+ await expect(page.getByRole('button',{name:'Sair',exact:true})).toBeVisible();
+}
+async function foundationNavigate(page:Page,name:string){
+ const toggle=page.getByRole('button',{name:'Menu administrativo'});
+ if(await toggle.isVisible())await toggle.click();
+ await page.getByRole('navigation',{name:'Administração do Portal'}).getByRole('button',{name,exact:true}).click();
+}
+for(const width of [1440,390])test('Foundation: measured zero, unavailable metrics, users, audit and browser history '+width,async({page})=>{
+ await page.setViewportSize({width,height:900});await fixtures(page,'platform_owner');await foundationLogin(page);
+ await expect(page.locator('h1')).toHaveText('Dashboard');
+ await expect(page.locator('.stat-card').filter({hasText:'Rascunhos'}).locator('strong')).toHaveText('0');
+ await expect(page.getByText('Medição ainda não disponível').first()).toBeVisible();
+ if(process.env.SUPER_ADMIN_QA_CAPTURE==='true'){mkdirSync('artifacts/super-admin-foundation',{recursive:true});await page.screenshot({path:'artifacts/super-admin-foundation/dashboard-'+width+'.jpg',type:'jpeg',quality:75});}
+ const dashboardAxe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(dashboardAxe.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))).toEqual([]);
+ await foundationNavigate(page,'Usuários');await expect(page).toHaveURL(/\/admin\/users$/);await expect(page.getByRole('heading',{name:'Contas do Portal'})).toBeVisible();await expect(page.locator('.admin-table')).toContainText(owner);await expect(page.locator('.admin-main')).not.toContainText('editorial-admin@example.test');
+ const usersAxe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(usersAxe.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))).toEqual([]);
+ await page.goBack();await expect(page.locator('h1')).toHaveText('Dashboard');await page.goForward();await expect(page.locator('h1')).toHaveText('Usuários');
+ await page.goto('/admin/audit-logs');await expect(page.getByRole('heading',{name:'Auditoria administrativa'})).toBeVisible();await page.getByText('Consultar campos registrados',{exact:true}).click();await expect(page.locator('.foundation-audit-list pre')).toContainText('"status": "review"');
+ if(process.env.SUPER_ADMIN_QA_CAPTURE==='true')await page.screenshot({path:'artifacts/super-admin-foundation/audit-'+width+'.jpg',type:'jpeg',quality:75});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();expect(axe.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)}))).toEqual([]);
+});
+test('Foundation: direct route denial never loads protected rows and unknown routes never open Settings',async({page})=>{
+ const f=await fixtures(page,'viewer');await foundationLogin(page,'/admin/users');
+ await expect(page.getByRole('heading',{name:'Acesso não autorizado'})).toBeVisible();expect(f.foundationRequests).not.toContain('portal_admin_users');expect(f.foundationRequests).not.toContain('portal_admin_audit');
+ await expect(page.getByRole('navigation',{name:'Administração do Portal'}).getByRole('button',{name:'Usuários',exact:true})).toHaveCount(0);
+ await page.goto('/admin/not-a-module');await expect(page.getByRole('heading',{name:'Área não encontrada'})).toBeVisible();await expect(page.getByRole('button',{name:'Salvar configuração'})).toHaveCount(0);
+});
+test('Foundation: an unknown or malformed staff role denies the entire admin',async({page})=>{
+ const f=await fixtures(page,'platform_owner ');await page.goto('/admin');
+ await page.getByLabel('E-mail',{exact:true}).fill('editorial-admin@example.test');await page.getByLabel('Senha',{exact:true}).fill('fixture_password_not_a_real_credential');await page.getByRole('button',{name:'Entrar no admin'}).click();await expect(page.getByRole('heading',{name:'Acesso restrito à equipe.'})).toBeVisible();expect(f.foundationRequests).toEqual([]);
+});
+test('Foundation: public navigation does not link to Admin',async({page})=>{
+ await fixtures(page);await page.goto('/');await expect(page.locator('header a[href^="/admin"],footer a[href^="/admin"]')).toHaveCount(0);
 });

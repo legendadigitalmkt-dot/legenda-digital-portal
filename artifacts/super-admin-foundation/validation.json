@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-24T17:15:26.586145+00:00",
+  "scope": "isolated Foundation fixtures; NOT hosted production",
+  "build": true,
+  "node_pglite": {
+    "passed": 90,
+    "failed": 0
+  },
+  "playwright": {
+    "passed": 60,
+    "failed": 0,
+    "flaky": 0
+  },
+  "python": {
+    "passed": 10,
+    "failed": 0
+  },
+  "total_tests": 160,
+  "dependency_audit_high_pass": true,
+  "remaining_dependency_alerts": {
+    "low": 1
+  },
+  "hosted_migration_applied": false,
+  "hosted_advisors_checked": false,
+  "production_data_changed": false,
+  "production_role_grants": false,
+  "foundation_deployed": false,
+  "blocked_by": "Current Supabase connection only lists Lunior; Portal query rejected for insufficient permission",
+  "ui_evidence": "Synthetic local fixtures only; no real audience numbers",
+  "release_expected_after_foundation_deploy": "portal-super-admin-foundation-v1"
+}
