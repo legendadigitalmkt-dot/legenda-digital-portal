@@ -48,3 +48,10 @@ NÃO REPETIR: passar testes locais como prova de migration/deploy; usar projeto 
 CROSS-PROJECT LEARNING: candidato apenas após resultado, sujeito ao HQ.
 Próximo teste: implementar e verificar Foundation em ambiente isolado; depois revalidar acesso ao Portal.
 
+
+## Revisão de escopo antes da correção de dependências — 24/10/2026
+O npm audit atual apontou DOMPurify 3.4.16 crítico, Zod 4.3.6 alto, sanitize-html 2.18.0 moderado e esbuild transitivo baixo. Não foi observado ataque nem reproduzida exploração no Portal. A correção das versões afetadas é um gate técnico, não validação de benefício de produto.
+Hipótese: atualizar as versões corrigidas manterá edição/sanitização/formulários compatíveis e removerá alertas high/critical do lockfile.
+Evidência inicial: forte para versões afetadas no audit; não demonstra exploração das configurações atuais do produto.
+Critério anterior à atualização: audit no limiar high deve passar; build, testes de sanitização, CMS e formulários devem continuar aprovados; manter dependências diretas com versões exatas e lockfile versionado.
+Se o plano precisar mudar novamente, registrar nova revisão antes de agir.
